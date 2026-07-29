@@ -356,7 +356,7 @@ input:focus:not(:focus-visible) {
   box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column; /* Stack header, items, footer top-to-bottom */
-  z-index: 700; /* Above the map (z-index 0) and controls (400) */
+  z-index: 1001; /* Above the map (z-index 0) and controls (400) */
   position: absolute; /* Float over the map, not push it aside       */
   top: 0;
   left: 0;
