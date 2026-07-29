@@ -1,0 +1,1076 @@
+/*
+  ================================================================
+  style.css — My Maps App
+  ================================================================
+
+  HOW TO READ THIS FILE
+  ─────────────────────
+  Every section has a comment block BEFORE it explaining:
+    • WHAT it styles
+    • WHY each property is there
+    • WHAT would break if you removed it
+
+  Sections in order:
+   1.  CSS Variables       (named colors & sizes — change once, updates everywhere)
+   2.  Reset & Base        (browser defaults removed, global settings applied)
+   3.  Top Search Bar      (#top-bar, #search-box, #search-results)
+   */
+
+:root {
+  /* ── COLORS ─────────────────────────────────────────── */
+  --blue: #1a73e8; /* Main accent color — used for buttons, highlights*/
+  --blue-dark: #1558b0; /* A darker blue — used when hovering over blue buttons*/
+  --blue-light: #e8f0fe; /* Very light blue — used for icon backgrounds*/
+  --red: #ea4335; /* Destination pin color & danger indicators*/
+  --green: #34a853; /* Success / GPS location dot color*/
+  --yellow: #fbbc04; /* Star / saved places icon color*/
+  --orange: #ff6d00; /* Restaurant and food icon color*/
+
+  /* ── NEUTRAL COLORS (light mode) ──────────────────────────── */
+  --bg-primary: #ffffff; /* White — used for cards, bars, panels*/
+  --bg-secondary: #f8f9fa; /* Off-white — used for the page background*/
+  --bg-tertiary: #f1f3f4; /* Light grey — used for input fields and hover states*/
+  --border: #e0e0e0; /* Subtle grey lines — used for dividers and outlines*/
+  --text-primary: #202124; /* Near-black — main text color*/
+  --text-secondary: #5f6368; /* Medium grey — subtitle and icon color*/
+  --text-hint: #9aa0a6; /* Light grey — placeholder text color*/
+
+  /* ── SHADOWS ────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.12); /* Small shadow for the top bar    */
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16); /* Medium shadow for panels, cards  */
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2); /* Large shadow for big modals      */
+
+  /* ── BORDER RADIUS (rounded corners) ───────────────────────── */
+  --radius-sm: 8px; /* Slight rounding — inputs, small buttons   */
+  --radius-md: 12px; /* Medium rounding — panels, popups          */
+  --radius-lg: 20px; /* Strong rounding — cards, directions panel */
+  --radius-pill: 999px; /* Fully rounded (pill shape) — search box   */
+
+  /* ── LAYOUT SIZES ───────────────────────────────────────────── */
+  --topbar-height: 64px; /* Height of the search bar at the top     */
+  --bottombar-height: 58px; /* Height of the transport tabs at bottom  */
+  --sidebar-width: 240px; /* Sidebar width on desktop screens        */
+  --sidebar-width-sm: 260px; /* Sidebar width on tablet screens         */
+
+  /* ── ANIMATION SPEED ────────────────────────────────────────── */
+  --speed: 0.25s; /* 0.25 seconds — quick but smooth                   */
+}
+
+*,
+*::before,
+*::after {
+  margin: 0; /* Remove all default outer spacing     */
+  padding: 0; /* Remove all default inner spacing     */
+  box-sizing: border-box;
+}
+
+/*
+  HTML AND BODY — fill the entire browser window.
+  "overflow: hidden" stops the page from scrolling —
+  the map itself handles its own pan/scroll internally.
+*/
+html,
+body {
+  height: 100%; /* Fill the full browser window height */
+  overflow: hidden; /* No page scroll — the map handles it */
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 14px; /* Default text size for the whole app   */
+  color: var(--text-primary); /* Near-black text everywhere by default */
+  background: var(--bg-secondary);
+  display: flex; /* Enable flexbox layout                 */
+  flex-direction: column; /* Stack children top-to-bottom          */
+}
+
+/*
+  BUTTON RESET — remove the default browser button appearance.
+  By default, buttons have a grey border and background.
+  We remove all of that and style each button ourselves.
+*/
+button {
+  border: none; /* No grey border              */
+  background: none; /* No grey background          */
+  cursor: pointer; /* Show a hand cursor on hover */
+  font-family: inherit; /* Use Roboto (same as body)   */
+  font-size: inherit; /* Use 14px (same as body)     */
+}
+
+/* Remove the bullet points from <ul> lists (sidebar uses these) */
+ul {
+  list-style: none;
+}
+
+/*
+  FOCUS STYLES — accessibility for keyboard and screen reader users.
+  When someone navigates using Tab, show a blue outline (:focus-visible).
+  When clicking with a mouse, hide the outline (:focus:not(:focus-visible)).
+  This way keyboard users see where they are, but mouse users do not see
+  an ugly box after every click.
+*/
+button:focus-visible,
+input:focus-visible {
+  outline: none;
+}
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+  outline: none; /* Hide ring on mouse click */
+}
+
+/* ================================================================
+   3. TOP SEARCH BAR  (#top-bar)
+   ================================================================
+   The white bar always fixed at the top of the screen.
+   Uses flexbox to place its three children side by side:
+     [hamburger]  [search box ← grows to fill space →]  [buttons]
+   ================================================================ */
+#top-bar {
+  display: flex; /* Lay children side by side                 */
+  align-items: center; /* Vertically centre all children            */
+  gap: 20px; /* Space between hamburger, box, and buttons */
+  padding: 10px 14px; /* Inner spacing: 10px top/bottom, 14px left/right */
+  height: var(--topbar-height); /* Fixed 64px height                  */
+  position: fixed; /* Needed so the dropdown can be positioned relative to this bar */
+  z-index: 1000; /* Float above the map and sidebar           */
+  flex-shrink: 0; /* Never let this bar shrink in height       */
+  background: rgba(255, 255, 255, 0.11); /* white but see-through */
+  backdrop-filter: blur(5px); /* frosted glass blur effect */
+  -webkit-backdrop-filter: blur(5px); /* same thing but for Safari/Opera */
+  border-radius: 30px; /* Round the corners of the bar */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%; /* or whatever width looks good */
+  max-width: 700px; /* stops it from getting too wide on large screens */
+  min-width: 300px; /* stops it from getting too narrow on small screens */
+}
+
+/* ── HAMBURGER MENU BUTTON (#menu-btn) ────────────────────────── */
+#menu-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%; /* Circle shape                    */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centre the icon inside the circle */
+  font-size: 20px;
+  color: var(--text-secondary); /* Grey icon colour                */
+  flex-shrink: 0; /* Never squash this button        */
+  background: var(--bg-secondary); /* White background                   */
+  transition: background var(--speed);
+  border: 1.5px solid var(--border); /* Thin grey outline   */
+}
+/* Change background when the mouse hovers over it */
+#menu-btn:hover {
+  background: var(--bg-tertiary); /* Light grey on hover */
+  border-color: var(--blue); /* Blue border on hover */
+  color: var(--blue); /* Blue icon on hover   */
+}
+
+/* ── SEARCH BOX (#search-box) ──────────────────────────────────── */
+#search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon, input, buttons */
+  background: var(--bg-tertiary); /* Light grey background               */
+  border-radius: var(--radius-pill); /* Fully rounded pill shape            */
+  padding: 0 14px; /* Left and right inner spacing        */
+  height: 44px;
+  border: 2px solid transparent;
+  background: var(--bg-secondary); /* White background                   */
+  transition:
+    border-color var(--speed),
+    background var(--speed),
+    box-shadow var(--speed);
+}
+
+/*
+  When the user clicks inside the search box (any child inside it is focused),
+  highlight it with a blue border and white background.
+  ":focus-within" = "this element contains a focused child".
+*/
+#search-box:focus-within {
+  border-color: var(--blue); /* Blue outline                   */
+  background: var(--bg-primary); /* Turn white when active         */
+  box-shadow: var(--shadow-sm); /* Add a small shadow for depth   */
+  background: var(--bg-secondary); /* White background                   */
+}
+
+/* The magnifying glass icon inside the search box */
+#search-box > i {
+  color: var(--text-hint); /* Light grey icon colour  */
+  font-size: 16px;
+  flex-shrink: 0; /* Never squash the icon   */
+  background: var(--bg-secondary); /* White background                   */
+}
+
+/* The text input inside the search box */
+#search-input {
+  flex: 1; /* Grow to fill the space between the two icons */
+  border: none; /* Remove default input border                  */
+  background: transparent; /* Show the search box background through it */
+  font-size: 15px;
+  color: var(--text-primary);
+  min-width: 0;
+}
+/* Style the placeholder text (the grey hint text inside the input) */
+#search-input::placeholder {
+  color: var(--text-hint); /* Light grey placeholder */
+}
+
+/* The × (clear) button inside the search box */
+#clear-btn {
+  color: var(--text-hint);
+  font-size: 15px;
+  padding: 4px;
+  display: none;
+  /*
+    Hidden by default — JavaScript will switch this to "display: inline-flex"
+    when the user types something in the search box.
+  */
+  border-radius: 50%;
+  transition: background var(--speed);
+}
+#clear-btn:hover {
+  background: var(--border); /* Grey circle on hover */
+}
+
+/* The → (submit) button inside the search box */
+#search-btn {
+  color: var(--blue); /* Blue arrow icon             */
+  font-size: 17px;
+  padding: 4px 6px;
+  border-radius: 50%;
+  transition: background var(--speed);
+}
+#search-btn:hover {
+  background: var(--blue-light); /* Light blue circle on hover */
+}
+
+/* ── RIGHT-SIDE ACTION BUTTONS (#top-actions) ─────────────────── */
+#top-actions {
+  display: flex;
+  gap: 6px; /* Space between the two buttons */
+  flex-shrink: 0; /* Do not let these buttons shrink */
+}
+/* Style both buttons inside #top-actions the same way */
+#top-actions button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%; /* Circle shape            */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--text-secondary);
+  border: 1.5px solid var(--border); /* Thin grey outline   */
+  background: var(--bg-primary); /* White background    */
+  transition:
+    background var(--speed),
+    border-color var(--speed);
+}
+#top-actions button:hover {
+  background: var(--bg-tertiary); /* Light grey on hover */
+  border-color: var(--blue); /* Blue border on hover */
+  color: var(--blue); /* Blue icon on hover   */
+}
+
+/* ── SEARCH RESULTS DROPDOWN (#search-results) ─────────────────── */
+#search-results {
+  position: absolute; /* Position relative to #top-bar (which is position:relative) */
+  top: calc(100% + 4px);
+  /*
+    calc() lets us do maths in CSS.
+    "100%" = the full height of the top-bar.
+    "+ 4px" = 4px gap below the bar.
+    Result: the dropdown appears just below the top bar.
+  */
+  left: 60px; /* Align with the left edge of the search box */
+  right: 110px; /* Align with the right edge of the search box */
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  z-index: 2000; /* Must be above everything else (even above sidebar) */
+  display: none; /* Hidden by default — JavaScript shows it while typing */
+  max-height: 320px;
+  overflow-y: auto; /* Scroll if there are many results */
+}
+
+/* One row inside the dropdown */
+.result-item {
+  display: flex;
+  align-items: flex-start; /* Align icon to the top of the text */
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--bg-tertiary); /* Thin divider between rows */
+  transition: background var(--speed);
+}
+.result-item:hover {
+  background: var(--bg-secondary); /* Light grey highlight on hover */
+}
+/* Remove the divider from the last row — it would look odd at the bottom */
+.result-item:last-child {
+  border-bottom: none;
+}
+
+/* The location pin icon inside each result row */
+.result-item i {
+  color: var(--blue);
+  font-size: 16px;
+  margin-top: 2px; /* Tiny nudge down to align with the first line of text */
+  flex-shrink: 0;
+}
+
+/* Text column inside each result row */
+.result-item-text {
+  display: flex;
+  flex-direction: column; /* Stack name above detail */
+  gap: 2px;
+}
+.result-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.result-item-detail {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* -------------------------------main layout-------------------------------- */
+
+#main {
+  flex: 1;
+  display: flex; /* Side-by-side layout for sidebar and map */
+  position: relative; /* Required so absolute children (panels) are positioned relative to this div */
+  overflow: hidden; /* Clip anything that would stick out      */
+  min-height: 0;
+}
+
+/* -------------------- SIDEBAR  -------------------*/
+#sidebar {
+  width: var(--sidebar-width-sm); /* 280px on tablet */
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column; /* Stack header, items, footer top-to-bottom */
+  z-index: 700; /* Above the map (z-index 0) and controls (400) */
+  position: absolute; /* Float over the map, not push it aside       */
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 30px 30px 30px 30px; /* Round the right side corners */
+  transform: translateX(-100%);
+  transition: transform var(--speed) ease; /* This makes the slide-in animation smooth instead of instant */
+  overflow: hidden; /* If there are many sidebar items, allow scrolling */
+}
+
+#sidebar.open {
+  transform: translateX(0); /* No offset — sidebar is fully visible */
+}
+
+#sidebar-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  scrollbar-color: var(--dark) transparent; /* Firefox */
+}
+
+/* ── DARK OVERLAY (#sidebar-overlay) ────────────────────────────── */
+#sidebar-overlay {
+  display: none; /* Hidden by default */
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* 35% transparent black */
+  z-index: 699; /* Just BELOW the sidebar (700) so the sidebar shows on top */
+}
+
+#sidebar-overlay.visible {
+  display: block;
+}
+
+/* ── SIDEBAR HEADER (#sidebar-header) ────────────────────────────── */
+#sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Push avatar left, close button right */
+  padding: 20px 16px 16px;
+  background: var(--yellow); /* Solid yellow background               */
+  color: white;
+  flex-shrink: 0; /* Never let this header squash when sidebar overflows */
+}
+
+/* The row with avatar circle + name + email */
+#sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* The circular avatar with the letter "U" */
+#avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%; /* Perfect circle              */
+  background: white; /* White circle on blue header */
+  color: var(--red); /* Red letter inside          */
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#avatar-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+}
+#avatar-email {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+}
+
+/* The × close button in the sidebar header */
+#sidebar-close {
+  color: white;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background var(--speed);
+}
+#sidebar-close:hover {
+  background: rgba(255, 255, 255, 0.15); /* Slightly lighter circle on hover */
+}
+
+/* ── SIDEBAR SECTION LABEL ──────────────────────────────────────── */
+/* Small uppercase grey heading used to separate groups of items     */
+.sidebar-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase; /* Force all letters to caps        */
+  letter-spacing: 0.08em; /* Tiny space between letters (more readable) */
+  color: var(--text-hint); /* Light grey text                  */
+  padding: 16px 16px 6px; /* Top padding creates vertical gap */
+}
+
+/* ── SIDEBAR ITEM ROW (.sidebar-item) ──────────────────────────── */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* Space between icon circle and text         */
+  padding: 12px 16px; /* Inner spacing for the row                  */
+  cursor: pointer; /* Hand cursor on hover                       */
+  border-radius: var(--radius-sm);
+  margin: 2px 8px; /* Small margin so rounded corners are visible */
+  transition: background var(--speed);
+}
+.sidebar-item:hover {
+  background: var(--bg-secondary); /* Light grey background on hover */
+}
+
+/* ── SIDEBAR ICON CIRCLES (.sidebar-icon) ───────────────────────── */
+.sidebar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Circle shape                */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0; /* Never squash the icon circle */
+}
+
+/* Each item type gets its own background and icon colour */
+.home-icon {
+  background: var(--blue-light);
+  color: var(--blue);
+} /* Light blue   */
+.work-icon {
+  background: #e6f4ea;
+  color: var(--green);
+} /* Light green  */
+.route-icon {
+  background: #fce8e6;
+  color: var(--red);
+} /* Light red    */
+.saved-icon {
+  background: #fef9e7;
+  color: var(--yellow);
+} /* Light yellow */
+.subway-icon {
+  background: #fff3e0;
+  color: var(--blue);
+} /* Light orange */
+.train-icon {
+  background: #fce8e6;
+  color: var(--blue-dark);
+} /* Light red    */
+.tram-icon {
+  background: #fce8e6;
+  color: #37e654;
+} /* Light red    */
+.cable-car-icon {
+  background: #fce8e6;
+  color: var(--green);
+} /* Light red    */
+.bus-icon {
+  background: #fce8e6;
+  color: var(--red);
+} /* Light red    */
+.layer-icon {
+  background: #e8eaf6;
+  color: #3949ab;
+} /* Light indigo */
+.share-icon {
+  background: var(--blue-light);
+  color: var(--blue);
+} /* Light blue   */
+.print-icon {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+} /* Grey */
+.settings-icon {
+  background: #fce8e6;
+  color: var(--text-secondary);
+} /* Light red    */
+
+/* ── SIDEBAR TEXT COLUMN (.sidebar-text) ───────────────────────── */
+.sidebar-text {
+  display: flex;
+  flex-direction: column; /* Stack title above subtitle */
+  gap: 2px;
+}
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.sidebar-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ── SIDEBAR FOOTER (last line in the sidebar) ──────────────────────────── */
+#sidebar-footer {
+  margin-top: auto;
+  padding: 16px;
+  font-size: 11px;
+  color: var(--text-hint);
+  border-top: 1px solid var(--bg-tertiary); /* Thin divider line above footer */
+  text-align: center;
+}
+
+/* -------------------------- FLOATING RIGHT CONTROLS  ----------------------------------*/
+#right-controls {
+  position: absolute; /* Float over the map                        */
+  right: 14px; /* 14px from the right edge                  */
+  top: 50%; /* Start at 50% from the top                 */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically      */
+  z-index: 400; /* Above the map but below panels */
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden; /* Clip the buttons to the rounded corners */
+}
+
+/* Each button inside the controls panel */
+.ctrl-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  transition:
+    background var(--speed),
+    color var(--speed);
+}
+.ctrl-btn:hover {
+  background: var(--bg-tertiary); /* Light grey on hover  */
+  color: var(--blue); /* Blue icon on hover   */
+}
+
+/* Thin horizontal line divider between the zoom and other buttons */
+.ctrl-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 6px; /* Indent slightly so it does not touch the edges */
+}
+
+/*  LAYER SWITCHER BUTTON  */
+#layer-switcher {
+  position: absolute; /* Float over the map                */
+  bottom: 14px; /* 14px from the bottom              */
+  right: 14px; /* 14px from the right               */
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 8px 14px; /* Inner spacing                     */
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text label */
+  box-shadow: var(--shadow-md);
+  border: 1.5px solid var(--border);
+  transition:
+    background var(--speed),
+    border-color var(--speed);
+}
+#layer-switcher:hover {
+  background: var(--bg-tertiary);
+  color: var(--blue);
+}
+#layer-switcher i {
+  font-size: 15px;
+}
+
+/* --------------------------------------the map---------------------------------------------------*/
+#map {
+  flex: 1; /* Fill all horizontal space not taken by the sidebar */
+  height: 100%; /* Fill the full height of #main                     */
+  position: absolute; /* Required so absolute children (panels) are positioned relative to this div */
+  inset: 0; /* Shorthand for top:0; right:0; bottom:0; left:0; */
+}
+
+/*
+  LEAFLET POPUP OVERRIDES
+  Leaflet draws popups with its own default styles.
+  We override them here to match our app's design.
+  "!important" forces our rule to win over Leaflet's own CSS.
+*/
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md) !important; /* Rounded corners */
+  box-shadow: var(--shadow-md) !important; /* Our depth shadow */
+  padding: 0 !important; /* We handle padding inside */
+}
+.leaflet-popup-content {
+  margin: 14px 16px !important;
+  font-family: "Roboto", Arial, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+.leaflet-popup-tip {
+  background: var(--bg-primary) !important; /* White triangle tip */
+}
+
+/*-----------------additional styles for hidden tabs--------------------*/
+/* ----------------------PLACE INFO CARD-------------------- */
+#info-card {
+  position: absolute; /* Float over the map                          */
+  bottom: 14px; /* 14px from the bottom edge                   */
+  left: 50%; /* Start at the horizontal centre              */
+  transform: translateX(-50%);
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 20px;
+  width: 360px;
+  max-width: calc(100vw - 28px); /*prevents the card from going off-screen */
+  z-index: 600;
+  display: none; /* Hidden by default                              */
+  text-align: center;
+}
+/* JavaScript adds "open" class to make the card visible */
+#info-card.open {
+  display: block;
+}
+
+/* The × close button inside the card (top-right corner) */
+#info-close {
+  position: absolute; /* Position relative to #info-card */
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--speed);
+}
+#info-close:hover {
+  background: var(--border);
+}
+
+/* The blue circle with location pin icon at the top of the card */
+#info-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  color: var(--green);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+#info-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+#info-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* Container for the pill-shaped location tags */
+#info-tags {
+  display: flex;
+  justify-content: center; /* Centre the tags horizontally */
+  gap: 8px;
+  flex-wrap: wrap; /* Allow tags to wrap to a new line if there are many */
+  margin-bottom: 16px;
+}
+/* One pill-shaped tag */
+.tag {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill); /* Fully rounded pill */
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Row of action buttons at the bottom of the card */
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+/* Each action button takes equal width ("flex: 1") */
+.card-btn {
+  flex: 1;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition:
+    background var(--speed),
+    border-color var(--speed);
+}
+.card-btn:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+/* The primary (main) action button has a solid blue background */
+.card-btn.primary {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+.card-btn.primary:hover {
+  background: var(--blue-dark);
+}
+
+/* ================================================================
+   PRINT STYLES
+   ================================================================*/
+@media print {
+  #top-bar,
+  #sidebar,
+  #sidebar-overlay,
+  #right-controls,
+  #layer-switcher,
+  #directions-panel,
+  #info-card,
+  #saved-popup,
+  #toast,
+  #bottom-tabs {
+    display: none !important;
+  }
+
+  #map {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   DIRECTIONS PANEL
+   ════════════════════════════════════════════════════════════ */
+#directions-panel {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 300px;
+  z-index: 600;
+  display: none; /* hidden until user clicks Directions */
+  overflow: hidden;
+}
+
+/* ── Blue header bar ── */
+#directions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px;
+  background: var(--blue);
+  color: white;
+}
+#directions-header h3 {
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#directions-header button {
+  color: white;
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background var(--speed);
+}
+#directions-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Transport mode buttons ── */
+#directions-modes {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.mode-btn {
+  flex: 1;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  font-size: 17px;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  transition:
+    background var(--speed),
+    color var(--speed);
+}
+.mode-btn:hover {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+.mode-btn.active {
+  background: var(--blue);
+  color: white;
+}
+
+/* ── From / To inputs with connector dots ── */
+#directions-inputs {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  padding: 16px;
+}
+
+/* Left column: the dots and dashed line connector */
+#waypoint-dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.blue-dot {
+  background: var(--blue);
+}
+.red-dot {
+  background: var(--red);
+}
+.dot-line {
+  flex: 1;
+  width: 2px;
+  min-height: 20px;
+  margin: 4px 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--border) 0px,
+    var(--border) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* Stop dots container — JS adds dot-lines here for each stop */
+#stop-dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.stop-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+  margin: 4px 0;
+}
+.stop-dot-line {
+  width: 2px;
+  min-height: 20px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--border) 0px,
+    var(--border) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* Right column: all the input fields */
+#waypoint-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#waypoint-fields input,
+.stop-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition:
+    border-color var(--speed),
+    background var(--speed);
+}
+#waypoint-fields input:focus,
+.stop-input:focus {
+  border-color: var(--blue);
+  background: var(--bg-primary);
+  outline: none;
+}
+#waypoint-fields input::placeholder,
+.stop-input::placeholder {
+  color: var(--text-hint);
+}
+
+/* ── Stop row (input + remove button side by side) ── */
+.stop-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.stop-row .stop-input {
+  flex: 1;
+}
+
+/* ── Remove stop button (× next to each stop) ── */
+.remove-stop-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background var(--speed),
+    color var(--speed);
+}
+.remove-stop-btn:hover {
+  background: #fce8e6;
+  color: var(--red);
+}
+
+/* ── Add stop button ── */
+#add-stop-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue);
+  background: var(--blue-light);
+  border: 1.5px solid var(--blue);
+  border-radius: var(--radius-pill);
+  transition:
+    background var(--speed),
+    color var(--speed);
+  align-self: flex-start; /* don't stretch full width */
+}
+#add-stop-btn:hover {
+  background: var(--blue);
+  color: white;
+}
+
+/* ── Get Route button ── */
+#get-route-btn {
+  margin: 0 16px 16px;
+  width: calc(100% - 32px);
+  padding: 12px;
+  background: var(--blue);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    background var(--speed),
+    transform var(--speed);
+}
+#get-route-btn:hover {
+  background: var(--blue-dark);
+}
+#get-route-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── Route summary (distance + time) ── */
+#route-summary {
+  padding: 0 16px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 16px;
+}
+#route-summary span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
