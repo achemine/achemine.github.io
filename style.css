@@ -1085,11 +1085,20 @@ input:focus:not(:focus-visible) {
     background: rgba(255, 255, 255, 0.92);
   }
 
+  #search-box {
+    max-width: 100%;    /* never wider than its container */
+    min-width: 0;       /* allow it to shrink freely */
+  }
+
   #right-controls {
     display: none;
   }
 
   #layer-switcher {
+    display: none;
+  }
+
+  #dark-mode-btn {
     display: none;
   }
 }
