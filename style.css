@@ -1072,3 +1072,24 @@ input:focus:not(:focus-visible) {
   align-items: center;
   gap: 4px;
 }
+
+@media (max-width: 767px) {
+  #top-bar {
+    left: 10px;
+    right: 10px;
+    width: auto;
+    transform: none;
+    min-width: unset;
+    max-width: unset;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  #right-controls {
+    display: none;
+  }
+
+  #layer-switcher {
+    display: none;
+  }
+}
