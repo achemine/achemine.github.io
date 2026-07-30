@@ -983,3 +983,182 @@ handleResize(); /* run once on page load */
 setTimeout(function () {
   map.invalidateSize();
 }, 300);
+
+/* the database of landmarks is loaded from a separate file */
+/* ════════════════════════════════════════════════════════════
+   TRANSIT STOPS — one GeoJSON file per category
+   ════════════════════════════════════════════════════════════
+
+   HOW TO ADD A NEW CATEGORY IN THE FUTURE:
+   1. Create a new .geojson file inside the stops/ folder
+   2. Add one new line to the stopCategories array below
+   That's it — no other code changes needed.
+   ════════════════════════════════════════════════════════════ */
+
+/*
+  stopCategories defines every transit type.
+  Each object has:
+    type  — the label shown in the popup ("metro stop", "bus stop" etc.)
+    color — the dot color on the map
+    file  — path to the GeoJSON file, relative to index.html
+*/
+const stopCategories = [
+  {
+    type: "metro",
+    color: "#0077ff",
+    file: "stops/metro.geojson",
+  } /* light blue  */,
+  {
+    type: "bus",
+    color: "#ea4335",
+    file: "stops/bus.geojson",
+  } /* red         */,
+  {
+    type: "tram",
+    color: "#14ee4e",
+    file: "stops/tram.geojson",
+  } /* green       */,
+  {
+    type: "train",
+    color: "#011985",
+    file: "stops/train.geojson",
+  } /* orange      */,
+  {
+    type: "telecabine",
+    color: "#009439",
+    file: "stops/telecabine.geojson",
+  } /* purple      */,
+];
+
+/*
+  createStopIcon(color) builds a small filled circle marker.
+  We use a simple dot (not the teardrop shape) so that hundreds
+  of stops don't visually clutter the map.
+
+  The white border (2px solid white) makes the dot visible
+  on both light and dark map tile styles.
+*/
+function createStopIcon(color) {
+  return L.divIcon({
+    className: "" /* remove Leaflet's default white square background */,
+    html: `
+      <div style="
+        width: 12px;
+        height: 12px;
+        background: ${color};
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      "></div>
+    `,
+    iconSize: [12, 12] /* total size of the icon in pixels      */,
+    iconAnchor: [6, 6] /* center of the dot sits on the coordinate */,
+    popupAnchor: [0, -8] /* popup appears just above the dot      */,
+  });
+}
+
+/*
+  loadCategory(category) fetches one GeoJSON file and adds
+  all its stops to the map.
+
+  Each category is loaded independently — if one file is
+  missing or has an error, the other categories still load fine.
+*/
+function loadCategory(category) {
+  fetch(category.file)
+    .then(function (response) {
+      /*
+        response.ok is false if the file was not found (404 error).
+        We skip missing files silently instead of crashing.
+      */
+      if (!response.ok) {
+        console.log(category.file + " not found — skipping.");
+        return null;
+      }
+      return response.json(); /* parse the file contents as JSON */
+    })
+    .then(function (data) {
+      if (!data) return; /* skip if the file was missing */
+
+      /*
+        L.geoJSON() is Leaflet's built-in GeoJSON loader.
+        It reads the features array and calls our two functions
+        for each stop: pointToLayer() and onEachFeature().
+      */
+      L.geoJSON(data, {
+        /*
+          pointToLayer() is called for each stop.
+          It decides what kind of marker to place on the map.
+          latlng is already converted by Leaflet (it handles
+          the GeoJSON [longitude, latitude] → [latitude, longitude] flip).
+        */
+        pointToLayer: function (feature, latlng) {
+          /*
+            Every stop in this file gets the same color
+            because color is defined per file in stopCategories —
+            no need to check feature.properties.type here.
+          */
+          return L.marker(latlng, { icon: createStopIcon(category.color) });
+        },
+
+        /*
+          onEachFeature() is called for each stop after it's placed.
+          We use it to add a popup and connect the stop to the info card.
+        */
+        onEachFeature: function (feature, layer) {
+          /*
+            feature.properties contains the stop's data from the GeoJSON file.
+            We read "name" — if it's missing we fall back to "Unknown stop".
+          */
+          const name = feature.properties.name || "Unknown stop";
+
+          /* Popup shown when the user clicks the dot */
+          layer.bindPopup(`
+            <strong style="font-size:14px;">${name}</strong><br>
+            <span style="color:#5f6368; font-size:12px; text-transform:capitalize;">
+              ${category.type} stop
+            </span>
+          `);
+
+          layer.on("click", function (e) {
+            /* Stop the click from bubbling up to the map
+     (otherwise the map click event would also fire
+     and drop an extra marker on top of the stop) */
+            L.DomEvent.stopPropagation(e);
+
+            const lat = feature.geometry.coordinates[1];
+            const lng = feature.geometry.coordinates[0];
+
+            /* Remove any previously dropped pin */
+            if (clickedMarker) {
+              map.removeLayer(clickedMarker);
+              clickedMarker = null;
+            }
+
+            /* Update the clicked coordinates so Save and Share work correctly */
+            clickedLat = lat;
+            clickedLng = lng;
+
+            /* Show the info card with the stop name and coordinates */
+            showInfoCard(name, lat.toFixed(5), lng.toFixed(5));
+          });
+        },
+      }).addTo(map); /* add all stops from this file to the map at once */
+
+      console.log(category.file + " loaded successfully.");
+    })
+    .catch(function (error) {
+      /* Network error or malformed JSON — log it but don't crash */
+      console.log("Error loading " + category.file + ":", error);
+    });
+}
+
+/*
+  Load every category.
+  forEach() loops through the stopCategories array and calls
+  loadCategory() once for each entry.
+  All files load at the same time (not one after another) — faster.
+*/
+stopCategories.forEach(function (category) {
+  loadCategory(category);
+});
