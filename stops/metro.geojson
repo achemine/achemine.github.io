@@ -1,0 +1,214 @@
+{
+  "type": "metro stations/stations",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.062371, 36.785778]
+      },
+      "properties": {
+        "name": "Place des Martyrs",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.058605, 36.780208]
+      },
+      "properties": {
+        "name": "علي بومنجل Ali Boumendjel",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.058071, 36.772005]
+      },
+      "properties": {
+        "name": "تافورة - البريد المركزي Tafourah - Grande Poste",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.053667, 36.766245]
+      },
+      "properties": {
+        "name": "خليفة بوخالفة Khelifa Boukhalfa",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.056615, 36.760203]
+      },
+      "properties": {
+        "name": "1er Mai أول ماي",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.061756, 36.756863]
+      },
+      "properties": {
+        "name": "Aïssat Idir عيسات إدير",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.066525, 36.752909]
+      },
+      "properties": {
+        "name": "Hamma الحامة",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.072737, 36.746677]
+      },
+      "properties": {
+        "name": "Jardin d'essai",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.083139, 36.742157]
+      },
+      "properties": {
+        "name": "Les fusillés",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.094444, 36.737907]
+      },
+      "properties": {
+        "name": "Cité Amirouche",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.100954, 36.733585]
+      },
+      "properties": {
+        "name": "Mer et Soleil",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.102271, 36.725431]
+      },
+      "properties": {
+        "name": "Haï El Badr",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.110589, 36.718218]
+      },
+      "properties": {
+        "name": "باش جراح - تنس",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.118273, 36.721806]
+      },
+      "properties": {
+        "name": "باش جراح",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.131727, 36.722094]
+      },
+      "properties": {
+        "name": "El Harrach Gare",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.137164, 36.722002]
+      },
+      "properties": {
+        "name": "El-Harrach Centre",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.100831, 36.71552]
+      },
+      "properties": {
+        "name": "Station des Ateliers",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.090223, 36.709585]
+      },
+      "properties": {
+        "name": "جسر قسنطينة",
+        "marker-color": "lightblue"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.082286, 36.705738]
+      },
+      "properties": {
+        "name": "عين النعجة",
+        "marker-color": "lightblue"
+      }
+    }
+  ]
+}

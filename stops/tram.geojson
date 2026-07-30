@@ -1,0 +1,412 @@
+{
+  "type": "tram stops/stations",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.083488, 36.742879]
+      },
+      "properties": {
+        "name": "العناصر",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.086814, 36.745993]
+      },
+      "properties": {
+        "name": "المعدومين",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.092293, 36.745217]
+      },
+      "properties": {
+        "name": "طرابلس- الثعالبية",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.097414, 36.743262]
+      },
+      "properties": {
+        "name": "طرابلس - المسجد",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.10409, 36.740719]
+      },
+      "properties": {
+        "name": "طرابلس - حمداش",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.113676, 36.737033]
+      },
+      "properties": {
+        "name": "طرابلس - المقرية",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.118177, 36.735713]
+      },
+      "properties": {
+        "name": "الخروبة",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.124633, 36.732817]
+      },
+      "properties": {
+        "name": "الهواء الجميل",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.130161, 36.730279]
+      },
+      "properties": {
+        "name": "جسر الحراش",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.136051, 36.729498]
+      },
+      "properties": {
+        "name": "Bellevue",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.143448, 36.727839]
+      },
+      "properties": {
+        "name": "بكري بوقرة",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.150803, 36.72588]
+      },
+      "properties": {
+        "name": "الديار الخمس",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.161368, 36.73127]
+      },
+      "properties": {
+        "name": "قصر المعارض",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.16703, 36.7322]
+      },
+      "properties": {
+        "name": "الصنوبر",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.173293, 36.732555]
+      },
+      "properties": {
+        "name": "حي المندرين",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.174323, 36.729479]
+      },
+      "properties": {
+        "name": "حي مختار زرهوني",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.176971, 36.724481]
+      },
+      "properties": {
+        "name": "حي رابية",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.179575, 36.720811]
+      },
+      "properties": {
+        "name": "جامعة باب الزوار",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.182818, 36.721527]
+      },
+      "properties": {
+        "name": "حي 5 جويلية",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.184749, 36.724337]
+      },
+      "properties": {
+        "name": "باب الزوار - الجسر",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.184065, 36.73225]
+      },
+      "properties": {
+        "name": "الإقامة الجامعية - ح ج ب 1",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.18491, 36.737327]
+      },
+      "properties": {
+        "name": "حي 8 ماي 1945",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.18609, 36.740975]
+      },
+      "properties": {
+        "name": "حي الصباح",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.187643, 36.745331]
+      },
+      "properties": {
+        "name": "برج الكيفان - الثانوية",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.191001, 36.747025]
+      },
+      "properties": {
+        "name": "برج الكيفان - وسط",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.197076, 36.74816]
+      },
+      "properties": {
+        "name": "برج الكيفان - العيادة",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.206486, 36.749303]
+      },
+      "properties": {
+        "name": "موحوس",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.211992, 36.750313]
+      },
+      "properties": {
+        "name": "ميموني محمود",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.220095, 36.753567]
+      },
+      "properties": {
+        "name": "بن مرابط",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.224218, 36.755411]
+      },
+      "properties": {
+        "name": "بن رضوان",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.229405, 36.758991]
+      },
+      "properties": {
+        "name": "بن مراد",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.238425, 36.766032]
+      },
+      "properties": {
+        "name": "سيدي ادريس",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.245155, 36.773041]
+      },
+      "properties": {
+        "name": "بن زرقة",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.250163, 36.777454]
+      },
+      "properties": {
+        "name": "مقهى شرقي",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.258861, 36.777701]
+      },
+      "properties": {
+        "name": "جامعة درقانة",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.259398, 36.773948]
+      },
+      "properties": {
+        "name": "الحي الدبلوماسي",
+        "marker-color": "yellow"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.260307, 36.771973]
+      },
+      "properties": {
+        "name": "درڨانة وسط",
+        "marker-color": "yellow"
+      }
+    }
+  ]
+}

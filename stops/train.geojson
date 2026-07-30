@@ -1,0 +1,247 @@
+{
+  "type": "train stops/stations",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.061705, 36.779074]
+      },
+      "properties": {
+        "name": "Gare d'Alger",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.057189, 36.767882]
+      },
+      "properties": {
+        "name": "Agha",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.065739, 36.756416]
+      },
+      "properties": {
+        "name": "Les Ateliers",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.094367, 36.745402]
+      },
+      "properties": {
+        "name": "Hussein Dey",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.119472, 36.735337]
+      },
+      "properties": {
+        "name": "الخروبة",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.132374, 36.722107]
+      },
+      "properties": {
+        "name": "الحراش",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.171869, 36.703835]
+      },
+      "properties": {
+        "name": "Oued Smar",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.186222, 36.70702]
+      },
+      "properties": {
+        "name": "Bab Ezzouar",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.209163, 36.700285]
+      },
+      "properties": {
+        "name": "Aéroport Houari Boumédiène",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.210804, 36.714617]
+      },
+      "properties": {
+        "name": "Dar El Beida",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.28287, 36.734187]
+      },
+      "properties": {
+        "name": "Rouiba",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.301742, 36.733305]
+      },
+      "properties": {
+        "name": "ZI Rouiba",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.340685, 36.735453]
+      },
+      "properties": {
+        "name": "Reghaïa",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.3178, 36.733815]
+      },
+      "properties": {
+        "name": "Rouiba SNVI",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.078979, 36.689415]
+      },
+      "properties": {
+        "name": "Aïn Naâdja",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.095281, 36.696751]
+      },
+      "properties": {
+        "name": "Gué de Constantine",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.051054, 36.666198]
+      },
+      "properties": {
+        "name": "Baba Ali",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.00996, 36.631095]
+      },
+      "properties": {
+        "name": "Birtouta",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.935489, 36.639483]
+      },
+      "properties": {
+        "name": "Train Station",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.89216, 36.68022]
+      },
+      "properties": {
+        "name": "Sidi Abdellah",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.871438, 36.691928]
+      },
+      "properties": {
+        "name": "Station Building",
+        "marker-color": "rebeccapurple"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.849202, 36.702149]
+      },
+      "properties": {
+        "name": "Gare de Zéralda",
+        "marker-color": "rebeccapurple"
+      }
+    }
+  ]
+}
