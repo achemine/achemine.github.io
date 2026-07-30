@@ -49,8 +49,8 @@
   /* ── LAYOUT SIZES ───────────────────────────────────────────── */
   --topbar-height: 64px; /* Height of the search bar at the top     */
   --bottombar-height: 58px; /* Height of the transport tabs at bottom  */
-  --sidebar-width: 240px; /* Sidebar width on desktop screens        */
-  --sidebar-width-sm: 260px; /* Sidebar width on tablet screens         */
+  --sidebar-width: 320px; /* Sidebar width on desktop screens        */
+  --sidebar-width-sm: 280px; /* Sidebar width on tablet screens         */
 
   /* ── ANIMATION SPEED ────────────────────────────────────────── */
   --speed: 0.25s; /* 0.25 seconds — quick but smooth                   */
@@ -138,6 +138,8 @@ input:focus:not(:focus-visible) {
   backdrop-filter: blur(5px); /* frosted glass blur effect */
   -webkit-backdrop-filter: blur(5px); /* same thing but for Safari/Opera */
   border-radius: 30px; /* Round the corners of the bar */
+  left: 50%;
+  transform: translateX(-50%);
   width: 50%; /* or whatever width looks good */
   max-width: 700px; /* stops it from getting too wide on large screens */
   min-width: 300px; /* stops it from getting too narrow on small screens */
@@ -354,7 +356,7 @@ input:focus:not(:focus-visible) {
   box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column; /* Stack header, items, footer top-to-bottom */
-  z-index: 4000; /* Above the map (z-index 0) and controls (400) */
+  z-index: 1001; /* Above the map (z-index 0) and controls (400) */
   position: absolute; /* Float over the map, not push it aside       */
   top: 0;
   left: 0;
@@ -1085,20 +1087,11 @@ input:focus:not(:focus-visible) {
     background: rgba(255, 255, 255, 0.92);
   }
 
-  #search-box {
-    max-width: 100%;    /* never wider than its container */
-    min-width: 0;       /* allow it to shrink freely */
-  }
-
   #right-controls {
     display: none;
   }
 
   #layer-switcher {
-    display: none;
-  }
-
-  #dark-mode-btn {
     display: none;
   }
 }
