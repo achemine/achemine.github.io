@@ -1,0 +1,32 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  toast.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  Styles for the small notification pill that slides up
+  from the bottom of the screen and fades away automatically.
+  ══════════════════════════════════════════════════════════════
+*/
+
+#toast {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);  /* Starts slightly below */
+  background: #323232;
+  color: white;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 800;
+  opacity: 0;
+  pointer-events: none;        /* Can't be accidentally clicked */
+  transition: opacity 0.3s, transform 0.3s;
+  white-space: nowrap;
+}
+
+/* JS adds this class to show the toast */
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

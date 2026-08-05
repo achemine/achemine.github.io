@@ -1,0 +1,49 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  variables.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  All CSS custom properties (variables) live here.
+  Change a value once → it updates everywhere it is used.
+  This file must be loaded FIRST in index.html.
+  ══════════════════════════════════════════════════════════════
+*/
+
+:root {
+  /* ── COLORS ─────────────────────────────────────────── */
+  --blue: #1a73e8;        /* Main accent color — used for buttons, highlights  */
+  --blue-dark: #1558b0;   /* A darker blue — used when hovering over blue buttons */
+  --blue-light: #e8f0fe;  /* Very light blue — used for icon backgrounds       */
+  --red: #ea4335;         /* Destination pin color & danger indicators         */
+  --green: #34a853;       /* Success / GPS location dot color                  */
+  --yellow: #fbbc04;      /* Star / saved places icon color                    */
+  --orange: #ff6d00;      /* Restaurant and food icon color                    */
+
+  /* ── NEUTRAL COLORS (light mode) ──────────────────────────── */
+  --bg-primary: #ffffff;    /* White — used for cards, bars, panels             */
+  --bg-secondary: #f8f9fa;  /* Off-white — used for the page background         */
+  --bg-tertiary: #f1f3f4;   /* Light grey — used for input fields and hover states */
+  --border: #e0e0e0;        /* Subtle grey lines — used for dividers and outlines */
+  --text-primary: #202124;  /* Near-black — main text color                     */
+  --text-secondary: #5f6368;/* Medium grey — subtitle and icon color            */
+  --text-hint: #9aa0a6;     /* Light grey — placeholder text color              */
+
+  /* ── SHADOWS ────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.12);   /* Small shadow for the top bar    */
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16);  /* Medium shadow for panels, cards */
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);   /* Large shadow for big modals     */
+
+  /* ── BORDER RADIUS (rounded corners) ───────────────────────── */
+  --radius-sm: 8px;      /* Slight rounding — inputs, small buttons   */
+  --radius-md: 12px;     /* Medium rounding — panels, popups          */
+  --radius-lg: 20px;     /* Strong rounding — cards, directions panel */
+  --radius-pill: 999px;  /* Fully rounded (pill shape) — search box   */
+
+  /* ── LAYOUT SIZES ───────────────────────────────────────────── */
+  --topbar-height: 64px;      /* Height of the search bar at the top    */
+  --bottombar-height: 58px;   /* Height of the transport tabs at bottom */
+  --sidebar-width: 320px;     /* Sidebar width on desktop screens       */
+  --sidebar-width-sm: 280px;  /* Sidebar width on tablet screens        */
+
+  /* ── ANIMATION SPEED ────────────────────────────────────────── */
+  --speed: 0.25s;  /* 0.25 seconds — quick but smooth */
+}

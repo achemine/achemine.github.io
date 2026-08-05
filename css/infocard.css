@@ -1,0 +1,133 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  infocard.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  Styles for the place info card that appears at the bottom
+  of the screen when the user clicks on the map or a marker.
+  Includes: #info-card, #info-close, #info-icon, #info-title,
+            #info-sub, #info-tags, .tag, .card-actions, .card-btn
+  ══════════════════════════════════════════════════════════════
+*/
+
+/* ── INFO CARD CONTAINER ── */
+#info-card {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);   /* Horizontally centred */
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 20px;
+  width: 360px;
+  max-width: calc(100vw - 28px); /* Never wider than the screen */
+  z-index: 600;
+  display: none;                 /* Hidden by default — JS adds .open */
+  text-align: center;
+}
+
+/* JS adds this class to show the card */
+#info-card.open {
+  display: block;
+}
+
+/* ── CLOSE BUTTON (top-right corner of the card) ── */
+#info-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--speed);
+}
+#info-close:hover {
+  background: var(--border);
+}
+
+/* ── ICON CIRCLE AT THE TOP OF THE CARD ── */
+#info-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  color: var(--green);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+/* ── PLACE NAME AND COORDINATES ── */
+#info-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+#info-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* ── LOCATION TAGS (pill-shaped labels) ── */
+#info-tags {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.tag {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ── ACTION BUTTONS ROW ── */
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+.card-btn {
+  flex: 1;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition:
+    background var(--speed),
+    border-color var(--speed);
+}
+.card-btn:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+/* The primary (blue) action button */
+.card-btn.primary {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+.card-btn.primary:hover {
+  background: var(--blue-dark);
+}

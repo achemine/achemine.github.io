@@ -1,0 +1,77 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  base.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  Global resets and base styles applied to the whole page.
+  Removes browser defaults so every element starts clean.
+  ══════════════════════════════════════════════════════════════
+*/
+
+*,
+*::before,
+*::after {
+  margin: 0;               /* Remove all default outer spacing  */
+  padding: 0;              /* Remove all default inner spacing  */
+  box-sizing: border-box;  /* Width/height includes padding & border */
+}
+
+/*
+  HTML AND BODY — fill the entire browser window.
+  "overflow: hidden" stops the page from scrolling —
+  the map itself handles its own pan/scroll internally.
+*/
+html,
+body {
+  height: 100%;     /* Fill the full browser window height */
+  overflow: hidden; /* No page scroll — the map handles it */
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 14px;                   /* Default text size for the whole app   */
+  color: var(--text-primary);        /* Near-black text everywhere by default */
+  background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;            /* Stack children top-to-bottom          */
+}
+
+/*
+  BUTTON RESET — remove the default browser button appearance.
+  By default, buttons have a grey border and background.
+  We remove all of that and style each button ourselves.
+*/
+button {
+  border: none;              /* No grey border              */
+  background: none;          /* No grey background          */
+  cursor: pointer;           /* Show a hand cursor on hover */
+  font-family: inherit;      /* Use Roboto (same as body)   */
+  font-size: inherit;        /* Use 14px (same as body)     */
+}
+
+/* Remove the bullet points from <ul> lists */
+ul {
+  list-style: none;
+}
+
+/*
+  FOCUS STYLES — accessibility for keyboard and screen reader users.
+  When someone navigates using Tab, show a blue outline (:focus-visible).
+  When clicking with a mouse, hide the outline (:focus:not(:focus-visible)).
+*/
+button:focus-visible,
+input:focus-visible {
+  outline: none;
+}
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── MAIN LAYOUT ── */
+#main {
+  flex: 1;
+  display: flex;        /* Side-by-side layout for sidebar and map */
+  position: relative;   /* Required so absolute children are positioned relative to this */
+  overflow: hidden;     /* Clip anything that sticks out */
+  min-height: 0;
+}

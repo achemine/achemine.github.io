@@ -1,0 +1,203 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  sidebar.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  Styles for the left sidebar navigation panel.
+  Includes: #sidebar, #sidebar-content, #sidebar-header,
+            #sidebar-profile, #avatar, .sidebar-item,
+            .sidebar-icon, .sidebar-text, #sidebar-footer,
+            #sidebar-overlay, scrollbar customisation
+  ══════════════════════════════════════════════════════════════
+*/
+
+/* ── SIDEBAR CONTAINER ── */
+#sidebar {
+  width: var(--sidebar-width-sm);
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;             /* Above the map and controls */
+  position: absolute;        /* Floats over the map        */
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 30px;
+  transform: translateX(-100%);              /* Hidden off-screen by default */
+  transition: transform var(--speed) ease;   /* Smooth slide-in animation    */
+  overflow: hidden;
+}
+
+/* Sliding in — JS adds this class */
+#sidebar.open {
+  transform: translateX(0);
+}
+
+/* ── SCROLLABLE CONTENT AREA ── */
+#sidebar-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;         /* Fill all space below the header */
+  min-height: 0;   /* Required for scrolling to work inside a flex column */
+  overflow-y: auto;
+  scrollbar-width: none;                     /* Firefox — hide scrollbar */
+  scrollbar-color: var(--blue) transparent;  /* Firefox — thumb color    */
+}
+
+/* Hide scrollbar arrows (Chrome/Opera) */
+#sidebar-content::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* ── DARK OVERLAY (appears behind the sidebar on mobile) ── */
+#sidebar-overlay {
+  display: none;
+  position: fixed;   /* Covers the full viewport including the top bar */
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 699;      /* Just below the sidebar (1001) */
+}
+#sidebar-overlay.visible {
+  display: block;
+}
+
+/* ── SIDEBAR HEADER (yellow band with avatar) ── */
+#sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 16px 16px;
+  background: var(--yellow);
+  color: white;
+  flex-shrink: 0;   /* Never let this shrink when content overflows */
+}
+
+/* Avatar + name + email row */
+#sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Circular avatar with initial letter */
+#avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: white;
+  color: var(--red);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#avatar-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+}
+#avatar-email {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 2px;
+}
+
+/* The × close button in the header */
+#sidebar-close {
+  color: white;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background var(--speed);
+}
+#sidebar-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── SECTION LABEL (small uppercase divider text) ── */
+.sidebar-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-hint);
+  padding: 16px 16px 6px;
+}
+
+/* ── SIDEBAR ITEM ROW ── */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  margin: 2px 8px;
+  transition: background var(--speed);
+}
+.sidebar-item:hover {
+  background: var(--bg-secondary);
+}
+
+/* ── SIDEBAR ICON CIRCLES ── */
+.sidebar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* One colour per item type */
+.home-icon     { background: var(--blue-light); color: var(--blue);          }
+.work-icon     { background: #e6f4ea;            color: var(--green);         }
+.route-icon    { background: #fce8e6;            color: var(--red);           }
+.saved-icon    { background: #fef9e7;            color: var(--yellow);        }
+.subway-icon   { background: #fff3e0;            color: var(--blue);          }
+.train-icon    { background: #fce8e6;            color: var(--blue-dark);     }
+.tram-icon     { background: #fce8e6;            color: #37e654;              }
+.cable-car-icon{ background: #fce8e6;            color: var(--green);         }
+.bus-icon      { background: #fce8e6;            color: var(--red);           }
+.layer-icon    { background: #e8eaf6;            color: #3949ab;              }
+.share-icon    { background: var(--blue-light);  color: var(--blue);          }
+.print-icon    { background: var(--bg-tertiary); color: var(--text-secondary);}
+.settings-icon { background: #fce8e6;            color: var(--text-secondary);}
+
+/* ── SIDEBAR TEXT (title + subtitle) ── */
+.sidebar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sidebar-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.sidebar-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ── SIDEBAR FOOTER ── */
+#sidebar-footer {
+  margin-top: auto;
+  padding: 16px;
+  font-size: 11px;
+  color: var(--text-hint);
+  border-top: 1px solid var(--bg-tertiary);
+  text-align: center;
+}
+
+/* ── EYE ICON (category toggle indicator) ── */
+.category-eye {
+  margin-left: auto;
+  color: var(--text-hint);
+  font-size: 14px;
+  flex-shrink: 0;
+}

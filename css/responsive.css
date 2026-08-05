@@ -1,0 +1,88 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  responsive.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  All @media queries live here — mobile overrides and print styles.
+  This file must be loaded LAST so its rules override the others.
+  ══════════════════════════════════════════════════════════════
+*/
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE  (screens narrower than 768px)
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* Fix the top bar — stretch edge to edge instead of centred 50% */
+  #top-bar {
+    left: 10px;
+    right: 10px;
+    width: auto;
+    transform: none;
+    min-width: unset;
+    max-width: unset;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.92);  /* More opaque on mobile */
+  }
+
+  /* Prevent the search box from overflowing */
+  #search-box {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Hide dark mode button on mobile to save space */
+  #dark-mode-btn {
+    display: none;
+  }
+
+  /* Hide the floating right controls — users pinch to zoom on mobile */
+  #right-controls {
+    display: none;
+  }
+
+  /* Hide the layer switcher — too small to be useful on mobile */
+  #layer-switcher {
+    display: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   PRINT STYLES
+   When the user prints or saves as PDF, hide all UI chrome
+   and only print the map itself.
+   ════════════════════════════════════════════════════════════ */
+@media print {
+  #top-bar,
+  #sidebar,
+  #sidebar-overlay,
+  #right-controls,
+  #layer-switcher,
+  #directions-panel,
+  #info-card,
+  #saved-popup,
+  #toast,
+  #bottom-tabs {
+    display: none !important;
+  }
+
+  #main {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #map {
+    position: fixed;
+    inset: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+
+  .leaflet-container {
+    width: 100vw !important;
+    height: 100vh !important;
+    position: fixed !important;
+    inset: 0 !important;
+  }
+}

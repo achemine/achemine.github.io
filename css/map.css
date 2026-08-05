@@ -1,0 +1,36 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  map.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  Styles for the Leaflet map container and popup overrides.
+  ══════════════════════════════════════════════════════════════
+*/
+
+/* ── MAP CONTAINER ── */
+#map {
+  flex: 1;
+  height: 100%;
+  position: absolute;  /* Fills its parent #main completely */
+  inset: 0;            /* top:0; right:0; bottom:0; left:0  */
+}
+
+/*
+  LEAFLET POPUP OVERRIDES
+  Leaflet draws popups with its own default styles.
+  We override them here to match our app's design.
+  "!important" forces our rule to win over Leaflet's own CSS.
+*/
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-md) !important;
+  padding: 0 !important;
+}
+.leaflet-popup-content {
+  margin: 14px 16px !important;
+  font-family: "Roboto", Arial, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+.leaflet-popup-tip {
+  background: var(--bg-primary) !important;
+}

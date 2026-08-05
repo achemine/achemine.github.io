@@ -1,0 +1,80 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  controls.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  Styles for the floating right-side control buttons
+  (zoom in, zoom out, compass, fullscreen) and the
+  layer switcher button in the bottom-right corner.
+  Both are hidden on mobile via responsive.css.
+  ══════════════════════════════════════════════════════════════
+*/
+
+/* ── FLOATING RIGHT CONTROLS PANEL ── */
+#right-controls {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);   /* Centre vertically on the map */
+  display: flex;
+  flex-direction: column;
+  z-index: 400;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;              /* Clips buttons to rounded corners */
+}
+
+/* Each individual control button */
+.ctrl-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  transition:
+    background var(--speed),
+    color var(--speed);
+}
+.ctrl-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--blue);
+}
+
+/* Thin divider line between zoom and other buttons */
+.ctrl-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 6px;
+}
+
+/* ── LAYER SWITCHER BUTTON (bottom-right) ── */
+#layer-switcher {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-md);
+  border: 1.5px solid var(--border);
+  transition:
+    background var(--speed),
+    border-color var(--speed);
+}
+#layer-switcher:hover {
+  background: var(--bg-tertiary);
+  color: var(--blue);
+}
+#layer-switcher i {
+  font-size: 15px;
+}
