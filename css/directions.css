@@ -10,14 +10,14 @@
 /* ── DIRECTIONS PANEL CONTAINER ── */
 #directions-panel {
   position: absolute;
-  top: 14px;
+  top: 140px;
   left: 14px;
   background: var(--bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   width: 300px;
-  z-index: 600;
-  display: none;     /* Hidden until user clicks Directions */
+  z-index: 1002;
+  display: none; /* Hidden until user clicks Directions */
   overflow: hidden;
 }
 
@@ -96,8 +96,12 @@
   border-radius: 50%;
   flex-shrink: 0;
 }
-.blue-dot { background: var(--blue); }
-.red-dot  { background: var(--red);  }
+.blue-dot {
+  background: var(--blue);
+}
+.red-dot {
+  background: var(--red);
+}
 .dot-line {
   flex: 1;
   width: 2px;
@@ -241,8 +245,12 @@
     background var(--speed),
     transform var(--speed);
 }
-#get-route-btn:hover  { background: var(--blue-dark); }
-#get-route-btn:active { transform: scale(0.98); }
+#get-route-btn:hover {
+  background: var(--blue-dark);
+}
+#get-route-btn:active {
+  transform: scale(0.98);
+}
 
 /* ── ROUTE SUMMARY (distance + time) ── */
 #route-summary {
