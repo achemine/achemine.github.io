@@ -30,6 +30,7 @@ var directionProfile = "driving"; /* current transport mode             */
 
 /* ── SAVED PLACES ── */
 var savedPlaces = [{}];
+var savedMarkersLayer = null; /* holds all the star markers on the map */
 
 /* ── TRANSIT STOP LAYERS ── */
 var stopLayers = {}; /* one Leaflet layer group per category     */
