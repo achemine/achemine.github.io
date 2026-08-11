@@ -156,8 +156,6 @@ function showSavedMarkers() {
     html: `<div style="
       font-size: 18px;
       line-height: 1;
-      border-color: white;
-      background-color: white;
       filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
     ">⭐</div>`,
     iconSize: [20, 20],
