@@ -11,7 +11,6 @@
    MOBILE  (screens narrower than 768px)
    ════════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
-
   /* Fix the top bar — stretch edge to edge instead of centred 50% */
   #top-bar {
     left: 10px;
@@ -21,7 +20,7 @@
     min-width: unset;
     max-width: unset;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.92);  /* More opaque on mobile */
+    background: rgba(255, 255, 255, 0.92); /* More opaque on mobile */
   }
 
   /* Prevent the search box from overflowing */
@@ -43,6 +42,11 @@
   /* Hide the layer switcher — too small to be useful on mobile */
   #layer-switcher {
     display: none;
+  }
+
+  /* On mobile the saved popup is replaced by the bottom sheet */
+  #saved-popup {
+    display: none !important;
   }
 }
 

@@ -440,15 +440,47 @@
         <div id="route-summary"></div>
       </div>
 
-      <!-- SAVED PLACES POPUP -->
+      <!-- SAVED PLACES POPUP (desktop) -->
       <div id="saved-popup" role="dialog" aria-label="Saved places">
         <div id="saved-popup-header">
           <h3><i class="fa-solid fa-star"></i> Saved Places</h3>
-          <button onclick="closeSavedPlaces()" aria-label="Close">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <div id="saved-popup-header-actions">
+            <!-- Global eye — hides/shows all saved markers at once -->
+            <button
+              id="saved-hide-all-btn"
+              onclick="toggleAllSavedMarkers()"
+              title="Hide all"
+            >
+              <i class="fa-solid fa-eye" id="saved-hide-all-icon"></i>
+            </button>
+            <button onclick="closeSavedPlaces()" aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
         </div>
         <div id="saved-list"></div>
+      </div>
+
+      <!-- SAVED PLACES BOTTOM SHEET (mobile) -->
+      <div id="saved-sheet-overlay" onclick="closeSavedPlaces()"></div>
+      <div id="saved-sheet" role="dialog" aria-label="Saved places">
+        <div id="saved-sheet-handle"></div>
+        <div id="saved-sheet-header">
+          <h3><i class="fa-solid fa-star"></i> Saved Places</h3>
+          <div id="saved-sheet-header-actions">
+            <button
+              id="saved-sheet-hide-all-btn"
+              onclick="toggleAllSavedMarkers()"
+              title="Hide all"
+            >
+              <i class="fa-solid fa-eye" id="saved-sheet-hide-all-icon"></i>
+            </button>
+            <button onclick="closeSavedPlaces()" aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+        <div id="saved-sheet-list"></div>
       </div>
 
       <!-- TOAST NOTIFICATION -->

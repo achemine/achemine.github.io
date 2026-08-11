@@ -41,6 +41,9 @@ function showInfoCard(name, lat, lng) {
   document.getElementById("info-title").style.display = "block";
   document.getElementById("edit-name-input").style.display = "none";
   document.getElementById("edit-name-btn").style.display = "block";
+  document.getElementById("info-title").style.display = "block";
+  document.getElementById("edit-name-input").style.display = "none";
+  document.getElementById("edit-name-btn").style.display = "block";
 }
 
 /*
@@ -53,4 +56,5 @@ function closeInfoCard() {
     map.removeLayer(clickedMarker);
     clickedMarker = null;
   }
+  document.getElementById("edit-name-btn").style.display = "none";
 }

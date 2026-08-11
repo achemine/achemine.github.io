@@ -2,11 +2,12 @@
   ══════════════════════════════════════════════════════════════
   saved.css — Transit Maps App
   ══════════════════════════════════════════════════════════════
-  Styles for the saved places popup panel.
+  Styles for the saved places popup (desktop) and
+  bottom sheet (mobile).
   ══════════════════════════════════════════════════════════════
 */
 
-/* ── SAVED PLACES POPUP ── */
+/* ── SAVED PLACES POPUP (desktop) ── */
 #saved-popup {
   position: absolute;
   top: 14px;
@@ -14,13 +15,18 @@
   background: var(--bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  width: 280px;
+  width: 300px;
+  max-height: 70vh;
   z-index: 600;
   display: none;
   overflow: hidden;
+  flex-direction: column;
+}
+#saved-popup.open {
+  display: flex;
 }
 
-/* ── YELLOW HEADER ── */
+/* ── HEADER ── */
 #saved-popup-header {
   display: flex;
   align-items: center;
@@ -28,6 +34,7 @@
   padding: 14px 16px;
   background: var(--yellow);
   color: #5c4000;
+  flex-shrink: 0;
 }
 #saved-popup-header h3 {
   font-size: 15px;
@@ -36,15 +43,33 @@
   align-items: center;
   gap: 8px;
 }
+#saved-popup-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
 #saved-popup-header button {
-  font-size: 18px;
+  font-size: 16px;
   color: #5c4000;
   padding: 4px;
   border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background var(--speed);
 }
 #saved-popup-header button:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+
+/* ── SCROLLABLE LIST ── */
+#saved-list {
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: var(--yellow) transparent;
 }
 
 /* ── ONE SAVED PLACE ROW ── */
@@ -63,15 +88,17 @@
 .saved-item:last-child {
   border-bottom: none;
 }
-.saved-item i {
-  color: var(--yellow);
-  font-size: 16px;
-  flex-shrink: 0;
+.saved-item-info {
+  flex: 1;
+  min-width: 0;
 }
 .saved-item-text {
   font-size: 14px;
   font-weight: 500;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .saved-item-coords {
   font-size: 11px;
@@ -79,10 +106,129 @@
   margin-top: 2px;
 }
 
-/* ── EMPTY STATE MESSAGE ── */
+/* Individual eye toggle button */
+.saved-item-eye {
+  color: var(--text-hint);
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition:
+    color var(--speed),
+    background var(--speed);
+}
+.saved-item-eye:hover {
+  color: var(--blue);
+  background: var(--blue-light);
+}
+
+/* ── EMPTY STATE ── */
 .saved-empty {
-  padding: 20px 16px;
+  padding: 24px 16px;
   text-align: center;
   color: var(--text-secondary);
   font-size: 13px;
+}
+
+/* ── CSS STAR ICON (used on the map markers) ── */
+.star-marker {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE BOTTOM SHEET
+   ══════════════════════════════════════════════════════════════ */
+
+/* Dark overlay behind the bottom sheet */
+#saved-sheet-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 700;
+}
+#saved-sheet-overlay.visible {
+  display: block;
+}
+
+/* The bottom sheet itself */
+#saved-sheet {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 55vh;
+  background: var(--bg-primary);
+  border-radius: 20px 20px 0 0;
+  box-shadow: var(--shadow-lg);
+  z-index: 701;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+#saved-sheet.open {
+  display: flex;
+  transform: translateY(0);
+}
+
+/* Drag handle pill at the top */
+#saved-sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 999px;
+  margin: 10px auto 0;
+  flex-shrink: 0;
+}
+
+/* Sheet header — same style as popup header */
+#saved-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--yellow);
+  color: #5c4000;
+  flex-shrink: 0;
+}
+#saved-sheet-header h3 {
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#saved-sheet-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+#saved-sheet-header button {
+  font-size: 16px;
+  color: #5c4000;
+  padding: 4px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--speed);
+}
+#saved-sheet-header button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollable list inside the sheet */
+#saved-sheet-list {
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: var(--yellow) transparent;
 }
