@@ -22,10 +22,10 @@
 */
 const stopCategories = [
   { type: "metro", color: "#0077ff", file: "stops/metro.geojson" },
-  { type: "bus", color: "#ea4335", file: "stops/bus.geojson" },
+  { type: "bus", color: "#fd1500", file: "stops/bus.geojson" },
   { type: "tram", color: "#14ee4e", file: "stops/tram.geojson" },
   { type: "train", color: "#011985", file: "stops/train.geojson" },
-  { type: "telecabine", color: "#009439", file: "stops/telecabine.geojson" },
+  { type: "telecabine", color: "#028a36", file: "stops/telecabine.geojson" },
 ];
 
 /*
