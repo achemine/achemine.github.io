@@ -1,0 +1,192 @@
+{
+  "type": "cable car stations",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.032703, 36.780988]
+      },
+      "properties": {
+        "name": "Station Frais Vallon",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.020885, 36.791322]
+      },
+      "properties": {
+        "name": "Station Bouzaréah",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.020885, 36.791322]
+      },
+      "properties": {
+        "name": "Station Bouzaréah",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.032703, 36.780988]
+      },
+      "properties": {
+        "name": "Station Frais Vallon",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.020885, 36.791322]
+      },
+      "properties": {
+        "name": "Station Bouzaréah",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.03794729, 36.79602783]
+      },
+      "properties": {
+        "name": "Station Village Celleste",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.033467107, 36.80404386]
+      },
+      "properties": {
+        "name": "",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.042685859, 36.80180064]
+      },
+      "properties": {
+        "name": "Station Notre Dame d'Afrique",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044364922, 36.80376682]
+      },
+      "properties": {
+        "name": "Station Bab El Oued",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.047044449, 36.78980063]
+      },
+      "properties": {
+        "name": "Station Bab El Oued",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.04482358, 36.78836681]
+      },
+      "properties": {
+        "name": "Station téléphérique de Triolet",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.065494024, 36.74775352]
+      },
+      "properties": {
+        "name": "Station El Madania",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.066761368, 36.74943847]
+      },
+      "properties": {
+        "name": "Belouizdad بلوزداد",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.071806603, 36.74436202]
+      },
+      "properties": {
+        "name": "Station Mémorial",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.073230856, 36.74610507]
+      },
+      "properties": {
+        "name": "Jardin d'Essai",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.081179582, 36.73877366]
+      },
+      "properties": {
+        "name": "Station Palais De La Culture",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.083179169, 36.74202141]
+      },
+      "properties": {
+        "name": "Oued Kniss",
+        "marker-color": "#FFC800"
+      }
+    }
+  ]
+}

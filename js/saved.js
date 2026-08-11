@@ -11,7 +11,6 @@
 function saveCurrentPlace() {
   const name = document.getElementById("info-title").textContent;
 
-  /* Prevent saving the same place twice */
   const alreadySaved = savedPlaces.some(function (p) {
     return p.name === name;
   });
@@ -25,7 +24,87 @@ function saveCurrentPlace() {
     lat: parseFloat(clickedLat) || 0,
     lng: parseFloat(clickedLng) || 0,
   });
+
   showToast('"' + name + '" saved!');
+
+  /* Show the pencil button so the user can rename it */
+  document.getElementById("edit-name-btn").style.display = "flex";
+}
+
+/*
+  startEditingName() — called when the pencil is clicked.
+  Hides the title, shows the text input pre-filled with the current name.
+*/
+function startEditingName() {
+  const title = document.getElementById("info-title");
+  const input = document.getElementById("edit-name-input");
+  const editBtn = document.getElementById("edit-name-btn");
+
+  /* Pre-fill the input with the current name */
+  input.value = title.textContent;
+
+  /* Hide the title row, show the input */
+  title.style.display = "none";
+  editBtn.style.display = "none";
+  input.style.display = "block";
+  input.focus();
+  input.select(); /* select all text so user can type immediately */
+
+  /* Confirm on Enter key */
+  input.onkeydown = function (e) {
+    if (e.key === "Enter") confirmEditName();
+    if (e.key === "Escape") cancelEditName();
+  };
+
+  /* Confirm when clicking outside the input */
+  input.onblur = confirmEditName;
+}
+
+/*
+  confirmEditName() — saves the new name to the savedPlaces array
+  and updates the info card title.
+*/
+function confirmEditName() {
+  const title = document.getElementById("info-title");
+  const input = document.getElementById("edit-name-input");
+  const editBtn = document.getElementById("edit-name-btn");
+
+  const oldName = title.textContent;
+  const newName =
+    input.value.trim() || oldName; /* fall back to old name if empty */
+
+  /* Update the info card title */
+  title.textContent = newName;
+
+  /* Update the name in the savedPlaces array */
+  const place = savedPlaces.find(function (p) {
+    return p.name === oldName;
+  });
+  if (place) place.name = newName;
+
+  /* Hide the input, show the title + pencil again */
+  input.style.display = "none";
+  title.style.display = "block";
+  editBtn.style.display = "flex";
+
+  /* Remove the blur listener to avoid double-firing */
+  input.onblur = null;
+
+  showToast('Renamed to "' + newName + '"');
+}
+
+/*
+  cancelEditName() — discards the edit and restores the original title.
+*/
+function cancelEditName() {
+  const title = document.getElementById("info-title");
+  const input = document.getElementById("edit-name-input");
+  const editBtn = document.getElementById("edit-name-btn");
+
+  input.style.display = "none";
+  title.style.display = "block";
+  editBtn.style.display = "flex";
+  input.onblur = null;
 }
 
 /* Build and show the saved places popup */
@@ -54,7 +133,6 @@ function showSavedPlaces() {
       div.onclick = function () {
         map.flyTo([place.lat, place.lng], 15, { duration: 1.2 });
         showInfoCard(place.name, place.lat.toFixed(5), place.lng.toFixed(5));
-        closeSavedPlaces();
       };
       list.appendChild(div);
     });
@@ -67,12 +145,10 @@ function showSavedPlaces() {
 
 function closeSavedPlaces() {
   document.getElementById("saved-popup").style.display = "none";
-  hideSavedMarkers(); /* remove stars from the map */
 }
 
 function showSavedMarkers() {
   /* Remove any existing star markers first */
-  hideSavedMarkers();
 
   /* Create a star icon using a Font Awesome character */
   const starIcon = L.divIcon({
@@ -81,6 +157,7 @@ function showSavedMarkers() {
       font-size: 18px;
       line-height: 1;
       border-color: white;
+      background-color: white;
       filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
     ">⭐</div>`,
     iconSize: [20, 20],

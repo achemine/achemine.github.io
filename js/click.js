@@ -14,7 +14,7 @@
   2. Drop a new blue marker at the clicked spot
   3. Show the info card at the bottom
 */
-map.on('click', function(event) {
+map.on("click", function (event) {
   clickedLat = event.latlng.lat;
   clickedLng = event.latlng.lng;
 
@@ -23,10 +23,10 @@ map.on('click', function(event) {
 
   /* Drop a new marker */
   clickedMarker = L.marker([clickedLat, clickedLng], {
-    icon: createIcon('#1a73e8')
+    icon: createIcon("#1a73e8"),
   }).addTo(map);
 
-  showInfoCard('Custom Location', clickedLat.toFixed(5), clickedLng.toFixed(5));
+  showInfoCard("Custom Location", clickedLat.toFixed(5), clickedLng.toFixed(5));
 });
 
 /*
@@ -35,9 +35,12 @@ map.on('click', function(event) {
   Called by: click handler, search results, stop clicks, landmarks.
 */
 function showInfoCard(name, lat, lng) {
-  document.getElementById('info-title').textContent = name;
-  document.getElementById('info-sub').textContent   = lat + ', ' + lng;
-  document.getElementById('info-card').classList.add('open');
+  document.getElementById("info-title").textContent = name;
+  document.getElementById("info-sub").textContent = lat + ", " + lng;
+  document.getElementById("info-card").classList.add("open");
+  document.getElementById("info-title").style.display = "block";
+  document.getElementById("edit-name-input").style.display = "none";
+  document.getElementById("edit-name-btn").style.display = "block";
 }
 
 /*
@@ -45,7 +48,7 @@ function showInfoCard(name, lat, lng) {
   Hides the info card and removes the click marker from the map.
 */
 function closeInfoCard() {
-  document.getElementById('info-card').classList.remove('open');
+  document.getElementById("info-card").classList.remove("open");
   if (clickedMarker) {
     map.removeLayer(clickedMarker);
     clickedMarker = null;

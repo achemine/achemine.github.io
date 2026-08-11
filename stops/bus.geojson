@@ -1573,6 +1573,2492 @@
         "name": "Garidi 2",
         "marker-color": "red"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.910343, 36.801647]
+      },
+      "properties": {
+        "name": "Gare routière d'Aïn Benian",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.919173, 36.802304]
+      },
+      "properties": {
+        "name": "CEM Abdelhamid Ben Badis",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.914892, 36.801787]
+      },
+      "properties": {
+        "name": "Marché d'Aïn Benian",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.924132, 36.802616]
+      },
+      "properties": {
+        "name": "Cité 138 Logements",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.904906, 36.795949]
+      },
+      "properties": {
+        "name": "Copemad",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.90493, 36.795535]
+      },
+      "properties": {
+        "name": "Copemad",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.937498, 36.806625]
+      },
+      "properties": {
+        "name": "Cimetière d'Aïn Benian",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.944125, 36.807231]
+      },
+      "properties": {
+        "name": "Grand Rocher",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.955002, 36.810991]
+      },
+      "properties": {
+        "name": "Le phare",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.964127, 36.812934]
+      },
+      "properties": {
+        "name": "Les Tamaris",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.963934, 36.813123]
+      },
+      "properties": {
+        "name": "Les Tamaris",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.954106, 36.811028]
+      },
+      "properties": {
+        "name": "Le phare",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.944606, 36.807433]
+      },
+      "properties": {
+        "name": "Grand Rocher",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.937117, 36.806653]
+      },
+      "properties": {
+        "name": "Aïn Benian Cimetière",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.97234, 36.813619]
+      },
+      "properties": {
+        "name": "Baïnem Falaise",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.972348, 36.813725]
+      },
+      "properties": {
+        "name": "Baïnem Falaise",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.91843, 36.800049]
+      },
+      "properties": {
+        "name": "Carrefour de l'Entrée d'Aïn Benian",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.991029, 36.813358]
+      },
+      "properties": {
+        "name": "Bains Romains",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.991083, 36.813531]
+      },
+      "properties": {
+        "name": "Bains Romains",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.939917, 36.791621]
+      },
+      "properties": {
+        "name": "Plateau",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.929416, 36.800575]
+      },
+      "properties": {
+        "name": "Château Boumediene",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.95354, 36.771215]
+      },
+      "properties": {
+        "name": "Rond-point Chéraga",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.948666, 36.808826]
+      },
+      "properties": {
+        "name": "Cité Ammar Boukikaz",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.948546, 36.808919]
+      },
+      "properties": {
+        "name": "Cité Boukikaz Amar",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.292923, 36.792882]
+      },
+      "properties": {
+        "name": "AÏN TAYA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.053015, 36.773838]
+      },
+      "properties": {
+        "name": "SONALGAZ",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.053109, 36.773741]
+      },
+      "properties": {
+        "name": "SONALGAZ",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.051556, 36.772048]
+      },
+      "properties": {
+        "name": "Krim Belkacem كريم بلقاسم",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.049998, 36.770628]
+      },
+      "properties": {
+        "name": "Place Geay",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.050341, 36.769453]
+      },
+      "properties": {
+        "name": "Lycée Zeineb Oum El Massakine",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.050537, 36.7695]
+      },
+      "properties": {
+        "name": "Lycée Zeineb Oum El Massakine",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.048214, 36.766161]
+      },
+      "properties": {
+        "name": "Escalier Mécanique",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.048187, 36.767304]
+      },
+      "properties": {
+        "name": "PARC DE BEYROUTH",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.04514, 36.765723]
+      },
+      "properties": {
+        "name": "AEROHABITAT",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.045475, 36.765616]
+      },
+      "properties": {
+        "name": "AEROHABITAT",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044327, 36.764238]
+      },
+      "properties": {
+        "name": "PARC TIFARTI",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044156, 36.764374]
+      },
+      "properties": {
+        "name": "PARC TIFARTI",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.045113, 36.761973]
+      },
+      "properties": {
+        "name": "BEAUX ARTS",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.045347, 36.761939]
+      },
+      "properties": {
+        "name": "BEAUX ARTS",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.987245, 36.760239]
+      },
+      "properties": {
+        "name": "HAÏ EL BINA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.987194, 36.760347]
+      },
+      "properties": {
+        "name": "HAÏ EL BINA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.978023, 36.753868]
+      },
+      "properties": {
+        "name": "Bus Stop",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.977599, 36.753913]
+      },
+      "properties": {
+        "name": "Bus Stop",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.981778, 36.753816]
+      },
+      "properties": {
+        "name": "bois des cars",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.991694, 36.750711]
+      },
+      "properties": {
+        "name": "Aïn Allah",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.9927, 36.749302]
+      },
+      "properties": {
+        "name": "Bus Stop",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.994119, 36.749991]
+      },
+      "properties": {
+        "name": "Dodanne",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.009606, 36.817169]
+      },
+      "properties": {
+        "name": "Raïs Hamidou 2",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.009593, 36.817263]
+      },
+      "properties": {
+        "name": "Raïs Hamidou 2",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.014246, 36.816774]
+      },
+      "properties": {
+        "name": "الرئيس حميدو 1",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.014316, 36.816866]
+      },
+      "properties": {
+        "name": "الرئيس حميدو 1",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.001903, 36.815756]
+      },
+      "properties": {
+        "name": "Horizons Bleus",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.001957, 36.815872]
+      },
+      "properties": {
+        "name": "Horizons Bleus",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.021631, 36.812421]
+      },
+      "properties": {
+        "name": "La Vigie",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.021156, 36.813121]
+      },
+      "properties": {
+        "name": "La Vigie",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.996254, 36.814609]
+      },
+      "properties": {
+        "name": "Miramar",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.996386, 36.814785]
+      },
+      "properties": {
+        "name": "Miramar",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.028805, 36.811569]
+      },
+      "properties": {
+        "name": "Deux Moulins",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.028961, 36.811646]
+      },
+      "properties": {
+        "name": "Deux Moulins",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.039228, 36.80928]
+      },
+      "properties": {
+        "name": "Plateau, Bologhine.",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.03907, 36.809494]
+      },
+      "properties": {
+        "name": "Plateau, Bologhine.",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.048557, 36.801879]
+      },
+      "properties": {
+        "name": "Stade de Bologhine",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.048343, 36.801793]
+      },
+      "properties": {
+        "name": "Stade de Bologhine",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.043778, 36.805489]
+      },
+      "properties": {
+        "name": "بلدية بولوغين",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.043812, 36.805567]
+      },
+      "properties": {
+        "name": "بلدية بولوغين",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.902213, 36.787041]
+      },
+      "properties": {
+        "name": "École Supérieure d'Hôtellerie et de Restauration d'Alger",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.901865, 36.787183]
+      },
+      "properties": {
+        "name": "École Supérieure d'Hôtellerie et de Restauration d'Alger",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.895864, 36.767332]
+      },
+      "properties": {
+        "name": "موقف الحافلات الصنوبر البحري",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.05261, 36.791881]
+      },
+      "properties": {
+        "name": "Bab El Oued (Ali Basta)",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.053653, 36.793552]
+      },
+      "properties": {
+        "name": "Place Ferhani",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.053471, 36.793466]
+      },
+      "properties": {
+        "name": "Place Ferhani",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.062827, 36.785793]
+      },
+      "properties": {
+        "name": "Place des Martyrs",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.062065, 36.784419]
+      },
+      "properties": {
+        "name": "Place des Martyrs",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.050279, 36.793226]
+      },
+      "properties": {
+        "name": "Hôpital Maillot",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.049708, 36.793]
+      },
+      "properties": {
+        "name": "Maillot",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.056336, 36.792349]
+      },
+      "properties": {
+        "name": "Bab El Ouad",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.058245, 36.791726]
+      },
+      "properties": {
+        "name": "الكتّاني",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.057604, 36.790882]
+      },
+      "properties": {
+        "name": "BD ABDRRAHMANE TALEB",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.058715, 36.789641]
+      },
+      "properties": {
+        "name": "LYCEE OKBA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.057674, 36.789636]
+      },
+      "properties": {
+        "name": "Louni Arezki",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.057017, 36.789192]
+      },
+      "properties": {
+        "name": "Okba",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.056338, 36.788272]
+      },
+      "properties": {
+        "name": "Larmaf",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.057017, 36.789192]
+      },
+      "properties": {
+        "name": "Okba",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.051977, 36.784921]
+      },
+      "properties": {
+        "name": "CHU AIT ALI IDIR",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.051159, 36.789151]
+      },
+      "properties": {
+        "name": "Re maison",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.047584, 36.790137]
+      },
+      "properties": {
+        "name": "Bazita",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.047377, 36.790173]
+      },
+      "properties": {
+        "name": "Basitta",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044475, 36.788023]
+      },
+      "properties": {
+        "name": "Triolet",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044083, 36.788171]
+      },
+      "properties": {
+        "name": "Bus station : beau-fraisier, Chevalley, bouzareah",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.043541, 36.787879]
+      },
+      "properties": {
+        "name": "Triolet",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044083, 36.788171]
+      },
+      "properties": {
+        "name": "Bus station : beau-fraisier, Chevalley, bouzareah",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.0429, 36.78543]
+      },
+      "properties": {
+        "name": "Sekoto",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.042624, 36.785428]
+      },
+      "properties": {
+        "name": "Secouto",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.043871, 36.785467]
+      },
+      "properties": {
+        "name": "Secoutto",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.043992, 36.785516]
+      },
+      "properties": {
+        "name": "Secoutto",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044826, 36.784367]
+      },
+      "properties": {
+        "name": "BARO ROUDJ",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.044877, 36.784538]
+      },
+      "properties": {
+        "name": "Bareau rouge",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.048053, 36.785903]
+      },
+      "properties": {
+        "name": "El Kettar",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.047449, 36.785686]
+      },
+      "properties": {
+        "name": "El Kettar",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.04679, 36.785688]
+      },
+      "properties": {
+        "name": "Climat de France",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.046631, 36.781581]
+      },
+      "properties": {
+        "name": "Barreaux rouges",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.047133, 36.78125]
+      },
+      "properties": {
+        "name": "Barreaux rouges",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.04617, 36.778601]
+      },
+      "properties": {
+        "name": "طارق بن زياد",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.055913, 36.785635]
+      },
+      "properties": {
+        "name": "Bab djedid",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.05755, 36.787196]
+      },
+      "properties": {
+        "name": "CHU ait idir",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.057953, 36.787009]
+      },
+      "properties": {
+        "name": "CHU ait idir",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.063475661, 36.78542177]
+      },
+      "properties": {
+        "name": "Place des Martyrs",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.063057237, 36.7856817]
+      },
+      "properties": {
+        "name": "Place des Martyrs",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.061716132, 36.7810287]
+      },
+      "properties": {
+        "name": "Port Saïd",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.061869018, 36.78090411]
+      },
+      "properties": {
+        "name": "Port Saïd",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.060399168, 36.7776752]
+      },
+      "properties": {
+        "name": "Hôtel Es-Safir",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.060184591, 36.77767734]
+      },
+      "properties": {
+        "name": "Hôtel Es-Safir",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.060696893, 36.77261565]
+      },
+      "properties": {
+        "name": "Grande Poste (Sofia)",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.059806399, 36.77373072]
+      },
+      "properties": {
+        "name": "Grande Poste",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.06168931, 36.77429146]
+      },
+      "properties": {
+        "name": "",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.061091178, 36.7746524]
+      },
+      "properties": {
+        "name": "",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.056182735, 36.76798765]
+      },
+      "properties": {
+        "name": "MAURETANIA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.056257837, 36.76792104]
+      },
+      "properties": {
+        "name": "Gare de l'Agha",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.056003027, 36.76509555]
+      },
+      "properties": {
+        "name": "Le Moulin",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.055919879, 36.76509125]
+      },
+      "properties": {
+        "name": "Le Moulin",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.061600797, 36.75701598]
+      },
+      "properties": {
+        "name": "Station Aissat Idir",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.060023658, 36.75494223]
+      },
+      "properties": {
+        "name": "Musset",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.062467151, 36.75214634]
+      },
+      "properties": {
+        "name": "Place du 11 Décembre",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.066423409, 36.75510985]
+      },
+      "properties": {
+        "name": "Les Halles",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.066332214, 36.75650238]
+      },
+      "properties": {
+        "name": "Les Ateliers",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.069102936, 36.74850788]
+      },
+      "properties": {
+        "name": "Hamma",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.066777461, 36.74962114]
+      },
+      "properties": {
+        "name": "Sidi M'hamed",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.070607655, 36.75214634]
+      },
+      "properties": {
+        "name": "LES ATELIERS الورشات",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.073547356, 36.74612226]
+      },
+      "properties": {
+        "name": "Jardin d'Essai",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.076336854, 36.75087623]
+      },
+      "properties": {
+        "name": "Jardin d'Essai حديقة التجارب",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.079163902, 36.74372797]
+      },
+      "properties": {
+        "name": "El Annasser 1",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.082441798, 36.74505068]
+      },
+      "properties": {
+        "name": "Cité universitaire ahmed yousfi",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.022134774, 36.77296371]
+      },
+      "properties": {
+        "name": "Carnot",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.024489753, 36.77219455]
+      },
+      "properties": {
+        "name": "جسر كارنو",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.024479024, 36.77291215]
+      },
+      "properties": {
+        "name": "Carnot كارنو",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.025136166, 36.77489088]
+      },
+      "properties": {
+        "name": "Robert",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.025576048, 36.77500474]
+      },
+      "properties": {
+        "name": "Robert",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.02958595, 36.77346216]
+      },
+      "properties": {
+        "name": "El Idrissi",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.029526942, 36.77355024]
+      },
+      "properties": {
+        "name": "El Idrissi",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.02124428, 36.77529478]
+      },
+      "properties": {
+        "name": "La Bruyère",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.021016292, 36.7753356]
+      },
+      "properties": {
+        "name": "La Bruyère",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.016491406, 36.77672562]
+      },
+      "properties": {
+        "name": "Baranes Triouli",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.016172223, 36.77721974]
+      },
+      "properties": {
+        "name": "برانيس بوزريعة",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.016311698, 36.78007917]
+      },
+      "properties": {
+        "name": "Quatre saisons",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.016333155, 36.78016725]
+      },
+      "properties": {
+        "name": "Quatre saisons",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.015936189, 36.78356791]
+      },
+      "properties": {
+        "name": "Petit Bois",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.016121261, 36.78410925]
+      },
+      "properties": {
+        "name": "Petit Bois",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.016815953, 36.78755699]
+      },
+      "properties": {
+        "name": "El Alia",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.016931288, 36.78746677]
+      },
+      "properties": {
+        "name": "El Alia",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.017199509, 36.79019049]
+      },
+      "properties": {
+        "name": "Bouzareah",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.012899928, 36.79202916]
+      },
+      "properties": {
+        "name": "Dayra",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.013034038, 36.79218381]
+      },
+      "properties": {
+        "name": "Dayra",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.01066833, 36.79475271]
+      },
+      "properties": {
+        "name": "Lamara",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.010392062, 36.79497609]
+      },
+      "properties": {
+        "name": "Bouskour",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.007908337, 36.79697573]
+      },
+      "properties": {
+        "name": "Bouskour",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.008063905, 36.79716474]
+      },
+      "properties": {
+        "name": "Bouskour",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.0058484, 36.79622614]
+      },
+      "properties": {
+        "name": "Echaba",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.005995922, 36.79610157]
+      },
+      "properties": {
+        "name": "La cité blanche",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.004059367, 36.79688767]
+      },
+      "properties": {
+        "name": "la city blanche",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.004086189, 36.79674162]
+      },
+      "properties": {
+        "name": "la city blanche",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.994754784, 36.79646885]
+      },
+      "properties": {
+        "name": "Bousmaha",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.994845979, 36.79662564]
+      },
+      "properties": {
+        "name": "Bousmaha",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.998078041, 36.79681894]
+      },
+      "properties": {
+        "name": "Stade",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.998485737, 36.79670726]
+      },
+      "properties": {
+        "name": "Stade",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.988853924, 36.79666]
+      },
+      "properties": {
+        "name": "Ecole Supérieur de Banque",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.988923661, 36.79693922]
+      },
+      "properties": {
+        "name": "Ecole Supérieur de Banque",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.964121274, 36.7840491]
+      },
+      "properties": {
+        "name": "Station Sidi Youcef",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.974888747, 36.78117168]
+      },
+      "properties": {
+        "name": "Cité 24 février",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.971853483, 36.78262324]
+      },
+      "properties": {
+        "name": "Rmila",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.969945589, 36.78368009]
+      },
+      "properties": {
+        "name": "Chalet",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.969630747, 36.78459019]
+      },
+      "properties": {
+        "name": "Carrière",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.984176151, 36.78148199]
+      },
+      "properties": {
+        "name": "Cous beni mesous",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.983671896, 36.7817097]
+      },
+      "properties": {
+        "name": "مستشفى بني مسوس",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.996919326, 36.77828318]
+      },
+      "properties": {
+        "name": "شوني",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.997238509, 36.77827888]
+      },
+      "properties": {
+        "name": "شوني",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.986155622, 36.76931979]
+      },
+      "properties": {
+        "name": "Cercle National de l'Armée 2",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.984103732, 36.76907915]
+      },
+      "properties": {
+        "name": "CERCLE NATIONAL DE L'ARMEE - 2 -",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.965073459, 36.77205704]
+      },
+      "properties": {
+        "name": "Dar Diaf",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.965575032, 36.77171113]
+      },
+      "properties": {
+        "name": "Hôtel Dar Diaf",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.942449025, 36.76598511]
+      },
+      "properties": {
+        "name": "SOUK EL FELLAH",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.942599229, 36.76587552]
+      },
+      "properties": {
+        "name": "Souk El Fellah",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.934407763, 36.7584708]
+      },
+      "properties": {
+        "name": "EL KARIA ( LES DUNES)",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.934638433, 36.75839773]
+      },
+      "properties": {
+        "name": "EL KARIA ( LES DUNES)",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.931449286, 36.75513564]
+      },
+      "properties": {
+        "name": "El Kerma",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.931127421, 36.75526888]
+      },
+      "properties": {
+        "name": "EL KERMA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.91514682, 36.74478113]
+      },
+      "properties": {
+        "name": "BOUCHAOUI POLYCLINIQUE",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.915093175, 36.7448714]
+      },
+      "properties": {
+        "name": "BOUCHAOUI POLYCLINIQUE",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.914347521, 36.74383329]
+      },
+      "properties": {
+        "name": "Bouchaoui École Mouloud Feraoun",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.914347521, 36.74383329]
+      },
+      "properties": {
+        "name": "Bouchaoui École Mouloud Feraoun",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.91509774, 36.74153494]
+      },
+      "properties": {
+        "name": "Bouchaoui",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.914441399, 36.74385693]
+      },
+      "properties": {
+        "name": "Bouchaoui École Mouloud Feraoun",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.909677795, 36.74290693]
+      },
+      "properties": {
+        "name": "BOUCHAOUI MOSQUEE EN-NASR",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.909667067, 36.74300795]
+      },
+      "properties": {
+        "name": "BOUCHAOUI MOSQUEE EN-NASR",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.89357113, 36.75020786]
+      },
+      "properties": {
+        "name": "CITE MAURIACE - STAOUELI -",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.893742792, 36.75026374]
+      },
+      "properties": {
+        "name": "CITE MAURIACE - STAOUELI -",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.891071311, 36.75151666]
+      },
+      "properties": {
+        "name": "CEM LES FRERES BOUDOUARA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.891280524, 36.75160048]
+      },
+      "properties": {
+        "name": "CEM LES FRERES BOUDOUARA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.88695412, 36.75053882]
+      },
+      "properties": {
+        "name": "RUE KACI AMEUR",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.882777921, 36.74552477]
+      },
+      "properties": {
+        "name": "CITE FELLAG MOHAMED ( MIMOSA)",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.882649175, 36.74561934]
+      },
+      "properties": {
+        "name": "CITE FELLAG MOHAMED ( MIMOSA)",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.876490823, 36.74083066]
+      },
+      "properties": {
+        "name": "RESIDENCE EL BARAKA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.876370124, 36.74105204]
+      },
+      "properties": {
+        "name": "Résidence El Baraka",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.87172722, 36.74191179]
+      },
+      "properties": {
+        "name": "LA BRIDJA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.867644898, 36.74156574]
+      },
+      "properties": {
+        "name": "Palm Beach",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.866590789, 36.74010631]
+      },
+      "properties": {
+        "name": "DOMAINE HADJERI AHMED",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.866400353, 36.74036639]
+      },
+      "properties": {
+        "name": "DOMAINE HADJERI AHMED",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.853869072, 36.72673798]
+      },
+      "properties": {
+        "name": "Azure Plage",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.854134611, 36.72716364]
+      },
+      "properties": {
+        "name": "Azure Plage",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.849671415, 36.71941118]
+      },
+      "properties": {
+        "name": "Zéralda Protection Civile",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.850084475, 36.71954447]
+      },
+      "properties": {
+        "name": "Zéralda - Protection civile",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.841040066, 36.71885863]
+      },
+      "properties": {
+        "name": "COMPLEXE TOURISTIQUE",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.841520182, 36.71942623]
+      },
+      "properties": {
+        "name": "COMPLEXE TOURISTIQUE",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.834747604, 36.71327272]
+      },
+      "properties": {
+        "name": "Gare routière de Zéralda",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.814625672, 36.69612974]
+      },
+      "properties": {
+        "name": "DOMAINE KHALLOUFI",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.814596167, 36.69579424]
+      },
+      "properties": {
+        "name": "DOMAINE KHALLOUFI",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.843125322, 36.69997004]
+      },
+      "properties": {
+        "name": "Hopital zeralda",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.842953569, 36.69986522]
+      },
+      "properties": {
+        "name": "Hopital zeralda",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.827580741, 36.68949904]
+      },
+      "properties": {
+        "name": "",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.836195997, 36.67571533]
+      },
+      "properties": {
+        "name": "Plateau",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.835090927, 36.70131906]
+      },
+      "properties": {
+        "name": "El Karia (Zéralda)",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.878706328, 36.68378194]
+      },
+      "properties": {
+        "name": "PLACE 11 DECEMBRE 1960",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.878470293, 36.68393251]
+      },
+      "properties": {
+        "name": "PLACE 11 DECEMBRE 1960",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.880487314, 36.67766215]
+      },
+      "properties": {
+        "name": "Mosquée Okba Ibn Nafaa",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.880658976, 36.6778493]
+      },
+      "properties": {
+        "name": "Mosquée Okba Ibn Nafaa",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.877641491, 36.68195788]
+      },
+      "properties": {
+        "name": "MAHELMA",
+        "marker-color": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [2.877939216, 36.68204177]
+      },
+      "properties": {
+        "name": "MAHELMA",
+        "marker-color": "#E51B23"
+      }
     }
   ]
 }

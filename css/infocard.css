@@ -14,7 +14,7 @@
   position: absolute;
   bottom: 14px;
   left: 50%;
-  transform: translateX(-50%);   /* Horizontally centred */
+  transform: translateX(-50%); /* Horizontally centred */
   background: var(--bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -22,7 +22,7 @@
   width: 360px;
   max-width: calc(100vw - 28px); /* Never wider than the screen */
   z-index: 600;
-  display: none;                 /* Hidden by default — JS adds .open */
+  display: none; /* Hidden by default — JS adds .open */
   text-align: center;
 }
 
@@ -130,4 +130,47 @@
 }
 .card-btn.primary:hover {
   background: var(--blue-dark);
+}
+
+/* ── EDITABLE TITLE ROW ── */
+#info-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+/* Pencil edit button — hidden by default, shown after saving */
+#edit-name-btn {
+  background: none;
+  border: none;
+  color: var(--text-hint);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: none; /* JS shows this after saving */
+  transition:
+    color var(--speed),
+    background var(--speed);
+}
+#edit-name-btn:hover {
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+}
+
+/* Inline name input — hidden by default, shown when pencil is clicked */
+#edit-name-input {
+  border: none;
+  border-bottom: 2px solid var(--blue);
+  background: transparent;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  width: 100%;
+  outline: none;
+  display: none; /* JS shows this when editing */
+  margin-bottom: 6px;
 }

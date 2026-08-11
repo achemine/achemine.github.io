@@ -347,7 +347,21 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
         <div id="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-        <h3 id="info-title">Place Name</h3>
+        <!-- Editable name input (shown when pencil is clicked) -->
+        <input type="text" id="edit-name-input" placeholder="Enter a name…" />
+
+        <!-- Title row with pencil button -->
+        <div id="info-title-row">
+          <h3 id="info-title">Place Name</h3>
+          <button
+            id="edit-name-btn"
+            title="Edit name"
+            onclick="startEditingName()"
+          >
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+        </div>
+
         <p id="info-sub">Click on the map to see coordinates</p>
         <div id="info-tags">
           <span class="tag">📍 Algiers</span>
