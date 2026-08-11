@@ -142,7 +142,6 @@
    MOBILE BOTTOM SHEET
    ══════════════════════════════════════════════════════════════ */
 
-/* Dark overlay behind the bottom sheet */
 #saved-sheet-overlay {
   display: none;
   position: fixed;
@@ -154,7 +153,6 @@
   display: block;
 }
 
-/* The bottom sheet itself */
 #saved-sheet {
   display: none;
   position: fixed;
@@ -162,40 +160,33 @@
   left: 0;
   right: 0;
   width: 100%;
-  max-height: 55vh;
   background: var(--bg-primary);
   border-radius: 20px 20px 0 0;
   box-shadow: var(--shadow-lg);
   z-index: 701;
   flex-direction: column;
   overflow: hidden;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
+  /* No transition here — JS handles the animation */
+  touch-action: none; /* prevents page scroll interfering with drag */
 }
 #saved-sheet.open {
   display: flex;
-  transform: translateY(0);
 }
 
-/* Drag handle pill at the top */
-#saved-sheet-handle {
-  width: 40px;
-  height: 4px;
-  background: var(--border);
-  border-radius: 999px;
-  margin: 10px auto 0;
-  flex-shrink: 0;
-}
-
-/* Sheet header — same style as popup header */
+/* The yellow header IS the drag handle — no separate pill needed */
 #saved-sheet-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 14px 16px;
   background: var(--yellow);
   color: #5c4000;
   flex-shrink: 0;
+  cursor: grab; /* show grab cursor to hint it's draggable */
+  user-select: none; /* prevent text selection while dragging   */
+}
+#saved-sheet-header:active {
+  cursor: grabbing;
 }
 #saved-sheet-header h3 {
   font-size: 15px;
@@ -203,6 +194,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  pointer-events: none; /* let drag events pass through the text */
 }
 #saved-sheet-header-actions {
   display: flex;
@@ -220,12 +212,14 @@
   align-items: center;
   justify-content: center;
   transition: background var(--speed);
+  pointer-events: all; /* buttons still need to be clickable */
+  cursor: pointer;
 }
 #saved-sheet-header button:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* Scrollable list inside the sheet */
+/* Scrollable list */
 #saved-sheet-list {
   overflow-y: auto;
   flex: 1;

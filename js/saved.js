@@ -101,24 +101,25 @@ function toggleAllSavedMarkers() {
   allSavedVisible = !allSavedVisible;
 
   savedPlaces.forEach(function (place) {
+    if (!place.marker) return;
     place.visible = allSavedVisible;
     if (allSavedVisible) {
-      place.marker.addTo(map);
+      if (!map.hasLayer(place.marker)) place.marker.addTo(map);
     } else {
-      map.removeLayer(place.marker);
+      if (map.hasLayer(place.marker)) map.removeLayer(place.marker);
     }
   });
 
-  /* Update both the popup and sheet eye icons */
+  /* Update icon in both popup and sheet */
   const iconClass = allSavedVisible
     ? "fa-solid fa-eye"
     : "fa-solid fa-eye-slash";
-  const popupIcon = document.getElementById("saved-hide-all-icon");
-  const sheetIcon = document.getElementById("saved-sheet-hide-all-icon");
-  if (popupIcon) popupIcon.className = iconClass;
-  if (sheetIcon) sheetIcon.className = iconClass;
+  ["saved-hide-all-icon", "saved-sheet-hide-all-icon"].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el) el.className = iconClass;
+  });
 
-  /* Rebuild the list to update individual eye icons */
+  /* Rebuild list rows to sync individual eye icons */
   buildSavedList();
 
   showToast(
@@ -196,18 +197,34 @@ function showSavedPlaces() {
   const isMobile = window.innerWidth < 768;
 
   if (isMobile) {
-    /* Show bottom sheet */
-    document.getElementById("saved-sheet").classList.add("open");
+    const sheet = document.getElementById("saved-sheet");
+    sheet.classList.add("open");
     document.getElementById("saved-sheet-overlay").classList.add("visible");
+
+    /* Start at 50% height */
+    sheetExpandedHeight = window.innerHeight * 0.5;
+    sheet.style.height = sheetExpandedHeight + "px";
+    sheet.style.transform = "translateY(0)";
+    sheet.style.transition = "transform 0.3s ease, height 0.3s ease";
+
+    initSheetDrag(sheet);
   } else {
-    /* Show popup */
     document.getElementById("saved-popup").classList.add("open");
   }
 }
 
 function closeSavedPlaces() {
+  const sheet = document.getElementById("saved-sheet");
+  sheet.style.transition = "transform 0.3s ease";
+  sheet.style.transform = "translateY(100%)";
+
+  setTimeout(function () {
+    sheet.classList.remove("open");
+    sheet.style.transform = "";
+    sheet.style.height = "";
+  }, 300);
+
   document.getElementById("saved-popup").classList.remove("open");
-  document.getElementById("saved-sheet").classList.remove("open");
   document.getElementById("saved-sheet-overlay").classList.remove("visible");
 }
 
@@ -284,4 +301,143 @@ function cancelEditName() {
   title.style.display = "block";
   editBtn.style.display = "flex";
   input.onblur = null;
+}
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE SHEET DRAG LOGIC
+   The user drags the yellow header to:
+   - Expand the sheet (drag up)
+   - Collapse the sheet (drag down)
+   - Close the sheet  (drag far enough down)
+   ════════════════════════════════════════════════════════════ */
+
+var sheetExpandedHeight = 0; /* current height of the sheet in px  */
+var dragStartY = 0; /* finger Y position when drag started */
+var dragStartHeight = 0; /* sheet height when drag started      */
+var isDragging = false;
+
+var MIN_HEIGHT = 120; /* minimum height before snapping shut  */
+var MAX_HEIGHT = window.innerHeight * 0.85; /* maximum expanded height */
+var CLOSE_THRESHOLD = window.innerHeight * 0.25; /* drag below this → close */
+
+function initSheetDrag(sheet) {
+  const header = document.getElementById("saved-sheet-header");
+
+  /* Remove old listeners to avoid stacking them */
+  header.removeEventListener("touchstart", onTouchStart);
+  header.removeEventListener("mousedown", onMouseDown);
+
+  header.addEventListener("touchstart", onTouchStart, { passive: true });
+  header.addEventListener("mousedown", onMouseDown);
+}
+
+/* ── TOUCH (mobile) ── */
+
+function onTouchStart(e) {
+  /* Don't start drag if the user tapped a button */
+  if (e.target.closest("button")) return;
+
+  isDragging = true;
+  dragStartY = e.touches[0].clientY;
+  dragStartHeight = sheetExpandedHeight;
+
+  const sheet = document.getElementById("saved-sheet");
+  sheet.style.transition = "none"; /* disable animation while dragging */
+
+  document.addEventListener("touchmove", onTouchMove, { passive: false });
+  document.addEventListener("touchend", onTouchEnd);
+}
+
+function onTouchMove(e) {
+  if (!isDragging) return;
+  e.preventDefault(); /* prevent page scroll while dragging */
+
+  const deltaY = e.touches[0].clientY - dragStartY; /* how far finger moved */
+  const newHeight = dragStartHeight - deltaY; /* drag up = bigger     */
+
+  applySheetHeight(newHeight);
+}
+
+function onTouchEnd(e) {
+  if (!isDragging) return;
+  isDragging = false;
+
+  document.removeEventListener("touchmove", onTouchMove);
+  document.removeEventListener("touchend", onTouchEnd);
+
+  snapSheet();
+}
+
+/* ── MOUSE (desktop testing) ── */
+
+function onMouseDown(e) {
+  if (e.target.closest("button")) return;
+
+  isDragging = true;
+  dragStartY = e.clientY;
+  dragStartHeight = sheetExpandedHeight;
+
+  const sheet = document.getElementById("saved-sheet");
+  sheet.style.transition = "none";
+
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mouseup", onMouseUp);
+}
+
+function onMouseMove(e) {
+  if (!isDragging) return;
+  const deltaY = e.clientY - dragStartY;
+  const newHeight = dragStartHeight - deltaY;
+  applySheetHeight(newHeight);
+}
+
+function onMouseUp() {
+  if (!isDragging) return;
+  isDragging = false;
+
+  document.removeEventListener("mousemove", onMouseMove);
+  document.removeEventListener("mouseup", onMouseUp);
+
+  snapSheet();
+}
+
+/* ── SHARED HELPERS ── */
+
+/*
+  applySheetHeight() sets the sheet height during dragging.
+  Clamps between MIN_HEIGHT and MAX_HEIGHT.
+*/
+function applySheetHeight(newHeight) {
+  const sheet = document.getElementById("saved-sheet");
+  const clamped = Math.max(MIN_HEIGHT, Math.min(MAX_HEIGHT, newHeight));
+  sheetExpandedHeight = clamped;
+  sheet.style.height = clamped + "px";
+}
+
+/*
+  snapSheet() is called when the user releases.
+  If height is below the close threshold → close.
+  Otherwise snap to either 50% or 85% depending on direction.
+*/
+function snapSheet() {
+  const sheet = document.getElementById("saved-sheet");
+  sheet.style.transition = "height 0.3s ease, transform 0.3s ease";
+
+  const screenH = window.innerHeight;
+  const halfHeight = screenH * 0.5;
+  const fullHeight = screenH * 0.85;
+  const closeHeight = screenH * 0.2;
+
+  if (sheetExpandedHeight < closeHeight) {
+    /* Too low — close the sheet */
+    closeSavedPlaces();
+  } else if (sheetExpandedHeight < (halfHeight + fullHeight) / 2) {
+    /* Closer to half — snap to 50% */
+    sheetExpandedHeight = halfHeight;
+    sheet.style.height = halfHeight + "px";
+  } else {
+    /* Closer to full — snap to 85% */
+    sheetExpandedHeight = fullHeight;
+    sheet.style.height = fullHeight + "px";
+  }
 }
