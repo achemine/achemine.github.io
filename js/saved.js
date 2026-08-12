@@ -42,10 +42,10 @@ function saveCurrentPlace() {
   const name = document.getElementById("info-title").textContent;
 
   const alreadySaved = savedPlaces.some(function (p) {
-    return p.name === name;
+    return p.lat === parseFloat(clickedLat) && p.lng === parseFloat(clickedLng);
   });
   if (alreadySaved) {
-    showToast('"' + name + '" is already saved');
+    showToast("This location is already saved");
     return;
   }
 
@@ -155,19 +155,22 @@ function buildSavedList() {
     const eyeIcon = place.visible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
 
     html += `
-      <div class="saved-item">
-        <div class="saved-item-info" onclick="flyToSaved(${index})">
-          <div class="saved-item-text">${place.name}</div>
-          <div class="saved-item-coords">
-            ${place.lat ? place.lat.toFixed(4) : "N/A"},
-            ${place.lng ? place.lng.toFixed(4) : "N/A"}
-          </div>
-        </div>
-        <button class="saved-item-eye" onclick="toggleSavedMarker(${index})" title="Toggle visibility">
-          <i class="${eyeIcon}"></i>
-        </button>
+  <div class="saved-item">
+    <div class="saved-item-info" onclick="flyToSaved(${index})">
+      <div class="saved-item-text">${place.name}</div>
+      <div class="saved-item-coords">
+        ${place.lat ? place.lat.toFixed(4) : "N/A"},
+        ${place.lng ? place.lng.toFixed(4) : "N/A"}
       </div>
-    `;
+    </div>
+    <button class="saved-item-eye" onclick="toggleSavedMarker(${index})" title="Toggle visibility">
+      <i class="${eyeIcon}"></i>
+    </button>
+    <button class="saved-item-delete" onclick="deleteSavedPlace(${index})" title="Delete">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+`;
   });
 
   /* Apply to both popup and sheet */
@@ -440,4 +443,22 @@ function snapSheet() {
     sheetExpandedHeight = fullHeight;
     sheet.style.height = fullHeight + "px";
   }
+}
+
+function deleteSavedPlace(index) {
+  const place = savedPlaces[index];
+  if (!place) return;
+
+  /* Remove the star marker from the map */
+  if (place.marker && map.hasLayer(place.marker)) {
+    map.removeLayer(place.marker);
+  }
+
+  /* Remove from the array */
+  savedPlaces.splice(index, 1);
+
+  /* Rebuild the list */
+  buildSavedList();
+
+  showToast('"' + place.name + '" removed');
 }

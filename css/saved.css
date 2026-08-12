@@ -122,6 +122,21 @@
   background: var(--blue-light);
 }
 
+.saved-item-delete {
+  color: var(--text-hint);
+  font-size: 13px;
+  padding: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition:
+    color var(--speed),
+    background var(--speed);
+}
+.saved-item-delete:hover {
+  color: var(--red);
+  background: #fce8e6;
+}
+
 /* ── EMPTY STATE ── */
 .saved-empty {
   padding: 24px 16px;
