@@ -48,6 +48,11 @@
   #saved-popup {
     display: none !important;
   }
+
+  /* Hide desktop directions panel on mobile */
+  #directions-panel {
+    display: none !important;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
