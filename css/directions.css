@@ -27,7 +27,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 16px 12px;
-  background: var(--blue);
+  background: var(--green);
   color: white;
 }
 #directions-header h3 {
@@ -484,7 +484,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--green);
   color: white;
   display: flex;
   align-items: center;
@@ -497,7 +497,7 @@
     transform var(--speed);
 }
 #sheet-add-stop-btn:hover {
-  background: var(--blue-dark);
+  background: var(--green-dark);
   transform: scale(1.1);
 }
 
