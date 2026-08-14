@@ -641,10 +641,9 @@ function snapDirSheet() {
 }
 
 function turn_by_turn() {
-  if (window.innerWidth < 768) {
+  if (getSheetRoute()) {
     showStepsView();
   } else {
-    const stepsPanel = document.getElementById("steps-panel");
-    stepsPanel.style.display = "block";
+    getSheetRoute();
   }
 }
