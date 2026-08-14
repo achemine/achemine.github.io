@@ -513,7 +513,7 @@ function openDirectionsSheet() {
   sheet.classList.add("open");
   sheet.classList.remove("picking");
 
-  directionSheetHeight = window.innerHeight * 0.5;
+  directionSheetHeight = window.innerHeight * 0.3;
   sheet.style.height = directionSheetHeight + "px";
   sheet.style.transform = "translateY(0)";
   sheet.style.transition = "transform 0.3s ease, height 0.3s ease";
@@ -553,7 +553,7 @@ var dirDragStartY = 0;
 var dirDragStartHeight = 0;
 var dirIsDragging = false;
 
-var DIR_MIN_HEIGHT = 80;
+var DIR_MIN_HEIGHT = 120;
 var DIR_CLOSE_THRESHOLD = window.innerHeight * 0.2;
 
 function initDirectionSheetDrag(sheet) {
