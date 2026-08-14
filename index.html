@@ -384,135 +384,139 @@
       </div>
 
       <!-- DIRECTIONS PANEL -->
-      <div id="directions-panel" role="dialog" aria-label="Directions">
-        <div id="directions-header">
-          <h3><i class="fa-solid fa-route"></i> Directions</h3>
-          <button
-            onclick="closeDirections()"
-            title="Close"
-            aria-label="Close directions"
-          >
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div id="directions-modes">
-          <button
-            class="mode-btn active"
-            onclick="setDirectionMode(this, 'driving')"
-            title="Driving"
-          >
-            <i class="fa-solid fa-car"></i>
-          </button>
-          <button
-            class="mode-btn"
-            onclick="setDirectionMode(this, 'cycling')"
-            title="Cycling"
-          >
-            <i class="fa-solid fa-train"></i>
-          </button>
-          <button
-            class="mode-btn"
-            onclick="setDirectionMode(this, 'walking')"
-            title="Walking"
-          >
-            <i class="fa-solid fa-person-walking"></i>
-          </button>
-        </div>
-        <div id="directions-inputs">
-          <div id="waypoint-dots">
-            <div class="dot blue-dot"></div>
-            <div class="dot-line"></div>
-            <div id="stop-dots"></div>
-            <div class="dot red-dot"></div>
-          </div>
-          <div id="waypoint-fields">
-            <input type="text" id="from-input" placeholder="Starting point" />
-            <div id="stops-container"></div>
-            <input type="text" id="to-input" placeholder="Destination" />
-            <button id="add-stop-btn" onclick="addStop()">
-              <i class="fa-solid fa-plus"></i> Add stop
-            </button>
-          </div>
-        </div>
-        <button id="get-route-btn" onclick="getRoute()">
-          <i class="fa-solid fa-diamond-turn-right"></i> Get Route
-        </button>
-        <div id="route-summary"></div>
-      </div>
-
       <!-- DIRECTIONS SHEET (mobile) -->
       <div id="directions-sheet" role="dialog" aria-label="Directions">
         <!-- Blue header — drag handle -->
         <div id="directions-sheet-header">
-          <h3><i class="fa-solid fa-route"></i> Directions</h3>
-          <button onclick="closeDirections()" title="Close" aria-label="Close">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <div id="directions-sheet-title">
+            <i class="fa-solid fa-route" aria-hidden="true"></i>
+            Directions
+          </div>
+          <div id="directions-sheet-actions">
+            <!-- Transport mode picker button -->
+            <button
+              id="sheet-mode-btn"
+              onclick="toggleModePicker(event)"
+              title="Transport mode"
+            >
+              <i class="fa-solid fa-car" id="sheet-mode-icon"></i>
+            </button>
+            <!-- Turn-by-turn steps button -->
+            <button
+              id="sheet-steps-btn"
+              onclick="showStepsView()"
+              title="Show steps"
+            >
+              <i class="fa-solid fa-diamond-turn-right"></i>
+            </button>
+            <!-- Close button -->
+            <button
+              onclick="closeDirections()"
+              title="Close"
+              aria-label="Close"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- Scrollable content -->
-        <div id="directions-sheet-content">
-          <!-- Transport mode buttons -->
-          <div id="directions-sheet-modes">
+        <!-- Hint shown while user is picking a location on the map -->
+        <div id="picking-hint">
+          <i class="fa-solid fa-hand-pointer"></i>
+          Tap anywhere on the map to select a location
+        </div>
+
+        <!-- INPUT VIEW -->
+        <div id="directions-sheet-input-view">
+          <!-- From row -->
+          <div class="sheet-input-row" id="sheet-from-row">
+            <div class="sheet-input-dot start"></div>
+            <div class="sheet-dot-connector"></div>
+            <input
+              type="text"
+              id="sheet-from-input"
+              placeholder="Starting point"
+            />
             <button
-              class="mode-btn active"
-              onclick="setDirectionMode(this, 'driving')"
-              title="Driving"
+              class="sheet-row-btn"
+              onclick="pickOnMap('sheet-from-input')"
+              title="Pick on map"
             >
-              <i class="fa-solid fa-car"></i>
+              <i class="fa-solid fa-location-dot"></i>
             </button>
             <button
-              class="mode-btn"
-              onclick="setDirectionMode(this, 'cycling')"
-              title="Cycling"
+              class="sheet-row-btn"
+              onclick="useGPS('sheet-from-input')"
+              title="Use my location"
             >
-              <i class="fa-solid fa-bicycle"></i>
-            </button>
-            <button
-              class="mode-btn"
-              onclick="setDirectionMode(this, 'walking')"
-              title="Walking"
-            >
-              <i class="fa-solid fa-person-walking"></i>
+              <i class="fa-solid fa-location-crosshairs"></i>
             </button>
           </div>
 
-          <!-- From / To inputs -->
-          <div id="directions-sheet-inputs">
-            <div id="directions-sheet-dots">
-              <div class="dot blue-dot"></div>
-              <div class="dot-line"></div>
-              <div id="directions-sheet-stop-dots"></div>
-              <div class="dot red-dot"></div>
-            </div>
-            <div id="directions-sheet-fields">
-              <input
-                type="text"
-                id="sheet-from-input"
-                placeholder="Starting point"
-              />
-              <div id="directions-sheet-stops-container"></div>
-              <input
-                type="text"
-                id="sheet-to-input"
-                placeholder="Destination"
-              />
-              <button
-                id="directions-sheet-add-stop-btn"
-                onclick="addSheetStop()"
-              >
-                <i class="fa-solid fa-plus"></i> Add stop
-              </button>
-            </div>
+          <!-- Dynamic stops inserted here by JS -->
+          <div id="sheet-stops-wrapper"></div>
+
+          <!-- To row — + button sits outside the input -->
+          <div class="sheet-input-row" id="sheet-to-row">
+            <div class="sheet-input-dot end"></div>
+            <input type="text" id="sheet-to-input" placeholder="Destination" />
+            <button
+              class="sheet-row-btn"
+              onclick="pickOnMap('sheet-to-input')"
+              title="Pick on map"
+            >
+              <i class="fa-solid fa-location-dot"></i>
+            </button>
+            <button
+              class="sheet-row-btn"
+              onclick="useGPS('sheet-to-input')"
+              title="Use my location"
+            >
+              <i class="fa-solid fa-location-crosshairs"></i>
+            </button>
+            <button
+              id="sheet-add-stop-btn"
+              onclick="addSheetStop()"
+              title="Add stop"
+            >
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </div>
 
           <!-- Get Route button -->
-          <button id="directions-sheet-route-btn" onclick="getSheetRoute()">
+          <button id="sheet-get-route-btn" onclick="getSheetRoute()">
             <i class="fa-solid fa-diamond-turn-right"></i> Get Route
           </button>
+        </div>
+        <!-- end input view -->
 
-          <!-- Route summary -->
-          <div id="directions-sheet-summary"></div>
+        <!-- STEPS VIEW (turn-by-turn, shown after route found) -->
+        <div id="directions-sheet-steps-view">
+          <div id="steps-back-bar">
+            <button onclick="hideStepsView()" title="Back">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <span id="steps-back-title">Route steps</span>
+          </div>
+          <div id="steps-summary-bar">
+            <span id="steps-distance"><i class="fa-solid fa-road"></i> --</span>
+            <span id="steps-time"><i class="fa-solid fa-clock"></i> --</span>
+          </div>
+          <div id="steps-list"></div>
+        </div>
+      </div>
+      <!-- end directions sheet -->
+
+      <!-- Transport mode picker dropdown -->
+      <div id="sheet-mode-picker">
+        <div class="sheet-mode-option active" onclick="selectMode('driving')">
+          <i class="fa-solid fa-car"></i> Driving
+        </div>
+        <div class="sheet-mode-option" onclick="selectMode('transit')">
+          <i class="fa-solid fa-train"></i> Transit
+        </div>
+        <div class="sheet-mode-option" onclick="selectMode('walking')">
+          <i class="fa-solid fa-person-walking"></i> Walking
         </div>
       </div>
 

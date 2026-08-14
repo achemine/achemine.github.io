@@ -53,6 +53,17 @@
   #directions-panel {
     display: none !important;
   }
+
+  #directions-panel {
+    display: none !important;
+  }
+
+  /* Position the mode picker relative to the sheet header */
+  #sheet-mode-picker {
+    position: fixed;
+    bottom: auto;
+    right: 56px;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
