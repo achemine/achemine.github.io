@@ -459,18 +459,10 @@
             <!-- Turn-by-turn steps button -->
             <button
               id="sheet-steps-btn"
-              onclick="showStepsView()"
+              onclick="turn_by_turn()"
               title="Show steps"
             >
               <i class="fa-solid fa-diamond-turn-right"></i>
-            </button>
-            <!-- Close button -->
-            <button
-              onclick="closeDirections()"
-              title="Close"
-              aria-label="Close"
-            >
-              <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
         </div>
@@ -537,11 +529,6 @@
               <i class="fa-solid fa-plus"></i>
             </button>
           </div>
-
-          <!-- Get Route button -->
-          <button id="sheet-get-route-btn" onclick="getSheetRoute()">
-            <i class="fa-solid fa-diamond-turn-right"></i> Get Route
-          </button>
         </div>
         <!-- end input view -->
 

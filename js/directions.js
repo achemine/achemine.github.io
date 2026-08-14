@@ -639,3 +639,12 @@ function snapDirSheet() {
     sheet.style.height = fullHeight + "px";
   }
 }
+
+function turn_by_turn() {
+  if (window.innerWidth < 768) {
+    showStepsView();
+  } else {
+    const stepsPanel = document.getElementById("steps-panel");
+    stepsPanel.style.display = "block";
+  }
+}
