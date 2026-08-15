@@ -402,9 +402,13 @@ function calculateRoute(from, to, stops, target) {
         const minutes = Math.round(route.summary.totalTime / 60);
 
         if (target === "sheet") {
-          /* Store route data for the steps view */
           buildStepsList(route, distance, minutes);
-          showToast("Route found — tap ➤ for steps");
+          document.getElementById("directions-sheet-input-view").style.display =
+            "none";
+          document
+            .getElementById("directions-sheet-steps-view")
+            .classList.add("open");
+          showToast("Route found: " + distance + " km");
         } else {
           document.getElementById("route-summary").innerHTML = `
             <span><i class="fa-solid fa-road"></i> ${distance} km</span>
@@ -487,10 +491,8 @@ function buildStepsList(route, distance, minutes) {
 }
 
 function showStepsView() {
-  if (!routingControl) {
-    showToast("Calculate a route first");
-    return;
-  }
+  ensureRoute();
+  if (!routingControl) return;
   document.getElementById("directions-sheet-input-view").style.display = "none";
   document.getElementById("directions-sheet-steps-view").classList.add("open");
 }
@@ -646,4 +648,18 @@ function turn_by_turn() {
   } else {
     getSheetRoute();
   }
+}
+
+function ensureRoute() {
+  if (routingControl) return;
+
+  const from = document.getElementById("sheet-from-input").value.trim();
+  const to = document.getElementById("sheet-to-input").value.trim();
+
+  if (!from || !to) {
+    showToast("Fill in start and destination first");
+    return;
+  }
+
+  getSheetRoute();
 }
