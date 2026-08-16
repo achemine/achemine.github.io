@@ -405,6 +405,7 @@
   padding: 10px 16px;
   border-bottom: 1px solid var(--bg-tertiary);
   position: relative;
+  overflow: visible; /* allow the dashed connector line to extend outside the row */
 }
 .sheet-input-dot {
   width: 12px;
@@ -425,10 +426,10 @@
 /* Dashed connector line between dots */
 .sheet-dot-connector {
   position: absolute;
-  left: 21px;
-  top: 100%;
+  left: 22px; /* align with center of the 12px dot (16px padding + 6px = 22px) */
+  top: 50%; /* start from the middle of this row */
+  bottom: -50%; /* extend to the middle of the next row */
   width: 2px;
-  height: 100%;
   background: repeating-linear-gradient(
     to bottom,
     var(--border) 0px,
@@ -437,7 +438,7 @@
     transparent 8px
   );
   pointer-events: none;
-  z-index: 0.5;
+  z-index: 1;
 }
 
 .sheet-input-row input {
