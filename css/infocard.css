@@ -21,7 +21,7 @@
   padding: 20px;
   width: 360px;
   max-width: calc(100vw - 28px); /* Never wider than the screen */
-  z-index: 600;
+  z-index: 700;
   display: none; /* Hidden by default — JS adds .open */
   text-align: center;
 }

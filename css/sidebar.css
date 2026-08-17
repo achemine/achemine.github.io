@@ -17,14 +17,14 @@
   box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column;
-  z-index: 1001;             /* Above the map and controls */
-  position: absolute;        /* Floats over the map        */
+  z-index: 800; /* Above the map and controls */
+  position: absolute; /* Floats over the map        */
   top: 0;
   left: 0;
   height: 100%;
   border-radius: 30px;
-  transform: translateX(-100%);              /* Hidden off-screen by default */
-  transition: transform var(--speed) ease;   /* Smooth slide-in animation    */
+  transform: translateX(-100%); /* Hidden off-screen by default */
+  transition: transform var(--speed) ease; /* Smooth slide-in animation    */
   overflow: hidden;
 }
 
@@ -37,11 +37,11 @@
 #sidebar-content {
   display: flex;
   flex-direction: column;
-  flex: 1;         /* Fill all space below the header */
-  min-height: 0;   /* Required for scrolling to work inside a flex column */
+  flex: 1; /* Fill all space below the header */
+  min-height: 0; /* Required for scrolling to work inside a flex column */
   overflow-y: auto;
-  scrollbar-width: none;                     /* Firefox — hide scrollbar */
-  scrollbar-color: var(--blue) transparent;  /* Firefox — thumb color    */
+  scrollbar-width: none; /* Firefox — hide scrollbar */
+  scrollbar-color: var(--blue) transparent; /* Firefox — thumb color    */
 }
 
 /* Hide scrollbar arrows (Chrome/Opera) */
@@ -52,10 +52,10 @@
 /* ── DARK OVERLAY (appears behind the sidebar on mobile) ── */
 #sidebar-overlay {
   display: none;
-  position: fixed;   /* Covers the full viewport including the top bar */
+  position: fixed; /* Covers the full viewport including the top bar */
   inset: 0;
   background: rgba(0, 0, 0, 0.35);
-  z-index: 699;      /* Just below the sidebar (1001) */
+  z-index: 699; /* Just below the sidebar (1001) */
 }
 #sidebar-overlay.visible {
   display: block;
@@ -69,7 +69,7 @@
   padding: 20px 16px 16px;
   background: var(--yellow);
   color: white;
-  flex-shrink: 0;   /* Never let this shrink when content overflows */
+  flex-shrink: 0; /* Never let this shrink when content overflows */
 }
 
 /* Avatar + name + email row */
@@ -154,19 +154,58 @@
 }
 
 /* One colour per item type */
-.home-icon     { background: var(--blue-light); color: var(--blue);          }
-.work-icon     { background: #e6f4ea;            color: var(--green);         }
-.route-icon    { background: #fce8e6;            color: var(--red);           }
-.saved-icon    { background: #fef9e7;            color: var(--yellow);        }
-.subway-icon   { background: #fff3e0;            color: var(--blue);          }
-.train-icon    { background: #fce8e6;            color: var(--blue-dark);     }
-.tram-icon     { background: #fce8e6;            color: #37e654;              }
-.cable-car-icon{ background: #fce8e6;            color: var(--green);         }
-.bus-icon      { background: #fce8e6;            color: var(--red);           }
-.layer-icon    { background: #e8eaf6;            color: #3949ab;              }
-.share-icon    { background: var(--blue-light);  color: var(--blue);          }
-.print-icon    { background: var(--bg-tertiary); color: var(--text-secondary);}
-.settings-icon { background: #fce8e6;            color: var(--text-secondary);}
+.home-icon {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+.work-icon {
+  background: #e6f4ea;
+  color: var(--green);
+}
+.route-icon {
+  background: #fce8e6;
+  color: var(--red);
+}
+.saved-icon {
+  background: #fef9e7;
+  color: var(--yellow);
+}
+.subway-icon {
+  background: #fff3e0;
+  color: var(--blue);
+}
+.train-icon {
+  background: #fce8e6;
+  color: var(--blue-dark);
+}
+.tram-icon {
+  background: #fce8e6;
+  color: #37e654;
+}
+.cable-car-icon {
+  background: #fce8e6;
+  color: var(--green);
+}
+.bus-icon {
+  background: #fce8e6;
+  color: var(--red);
+}
+.layer-icon {
+  background: #e8eaf6;
+  color: #3949ab;
+}
+.share-icon {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+.print-icon {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+.settings-icon {
+  background: #fce8e6;
+  color: var(--text-secondary);
+}
 
 /* ── SIDEBAR TEXT (title + subtitle) ── */
 .sidebar-text {

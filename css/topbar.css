@@ -15,18 +15,18 @@
   gap: 20px;
   padding: 10px 14px;
   height: var(--topbar-height);
-  position: fixed;           /* Floats above the map — doesn't affect layout flow */
-  z-index: 1000;             /* Above everything else */
+  position: fixed; /* Floats above the map — doesn't affect layout flow */
+  z-index: 799; /* Above everything else */
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.11);  /* Frosted glass — semi-transparent */
-  backdrop-filter: blur(5px);             /* Blur whatever is behind the bar   */
-  -webkit-backdrop-filter: blur(5px);     /* Same for Safari/Opera             */
+  background: rgba(255, 255, 255, 0.11); /* Frosted glass — semi-transparent */
+  backdrop-filter: blur(5px); /* Blur whatever is behind the bar   */
+  -webkit-backdrop-filter: blur(5px); /* Same for Safari/Opera             */
   border-radius: 30px;
   left: 50%;
-  transform: translateX(-50%);            /* Centre it horizontally            */
+  transform: translateX(-50%); /* Centre it horizontally            */
   width: 50%;
-  max-width: 700px;   /* Never too wide on large screens  */
-  min-width: 300px;   /* Never too narrow on small screens */
+  max-width: 700px; /* Never too wide on large screens  */
+  min-width: 300px; /* Never too narrow on small screens */
 }
 
 /* ── HAMBURGER MENU BUTTON ── */
@@ -149,14 +149,14 @@
 /* ── SEARCH RESULTS DROPDOWN ── */
 #search-results {
   position: absolute;
-  top: calc(100% + 4px);   /* Just below the top bar */
+  top: calc(100% + 4px); /* Just below the top bar */
   left: 60px;
   right: 110px;
   background: var(--bg-primary);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   z-index: 2000;
-  display: none;            /* Hidden by default — JS shows it */
+  display: none; /* Hidden by default — JS shows it */
   max-height: 320px;
   overflow-y: auto;
 }

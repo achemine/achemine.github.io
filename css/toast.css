@@ -11,17 +11,19 @@
   position: absolute;
   bottom: 70px;
   left: 50%;
-  transform: translateX(-50%) translateY(20px);  /* Starts slightly below */
+  transform: translateX(-50%) translateY(20px); /* Starts slightly below */
   background: #323232;
   color: white;
   padding: 10px 20px;
   border-radius: var(--radius-pill);
   font-size: 14px;
   font-weight: 500;
-  z-index: 800;
+  z-index: 702;
   opacity: 0;
-  pointer-events: none;        /* Can't be accidentally clicked */
-  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none; /* Can't be accidentally clicked */
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
   white-space: nowrap;
 }
 

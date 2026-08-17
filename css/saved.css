@@ -17,7 +17,7 @@
   box-shadow: var(--shadow-lg);
   width: 300px;
   max-height: 70vh;
-  z-index: 600;
+  z-index: 701;
   display: none;
   overflow: hidden;
   flex-direction: column;
