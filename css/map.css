@@ -10,8 +10,8 @@
 #map {
   flex: 1;
   height: 100%;
-  position: absolute;  /* Fills its parent #main completely */
-  inset: 0;            /* top:0; right:0; bottom:0; left:0  */
+  position: absolute; /* Fills its parent #main completely */
+  inset: 0; /* top:0; right:0; bottom:0; left:0  */
 }
 
 /*
@@ -33,4 +33,22 @@
 }
 .leaflet-popup-tip {
   background: var(--bg-primary) !important;
+}
+
+/* Default map cursor — normal arrow */
+.leaflet-container {
+  cursor: default !important;
+}
+
+/* While actively dragging — 4-direction move arrow */
+.leaflet-dragging .leaflet-container {
+  cursor: move !important;
+}
+
+/* All clickable markers restore pointer cursor */
+.pin-marker-icon,
+.stop-marker-icon,
+.star-marker-icon,
+.leaflet-marker-icon {
+  cursor: pointer !important;
 }

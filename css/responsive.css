@@ -64,6 +64,12 @@
     bottom: auto;
     right: 56px;
   }
+
+  /* Make the sidebar full width on mobile */
+  #sidebar {
+    width: 100%;
+    border-radius: 0;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -81,6 +87,10 @@
   #info-card,
   #saved-popup,
   #toast,
+  .pin-marker-icon,
+  .stop-marker-icon,
+  .star-marker-icon,
+  .leaflet-marker-icon,
   #bottom-tabs {
     display: none !important;
   }

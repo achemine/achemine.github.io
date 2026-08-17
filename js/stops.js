@@ -35,7 +35,7 @@ const stopCategories = [
 */
 function createStopIcon(color) {
   return L.divIcon({
-    className: "",
+    className: "stop-marker-icon",
     html: `
       <div style="
         width: 12px;

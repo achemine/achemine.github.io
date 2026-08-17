@@ -15,7 +15,7 @@
 */
 function createStarIcon() {
   return L.divIcon({
-    className: "",
+    className: "star-marker-icon",
     html: `
       <div style="
         width: 20px;
