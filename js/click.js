@@ -44,6 +44,10 @@ function showInfoCard(name, lat, lng) {
   document.getElementById("info-title").style.display = "block";
   document.getElementById("edit-name-input").style.display = "none";
   document.getElementById("edit-name-btn").style.display = "block";
+  /* Store current place for other functions to use */
+  currentInfoName = name;
+  currentInfoLat = parseFloat(lat);
+  currentInfoLng = parseFloat(lng);
 }
 
 /*

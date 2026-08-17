@@ -663,3 +663,20 @@ function ensureRoute() {
 
   getSheetRoute();
 }
+
+function openDirectionsTo() {
+  openDirections();
+
+  const isMobile = window.innerWidth < 768;
+  const value = currentInfoLat.toFixed(6) + ", " + currentInfoLng.toFixed(6);
+
+  if (isMobile) {
+    setTimeout(function () {
+      const input = document.getElementById("sheet-to-input");
+      if (input) input.value = value;
+    }, 350);
+  } else {
+    const input = document.getElementById("to-input");
+    if (input) input.value = value;
+  }
+}
