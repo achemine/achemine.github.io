@@ -94,14 +94,14 @@
         >
           <i class="fa-solid fa-location-crosshairs"></i>
         </button>
-        <div class="sidebar-item" onclick="openDirections()">
-          <div class="sidebar-icon route-icon">
-            <i class="fa-solid fa-route"></i>
-          </div>
-          <div class="sidebar-text">
-            <span class="sidebar-title">Directions</span>
-          </div>
-        </div>
+        <button
+          id="direction-btn"
+          title="open directions"
+          aria-label="open directions"
+          onclick="openDirections()"
+        >
+          <i class="fa-solid fa-route"></i>
+        </button>
       </div>
 
       <!-- Search results dropdown -->
@@ -465,14 +465,6 @@
             >
               <i class="fa-solid fa-diamond-turn-right"></i>
             </button>
-            <!-- Add stop button -->
-            <button
-              id="sheet-add-stop-btn"
-              onclick="addSheetStop()"
-              title="Add stop"
-            >
-              <i class="fa-solid fa-plus"></i>
-            </button>
           </div>
         </div>
 
@@ -529,6 +521,13 @@
               title="Use my location"
             >
               <i class="fa-solid fa-location-crosshairs"></i>
+            </button>
+            <button
+              id="sheet-add-stop-btn"
+              onclick="addSheetStop()"
+              title="Add stop"
+            >
+              <i class="fa-solid fa-plus"></i>
             </button>
           </div>
         </div>
