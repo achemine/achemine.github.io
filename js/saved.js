@@ -55,10 +55,22 @@ function saveCurrentPlace() {
   /* Create the star marker and add it to the map immediately */
   const marker = L.marker([lat, lng], { icon: createStarIcon() });
 
-  marker.bindPopup("<strong>" + name + "</strong>");
   marker.on("click", function (e) {
     L.DomEvent.stopPropagation(e);
+
+    clickedLat = lat;
+    clickedLng = lng;
+
     showInfoCard(name, lat.toFixed(5), lng.toFixed(5));
+
+    const saveBtn = document.querySelector(".card-btn:not(.primary)");
+    if (saveBtn) {
+      saveBtn.style.background = "var(--yellow)";
+      saveBtn.style.borderColor = "var(--yellow)";
+      saveBtn.style.color = "var(--bg-primary)";
+      const span = saveBtn.querySelector("span");
+      if (span) span.textContent = "Saved";
+    }
   });
   marker.addTo(map);
 
@@ -73,6 +85,15 @@ function saveCurrentPlace() {
 
   showToast('"' + name + '" saved!');
   document.getElementById("edit-name-btn").style.display = "flex";
+
+  /* Update the save button appearance */
+  const saveBtn = document.querySelector(".card-btn:not(.primary)");
+  if (saveBtn) {
+    saveBtn.style.background = "var(--yellow)";
+    saveBtn.style.borderColor = "var(--yellow)";
+    saveBtn.style.color = "var(--bg-primary)";
+    saveBtn.querySelector("span").textContent = "Saved";
+  }
 }
 
 /* ── TOGGLE INDIVIDUAL MARKER VISIBILITY ── */

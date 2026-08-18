@@ -48,6 +48,15 @@ function showInfoCard(name, lat, lng) {
   currentInfoName = name;
   currentInfoLat = parseFloat(lat);
   currentInfoLng = parseFloat(lng);
+  /* Reset save button for new location */
+  const saveBtn = document.querySelector(".card-btn:not(.primary)");
+  if (saveBtn) {
+    saveBtn.style.background = "";
+    saveBtn.style.borderColor = "";
+    saveBtn.style.color = "";
+    const span = saveBtn.querySelector("span");
+    if (span) span.textContent = "Save";
+  }
 }
 
 /*
@@ -61,4 +70,13 @@ function closeInfoCard() {
     clickedMarker = null;
   }
   document.getElementById("edit-name-btn").style.display = "none";
+  /* Reset save button for new location */
+  const saveBtn = document.querySelector(".card-btn:not(.primary)");
+  if (saveBtn) {
+    saveBtn.style.background = "";
+    saveBtn.style.borderColor = "";
+    saveBtn.style.color = "";
+    const span = saveBtn.querySelector("span");
+    if (span) span.textContent = "Save";
+  }
 }
