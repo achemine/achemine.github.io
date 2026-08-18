@@ -1,5 +1,5 @@
 {
-  "type": "FeatureCollection",
+  "type": "bus stops/stations",
   "features": [
     {
       "type": "Feature",

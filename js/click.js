@@ -15,6 +15,34 @@
   3. Show the info card at the bottom
 */
 map.on("click", function (event) {
+  map.on("click", function (event) {
+    /* Don't show info card if a sheet is open on mobile */
+    const directionsSheet = document.getElementById("directions-sheet");
+    const savedSheet = document.getElementById("saved-sheet");
+
+    const dirOpen =
+      directionsSheet && directionsSheet.classList.contains("open");
+    const savedOpen = savedSheet && savedSheet.classList.contains("open");
+
+    if ((dirOpen || savedOpen) && window.innerWidth < 768) {
+      return; /* do nothing — let the sheet handle the tap */
+    }
+
+    clickedLat = event.latlng.lat;
+    clickedLng = event.latlng.lng;
+
+    if (clickedMarker) map.removeLayer(clickedMarker);
+
+    clickedMarker = L.marker([clickedLat, clickedLng], {
+      icon: createIcon("#1a73e8"),
+    }).addTo(map);
+
+    showInfoCard(
+      "Custom Location",
+      clickedLat.toFixed(5),
+      clickedLng.toFixed(5),
+    );
+  });
   clickedLat = event.latlng.lat;
   clickedLng = event.latlng.lng;
 
