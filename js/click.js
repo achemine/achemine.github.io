@@ -38,25 +38,58 @@ function showInfoCard(name, lat, lng) {
   document.getElementById("info-title").textContent = name;
   document.getElementById("info-sub").textContent = lat + ", " + lng;
   document.getElementById("info-card").classList.add("open");
-  document.getElementById("info-title").style.display = "block";
-  document.getElementById("edit-name-input").style.display = "none";
-  document.getElementById("edit-name-btn").style.display = "block";
-  document.getElementById("info-title").style.display = "block";
-  document.getElementById("edit-name-input").style.display = "none";
-  document.getElementById("edit-name-btn").style.display = "block";
-  /* Store current place for other functions to use */
+
   currentInfoName = name;
   currentInfoLat = parseFloat(lat);
   currentInfoLng = parseFloat(lng);
-  /* Reset save button for new location */
-  const saveBtn = document.querySelector(".card-btn:not(.primary)");
-  if (saveBtn) {
-    saveBtn.style.background = "";
-    saveBtn.style.borderColor = "";
-    saveBtn.style.color = "";
-    const span = saveBtn.querySelector("span");
-    if (span) span.textContent = "Save";
-  }
+
+  /* Reset tags to loading state */
+  const tags = document.getElementById("info-tags");
+  tags.innerHTML = '<span class="tag">📍 Loading…</span>';
+
+  /* Reverse geocode to get province and country */
+  fetch(
+    "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+      lat +
+      "&lon=" +
+      lng +
+      "&zoom=10&addressdetails=1",
+  )
+    .then(function (r) {
+      return r.json();
+    })
+    .then(function (data) {
+      const address = data.address || {};
+
+      /*
+        Nominatim returns different field names depending on the country.
+        We try several fallbacks to find the province/region.
+      */
+      const province =
+        address.state ||
+        address.province ||
+        address.region ||
+        address.county ||
+        address.state_district ||
+        "";
+
+      const country = address.country || "";
+
+      tags.innerHTML = "";
+
+      if (province) {
+        tags.innerHTML += '<span class="tag">📍 ' + province + "</span>";
+      }
+      if (country) {
+        tags.innerHTML += '<span class="tag">🗺️ ' + country + "</span>";
+      }
+      if (!province && !country) {
+        tags.innerHTML = '<span class="tag">📍 Unknown location</span>';
+      }
+    })
+    .catch(function () {
+      tags.innerHTML = '<span class="tag">📍 Location unavailable</span>';
+    });
 }
 
 /*
