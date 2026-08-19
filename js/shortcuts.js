@@ -10,27 +10,37 @@
 /* Fly to the "Home" location */
 function goHome() {
   map.flyTo([36.7122, 3.1622], 16, { duration: 1.5 });
-  showInfoCard('Home – USTHB', '36.71220', '3.16220');
+  showInfoCard("Home – USTHB", "36.71220", "3.16220");
   closeSidebar();
 }
 
 /* Fly to the "Work" location */
 function goWork() {
   map.flyTo([36.7347, 3.0458], 16, { duration: 1.5 });
-  showInfoCard('Work – Grande Poste', '36.73470', '3.04580');
+  showInfoCard("Work – Grande Poste", "36.73470", "3.04580");
   closeSidebar();
 }
 
 /* Copy a shareable OpenStreetMap link to the clipboard */
 function shareLocation() {
   const center = map.getCenter();
-  const zoom   = map.getZoom();
-  const url    = 'https://www.openstreetmap.org/#map='
-                 + zoom + '/' + center.lat.toFixed(5) + '/' + center.lng.toFixed(5);
+  const zoom = map.getZoom();
+  const url =
+    "https://www.openstreetmap.org/#map=" +
+    zoom +
+    "/" +
+    center.lat.toFixed(5) +
+    "/" +
+    center.lng.toFixed(5);
 
-  navigator.clipboard.writeText(url)
-    .then(function()  { showToast('Map link copied to clipboard!'); })
-    .catch(function() { showToast('Link: ' + url); });
+  navigator.clipboard
+    .writeText(url)
+    .then(function () {
+      showToast("Map link copied to clipboard!");
+    })
+    .catch(function () {
+      showToast("Link: " + url);
+    });
 
   closeSidebar();
 }
@@ -42,32 +52,32 @@ function shareLocation() {
 */
 function printMap() {
   closeSidebar();
-  showToast('Capturing map…');
+  showToast("Capturing map…");
 
-  window.onbeforeprint = function() { map.invalidateSize(); };
-  window.onafterprint  = function() { map.invalidateSize(); };
+  window.onbeforeprint = function () {
+    map.invalidateSize();
+  };
+  window.onafterprint = function () {
+    map.invalidateSize();
+  };
 
-  if (typeof leafletImage !== 'undefined') {
-    setTimeout(function() {
-      leafletImage(map, function(err, canvas) {
+  if (typeof leafletImage !== "undefined") {
+    setTimeout(function () {
+      leafletImage(map, function (err, canvas) {
         if (err) {
-          showToast('Could not capture map. Try again.');
+          showToast("Could not capture map. Try again.");
           return;
         }
-        const link    = document.createElement('a');
-        link.download = 'transit-map.png';
-        link.href     = canvas.toDataURL();
+        const link = document.createElement("a");
+        link.download = "transit-map.png";
+        link.href = canvas.toDataURL();
         link.click();
-        showToast('Map saved as transit-map.png!');
+        showToast("Map saved as transit-map.png!");
       });
     }, 800);
   } else {
-    setTimeout(function() { window.print(); }, 300);
+    setTimeout(function () {
+      window.print();
+    }, 300);
   }
-}
-
-/* Placeholder for a future settings panel */
-function openSettings() {
-  showToast('Settings coming soon!');
-  closeSidebar();
 }

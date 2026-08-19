@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/topbar.css" />
+    <link rel="stylesheet" href="css/settings.css" />
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/map.css" />
     <link rel="stylesheet" href="css/controls.css" />
@@ -605,6 +606,71 @@
         <div id="saved-sheet-list"></div>
       </div>
 
+      <!-- SETTINGS OVERLAY -->
+      <div id="settings-overlay" onclick="closeSettings()"></div>
+
+      <!-- SETTINGS PANEL -->
+      <nav id="settings" aria-label="Settings">
+        <!-- Header -->
+        <div id="settings-header">
+          <div id="settings-profile">
+            <div id="settings-gear">
+              <i class="fa-solid fa-gear"></i>
+            </div>
+            <h3 id="settings-title">Settings</h3>
+          </div>
+          <button
+            id="settings-close"
+            onclick="closeSettings()"
+            title="Close settings"
+            aria-label="Close settings"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Scrollable content -->
+        <div id="settings-content">
+          <div class="settings-section-label">General</div>
+
+          <div class="settings-item" onclick="toggleDarkMode()">
+            <div class="settings-icon theme-icon">
+              <i class="fa-solid fa-moon" id="settings-theme-icon"></i>
+            </div>
+            <div class="settings-text">
+              <span class="settings-title">Theme</span>
+              <span class="settings-sub">Toggle dark / light mode</span>
+            </div>
+          </div>
+
+          <div class="settings-item" onclick="openLanguageMenu()">
+            <div class="settings-icon language-icon">
+              <i class="fa-solid fa-language"></i>
+            </div>
+            <div class="settings-text">
+              <span class="settings-title">Language</span>
+              <span class="settings-sub">Select your preferred language</span>
+            </div>
+          </div>
+
+          <div class="settings-section-label">About</div>
+
+          <div class="settings-item" onclick="openAbout()">
+            <div class="settings-icon about-icon">
+              <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="settings-text">
+              <span class="settings-title">About this app</span>
+            </div>
+          </div>
+
+          <div id="settings-footer">
+            <span>transit · personal project</span>
+          </div>
+        </div>
+        <!-- end #settings-content -->
+      </nav>
+
       <!-- TOAST NOTIFICATION -->
       <div id="toast" role="alert" aria-live="polite"></div>
     </div>
@@ -623,6 +689,7 @@
          Order matters — variables.js always first, ui.js last.
          ══════════════════════════════════════════════════════ -->
     <script src="js/variables.js"></script>
+    <script src="js/settings.js"></script>
     <script src="js/map.js"></script>
     <script src="js/markers.js"></script>
     <script src="js/click.js"></script>
