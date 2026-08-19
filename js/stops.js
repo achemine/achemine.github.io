@@ -89,6 +89,25 @@ function loadCategory(category) {
 
           layer.on("click", function (e) {
             L.DomEvent.stopPropagation(e);
+            /* If directions sheet is in pick mode, fill the input instead */
+            if (pickingInputId) {
+              const lat = feature.geometry.coordinates[1];
+              const lng = feature.geometry.coordinates[0];
+
+              const input = document.getElementById(pickingInputId);
+              if (input) input.value = lat.toFixed(6) + ", " + lng.toFixed(6);
+
+              /* Restore the sheet */
+              const sheet = document.getElementById("directions-sheet");
+              if (sheet) {
+                sheet.classList.remove("picking");
+                sheet.style.height = pickingPrevHeight + "px";
+              }
+              pickingInputId = null;
+
+              /* Still allow the popup to show */
+              return;
+            }
 
             /* Block info card on mobile if a sheet is open */
             if (window.innerWidth < 768) {

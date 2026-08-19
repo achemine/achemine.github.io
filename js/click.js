@@ -16,13 +16,12 @@
 */
 map.on("click", function (event) {
   map.on("click", function (event) {
-    /* Don't show info card if a sheet is open on mobile */
-    const directionsSheet = document.getElementById("directions-sheet");
-    const savedSheet = document.getElementById("saved-sheet");
-
     const dirOpen =
       directionsSheet && directionsSheet.classList.contains("open");
     const savedOpen = savedSheet && savedSheet.classList.contains("open");
+
+    /* Block on mobile if any sheet is open */
+    if ((dirOpen || savedOpen) && window.innerWidth < 768) return;
 
     if ((dirOpen || savedOpen) && window.innerWidth < 768) {
       return;
