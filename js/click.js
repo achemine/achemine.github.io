@@ -25,7 +25,7 @@ map.on("click", function (event) {
     const savedOpen = savedSheet && savedSheet.classList.contains("open");
 
     if ((dirOpen || savedOpen) && window.innerWidth < 768) {
-      return; /* do nothing — let the sheet handle the tap */
+      return;
     }
 
     clickedLat = event.latlng.lat;
@@ -70,6 +70,27 @@ function showInfoCard(name, lat, lng) {
   currentInfoName = name;
   currentInfoLat = parseFloat(lat);
   currentInfoLng = parseFloat(lng);
+
+  /* Update save button based on whether this location is already saved */
+  const saveBtn = document.querySelector(".card-btn:not(.primary)");
+  if (saveBtn) {
+    const alreadySaved = savedPlaces.some(function (p) {
+      return p.lat === parseFloat(lat) && p.lng === parseFloat(lng);
+    });
+    if (alreadySaved) {
+      saveBtn.style.background = "var(--yellow)";
+      saveBtn.style.borderColor = "var(--yellow)";
+      saveBtn.style.color = "var(--bg-primary)";
+      const span = saveBtn.querySelector("span");
+      if (span) span.textContent = "Saved";
+    } else {
+      saveBtn.style.background = "";
+      saveBtn.style.borderColor = "";
+      saveBtn.style.color = "";
+      const span = saveBtn.querySelector("span");
+      if (span) span.textContent = "Save";
+    }
+  }
 
   /* Reset tags to loading state */
   const tags = document.getElementById("info-tags");

@@ -498,7 +498,7 @@
     transform var(--speed);
 }
 #sheet-add-stop-btn:hover {
-  background: var(--green-dark);
+  background: var(--green);
   transform: scale(1.1);
 }
 
@@ -527,7 +527,7 @@
 #sheet-get-route-btn {
   margin: 12px 16px;
   padding: 12px;
-  background: var(--blue);
+  background: var(--green);
   color: white;
   border-radius: var(--radius-sm);
   font-size: 14px;

@@ -88,15 +88,20 @@ function loadCategory(category) {
           `);
 
           layer.on("click", function (e) {
-            /*
-              Stop the click from bubbling up to the map —
-              otherwise the map click would also fire and drop
-              an extra pin on top of the stop dot.
-            */
             L.DomEvent.stopPropagation(e);
 
-            const lat =
-              feature.geometry.coordinates[1]; /* GeoJSON is [lng, lat] */
+            /* Block info card on mobile if a sheet is open */
+            if (window.innerWidth < 768) {
+              const dirOpen = document
+                .getElementById("directions-sheet")
+                ?.classList.contains("open");
+              const savedOpen = document
+                .getElementById("saved-sheet")
+                ?.classList.contains("open");
+              if (dirOpen || savedOpen) return;
+            }
+
+            const lat = feature.geometry.coordinates[1];
             const lng = feature.geometry.coordinates[0];
 
             if (clickedMarker) {
