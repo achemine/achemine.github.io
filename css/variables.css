@@ -12,13 +12,21 @@
   /* ── COLORS ─────────────────────────────────────────── */
   --blue: #1a73e8; /* Main accent color — used for buttons, highlights  */
   --blue-dark: #1558b0; /* A darker blue — used when hovering over blue buttons */
-  --blue-light: #e8f0fe; /* Very light blue — used for icon backgrounds       */
-  --red: #ea4335; /* Destination pin color & danger indicators         */
+  --blue-light: #a2c4fd; /* Very light blue — used for icon backgrounds       */
+  --red: #ff0000; /* Destination pin color & danger indicators         */
+  --dark-red: #b71c1c; /* Dark red — used when hovering over red buttons     */
+  --light-red: #f85555; /* Very light red — used for icon backgrounds         */
   --green: #34a853; /* Success / GPS location dot color                  */
-  --yellow: #fbbc04; /* Star / saved places icon color                    */
+  --dark-green: #006631; /* Dark green — used when hovering over green buttons */
+  --light-green: #37e654; /* Light green — used for tram icon color              */
+  --yellow: #a5fb04; /* Star / saved places icon color                    */
+
   --orange: #ff6d00; /* Restaurant and food icon color                    */
   --purple: #8d00a0;
+  --white: #ffffff; /* White — used for text on dark backgrounds         */
+  
 
+  
   /* ── NEUTRAL COLORS (light mode) ──────────────────────────── */
   --bg-primary: #ffffff; /* White — used for cards, bars, panels             */
   --bg-secondary: #f8f9fa; /* Off-white — used for the page background         */
@@ -27,17 +35,22 @@
   --text-primary: #202124; /* Near-black — main text color                     */
   --text-secondary: #5f6368; /* Medium grey — subtitle and icon color            */
   --text-hint: #9aa0a6; /* Light grey — placeholder text color              */
-
+  --bg-topbar: rgba(255, 255, 255, 0.11); /* Frosted glass — semi-transparent */
+  --background: rgba(255, 255, 255, 0.2);
+  --hover-white: #fce8e6;
+  --saved-header-txt: #5c4000;
   /* ── SHADOWS ────────────────────────────────────────────────── */
   --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.12); /* Small shadow for the top bar    */
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16); /* Medium shadow for panels, cards */
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2); /* Large shadow for big modals     */
+  --shadow-white: rgba(255, 255, 255, 0.8);
 
   /* ── BORDER RADIUS (rounded corners) ───────────────────────── */
   --radius-sm: 8px; /* Slight rounding — inputs, small buttons   */
   --radius-md: 12px; /* Medium rounding — panels, popups          */
   --radius-lg: 20px; /* Strong rounding — cards, directions panel */
   --radius-pill: 999px; /* Fully rounded (pill shape) — search box   */
+
 
   /* ── LAYOUT SIZES ───────────────────────────────────────────── */
   --topbar-height: 64px; /* Height of the search bar at the top    */
