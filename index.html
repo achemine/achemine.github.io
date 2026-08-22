@@ -81,6 +81,7 @@
           type="text"
           id="search-input"
           placeholder="Search places, addresses…"
+          data-i18n-placeholder="search_placeholder"
           autocomplete="on"
           aria-label="Search"
         />
@@ -126,7 +127,7 @@
           <div id="sidebar-profile">
             <div id="avatar">U</div>
             <div>
-              <div id="avatar-name">user_test</div>
+              <div id="avatar-name" data-i18n="avatar_name">user_test</div>
               <div id="avatar-email">transit@example.com</div>
             </div>
           </div>
@@ -137,7 +138,9 @@
 
         <!-- Scrollable content -->
         <div id="sidebar-content">
-          <div class="sidebar-section-label">Navigation</div>
+          <div class="sidebar-section-label" data-i18n="nav_label">
+            Navigation
+          </div>
 
           <div class="sidebar-item" onclick="goHome()">
             <div class="sidebar-icon home-icon">
@@ -168,14 +171,16 @@
             </div>
           </div>
 
-          <div class="sidebar-section-label">Places</div>
+          <div class="sidebar-section-label" data-i18n="places_label">
+            Places
+          </div>
 
           <div class="sidebar-item" onclick="toggleSavedPlaces()">
             <div class="sidebar-icon saved-icon">
               <i class="fa-solid fa-star"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="saved-places"
+              <span class="sidebar-title" data-i18n="saved_places"
                 >Saved places</span
               >
             </div>
@@ -186,7 +191,7 @@
               <i class="fa-solid fa-subway"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="metro-stations"
+              <span class="sidebar-title" data-i18n="metro_stations"
                 >Metro stations</span
               >
             </div>
@@ -202,7 +207,7 @@
               <i class="fa-solid fa-bus"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="bus-stations"
+              <span class="sidebar-title" data-i18n="bus_stations"
                 >Bus stations</span
               >
             </div>
@@ -218,7 +223,7 @@
               <i class="fa-solid fa-train"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="train-stations"
+              <span class="sidebar-title" data-i18n="train_stations"
                 >Train stations</span
               >
             </div>
@@ -234,7 +239,7 @@
               <i class="fa-solid fa-train-tram"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="tram-stations"
+              <span class="sidebar-title" data-i18n="tram_stations"
                 >Tram stations</span
               >
             </div>
@@ -250,7 +255,7 @@
               <i class="fa-solid fa-cable-car"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="cable-car-terminals"
+              <span class="sidebar-title" data-i18n="cable_car"
                 >Cable car terminals</span
               >
             </div>
@@ -261,17 +266,20 @@
             ></i>
           </div>
 
-          <div class="sidebar-section-label">Other</div>
+          <div class="sidebar-section-label" data-i18n="other_label">Other</div>
 
           <div class="sidebar-item" onclick="switchLayer()">
             <div class="sidebar-icon layer-icon">
               <i class="fa-solid fa-layer-group"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="switch-map-style"
+              <span class="sidebar-title" data-i18n="switch_map"
                 >Switch map style</span
               >
-              <span class="sidebar-sub" id="current-layer-name"
+              <span
+                class="sidebar-sub"
+                id="current-layer-name"
+                data-i18n="currently"
                 >Currently: Default</span
               >
             </div>
@@ -282,10 +290,10 @@
               <i class="fa-solid fa-share-nodes"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="share-map-link"
+              <span class="sidebar-title" data-i18n="share_map"
                 >Share map link</span
               >
-              <span class="sidebar-sub" data-i18n="copy-link-to-clipboard"
+              <span class="sidebar-sub" data-i18n="share_sub"
                 >Copy link to clipboard</span
               >
             </div>
@@ -296,8 +304,8 @@
               <i class="fa-solid fa-print"></i>
             </div>
             <div class="sidebar-text">
-              <span class="sidebar-title" data-i18n="print-map">Print map</span>
-              <span class="sidebar-sub" data-i18n="save-as-image"
+              <span class="sidebar-title" data-i18n="print_map">Print map</span>
+              <span class="sidebar-sub" data-i18n="print_sub"
                 >Save as image</span
               >
             </div>
