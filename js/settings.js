@@ -2,9 +2,7 @@
   ══════════════════════════════════════════════════════════════
   settings.js — Transit Maps App
   ══════════════════════════════════════════════════════════════
-  Handles the settings panel open/close and settings actions.
-  Mirrors the exact same pattern as sidebar.js.
-  Depends on: variables.js, map.js, ui.js (showToast)
+  Handles the settings panel and language sub-panel.
   ══════════════════════════════════════════════════════════════
 */
 
@@ -13,31 +11,29 @@
 function openSettings() {
   document.getElementById("settings").classList.add("open");
   document.getElementById("settings-overlay").classList.add("visible");
-  closeSidebar();
+  closeSidebar(); /* hide the sidebar while settings is open */
 }
 
 function closeSettings() {
   document.getElementById("settings").classList.remove("open");
   document.getElementById("settings-overlay").classList.remove("visible");
+  closeLanguagePanel();
+  openSidebar(); /* reopen the sidebar if it was closed */
 }
 
-/* The × inside the settings header closes it */
 document.getElementById("settings-close").onclick = closeSettings;
 
-/* ── DARK MODE (called from settings panel) ── */
+/* ── DARK MODE ── */
 
 function toggleDarkMode() {
   darkMode = !darkMode;
-
   document.body.classList.toggle("dark", darkMode);
 
-  /* Update icon in settings panel */
   const settingsIcon = document.getElementById("settings-theme-icon");
   if (settingsIcon) {
     settingsIcon.className = darkMode ? "fa-solid fa-sun" : "fa-solid fa-moon";
   }
 
-  /* Switch map tile layer */
   if (darkMode && currentLayer !== "Dark") {
     map.removeLayer(tileLayers[currentLayer]);
     tileLayers["Dark"].addTo(map);
@@ -57,11 +53,61 @@ function toggleDarkMode() {
   showToast(darkMode ? "Dark mode on" : "Dark mode off");
 }
 
-/* ── PLACEHOLDER ACTIONS ── */
+/* ── LANGUAGE SUB-PANEL ── */
 
 function openLanguageMenu() {
-  showToast("Language selection coming soon!");
+  buildLanguageList();
+  document.getElementById("language-panel").classList.add("open");
 }
+
+function closeLanguagePanel() {
+  document.getElementById("language-panel").classList.remove("open");
+}
+
+/*
+  buildLanguageList() generates the list of language options.
+  The currently active language gets a highlighted background.
+*/
+function buildLanguageList() {
+  const list = document.getElementById("language-list");
+  list.innerHTML = "";
+
+  SUPPORTED_LANGUAGES.forEach(function (lang) {
+    const item = document.createElement("div");
+    item.className =
+      "settings-item language-option" +
+      (lang === currentLanguage ? " language-active" : "");
+
+    /* Flag emojis per language */
+    const flags = {
+      en: "🇬🇧",
+      fr: "🇫🇷",
+      ar: "🇩🇿",
+      de: "🇩🇪",
+      es: "🇪🇸",
+      it: "🇮🇹",
+    };
+
+    item.innerHTML = `
+      <div class="settings-icon language-flag-icon">${flags[lang] || "🌐"}</div>
+      <div class="settings-text">
+        <span class="settings-title">${LANGUAGE_NAMES[lang]}</span>
+      </div>
+      ${
+        lang === currentLanguage
+          ? '<i class="fa-solid fa-check language-check"></i>'
+          : ""
+      }
+    `;
+
+    item.onclick = function () {
+      changeLanguage(lang);
+    };
+    list.appendChild(item);
+  });
+}
+
+/* ── ABOUT ── */
 
 function openAbout() {
   showToast("Transit · Personal Project · v1.0");

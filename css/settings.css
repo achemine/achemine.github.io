@@ -173,10 +173,114 @@
   text-align: center;
 }
 
-/* ── MOBILE: full width ── */
-@media (max-width: 767px) {
-  #settings {
-    width: 100%;
-    border-radius: 0;
-  }
+/* ── LANGUAGE SUB-PANEL ── */
+#language-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+  transform: translateX(100%); /* hidden to the right by default */
+  transition: transform var(--speed) ease;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+/* RTL: sub-panel slides from the left */
+[dir="rtl"] #language-panel {
+  transform: translateX(-100%);
+}
+
+#language-panel.open {
+  transform: translateX(0);
+}
+
+#language-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 16px;
+  background: var(--text-secondary);
+  color: white;
+  flex-shrink: 0;
+}
+#language-panel-header button {
+  color: white;
+  font-size: 18px;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background var(--speed);
+}
+#language-panel-header button:hover {
+  background: var(--header-hover-bg);
+}
+#language-panel-header h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+}
+
+#language-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Highlighted active language row */
+.language-active {
+  background: var(--blue-light) !important;
+}
+.language-active .settings-title {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+/* Check icon on the right of the active language */
+.language-check {
+  margin-left: auto;
+  color: var(--blue);
+  font-size: 16px;
+}
+
+/* Flag emoji icon circle */
+.language-flag-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+/* RTL layout adjustments */
+body.rtl #sidebar {
+  left: auto;
+  right: 0;
+  border-radius: var(--radius-panel) 0 0 var(--radius-panel);
+  transform: translateX(100%);
+}
+body.rtl #sidebar.open {
+  transform: translateX(0);
+}
+body.rtl #settings {
+  left: auto;
+  right: 0;
+  border-radius: var(--radius-panel) 0 0 var(--radius-panel);
+  transform: translateX(100%);
+}
+body.rtl #settings.open {
+  transform: translateX(0);
+}
+body.rtl .sidebar-item {
+  flex-direction: row-reverse;
+}
+body.rtl .settings-item {
+  flex-direction: row-reverse;
+}
+body.rtl #sidebar-overlay,
+body.rtl #settings-overlay {
+  direction: rtl;
 }
