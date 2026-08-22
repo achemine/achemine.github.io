@@ -80,16 +80,16 @@ function buildLanguageList() {
 
     /* Flag emojis per language */
     const flags = {
-      en: "🇬🇧",
-      fr: "🇫🇷",
-      ar: "🇩🇿",
-      de: "🇩🇪",
-      es: "🇪🇸",
-      it: "🇮🇹",
+      en: "gb",
+      fr: "fr",
+      ar: "dz",
+      de: "de",
+      es: "es",
+      it: "it",
     };
 
     item.innerHTML = `
-      <div class="settings-icon language-flag-icon">${flags[lang] || "🌐"}</div>
+      <span class="fi fi-${flags[lang]} language-flag-icon"></span>
       <div class="settings-text">
         <span class="settings-title">${LANGUAGE_NAMES[lang]}</span>
       </div>
