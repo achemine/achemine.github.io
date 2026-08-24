@@ -27,13 +27,21 @@ document.getElementById("settings-close").onclick = closeSettings;
 
 function toggleDarkMode() {
   darkMode = !darkMode;
-  document.body.classList.toggle("dark", darkMode);
 
+  /* Switch theme by setting data-theme on <html> */
+  if (darkMode) {
+    document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    document.documentElement.removeAttribute("data-theme", "light");
+  }
+
+  /* Update the icon in the settings panel */
   const settingsIcon = document.getElementById("settings-theme-icon");
   if (settingsIcon) {
     settingsIcon.className = darkMode ? "fa-solid fa-sun" : "fa-solid fa-moon";
   }
 
+  /* Switch map tile layer to match */
   if (darkMode && currentLayer !== "Dark") {
     map.removeLayer(tileLayers[currentLayer]);
     tileLayers["Dark"].addTo(map);

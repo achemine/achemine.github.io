@@ -40,9 +40,9 @@
   font-size: 20px;
   color: var(--text-secondary);
   flex-shrink: 0;
-  background: var(--bg-secondary);
+  background: var(--bg-secondary-dark);
   transition: background var(--speed);
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--border-dark);
 }
 #menu-btn:hover {
   background: var(--bg-tertiary);

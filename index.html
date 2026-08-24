@@ -386,11 +386,16 @@
         </button>
         <div id="info-icon"><i class="fa-solid fa-location-dot"></i></div>
         <!-- Editable name input (shown when pencil is clicked) -->
-        <input type="text" id="edit-name-input" placeholder="Enter a name…" />
+        <input
+          type="text"
+          id="edit-name-input"
+          placeholder="enter a name…"
+          data-i18n-placeholder="search_placeholder"
+        />
 
         <!-- Title row with pencil button -->
         <div id="info-title-row">
-          <h3 id="info-title">Place Name</h3>
+          <h3 id="info-title" data-i18n="place_name">Place Name</h3>
           <button
             id="edit-name-btn"
             title="Edit name"
@@ -425,7 +430,7 @@
 
       <!-- DIRECTIONS PANEL -->
       <div id="directions-panel" role="dialog" aria-label="Directions">
-        <div id="directions-header">
+        <div id="directions-header" data-i18n="directions">
           <h3><i class="fa-solid fa-route"></i> Directions</h3>
           <button
             onclick="closeDirections()"
@@ -466,9 +471,19 @@
             <div class="dot red-dot"></div>
           </div>
           <div id="waypoint-fields">
-            <input type="text" id="from-input" placeholder="Starting point" />
+            <input
+              type="text"
+              id="from-input"
+              placeholder="Starting point"
+              data-i18n-placeholder="starting_point"
+            />
             <div id="stops-container"></div>
-            <input type="text" id="to-input" placeholder="Destination" />
+            <input
+              type="text"
+              id="to-input"
+              placeholder="Destination"
+              data-i18n-placeholder="destination"
+            />
             <button id="add-stop-btn" onclick="addStop()">
               <i class="fa-solid fa-plus"></i> Add stop
             </button>
@@ -483,7 +498,7 @@
       <div id="directions-sheet" role="dialog" aria-label="Directions">
         <!-- Blue header — drag handle -->
         <div id="directions-sheet-header">
-          <div id="directions-sheet-title">
+          <div id="directions-sheet-title" data-i18n="directions">
             <i class="fa-solid fa-route" aria-hidden="true"></i>
             Directions
           </div>
@@ -508,7 +523,7 @@
         </div>
 
         <!-- Hint shown while user is picking a location on the map -->
-        <div id="picking-hint">
+        <div id="picking-hint" data-i18n="picking_hint">
           <i class="fa-solid fa-hand-pointer"></i>
           Tap anywhere on the map to select a location
         </div>
@@ -523,6 +538,7 @@
               type="text"
               id="sheet-from-input"
               placeholder="Starting point"
+              data-i18n-placeholder="starting_point"
             />
             <button
               class="sheet-row-btn"
@@ -546,7 +562,12 @@
           <!-- To row — + button sits outside the input -->
           <div class="sheet-input-row" id="sheet-to-row">
             <div class="sheet-input-dot end"></div>
-            <input type="text" id="sheet-to-input" placeholder="Destination" />
+            <input
+              type="text"
+              id="sheet-to-input"
+              placeholder="Destination"
+              data-i18n-placeholder="destination"
+            />
             <button
               class="sheet-row-btn"
               onclick="pickOnMap('sheet-to-input')"
@@ -582,9 +603,13 @@
               >Route steps</span
             >
           </div>
-          <div id="steps-summary-bar">
-            <span id="steps-distance"><i class="fa-solid fa-road"></i> --</span>
-            <span id="steps-time"><i class="fa-solid fa-clock"></i> --</span>
+          <div id="steps-summary-bar" data-i18n="route_summary">
+            <span id="steps-distance" data-i18n="route_distance"
+              ><i class="fa-solid fa-road"></i> --</span
+            >
+            <span id="steps-time" data-i18n="route_time"
+              ><i class="fa-solid fa-clock"></i> --</span
+            >
           </div>
           <div id="steps-list"></div>
         </div>
@@ -609,7 +634,7 @@
 
       <!-- SAVED PLACES POPUP (desktop) -->
       <div id="saved-popup" role="dialog" aria-label="Saved places">
-        <div id="saved-popup-header">
+        <div id="saved-popup-header" data-i18n="saved_places">
           <h3><i class="fa-solid fa-star"></i> Saved Places</h3>
           <div id="saved-popup-header-actions">
             <!-- Global eye — hides/shows all saved markers at once -->
@@ -631,7 +656,7 @@
       <!-- SAVED PLACES BOTTOM SHEET (mobile) -->
       <div id="saved-sheet-overlay" onclick="closeSavedPlaces()"></div>
       <div id="saved-sheet" role="dialog" aria-label="Saved places">
-        <div id="saved-sheet-header">
+        <div id="saved-sheet-header" data-i18n="saved_places">
           <h3><i class="fa-solid fa-star"></i> Saved Places</h3>
           <div id="saved-sheet-header-actions">
             <button
@@ -674,15 +699,19 @@
 
         <!-- Scrollable content -->
         <div id="settings-content">
-          <div class="settings-section-label" data-i18n="general">General</div>
+          <div class="settings-section-label" data-i18n="settings_general">
+            General
+          </div>
 
           <div class="settings-item" onclick="toggleDarkMode()">
             <div class="settings-icon theme-icon">
               <i class="fa-solid fa-moon" id="settings-theme-icon"></i>
             </div>
             <div class="settings-text">
-              <span class="settings-title" data-i18n="theme">Theme</span>
-              <span class="settings-sub" data-i18n="toggle-dark-light"
+              <span class="settings-title" data-i18n="settings_theme"
+                >Theme</span
+              >
+              <span class="settings-sub" data-i18n="toggle_dark_light"
                 >Toggle dark / light mode</span
               >
             </div>
@@ -693,28 +722,32 @@
               <i class="fa-solid fa-language"></i>
             </div>
             <div class="settings-text">
-              <span class="settings-title" data-i18n="language">Language</span>
+              <span class="settings-title" data-i18n="settings_language"
+                >Language</span
+              >
               <span class="settings-sub" data-i18n="select-language"
                 >Select your preferred language</span
               >
             </div>
           </div>
 
-          <div class="settings-section-label" data-i18n="about">About</div>
+          <div class="settings-section-label" data-i18n="settings_about">
+            About
+          </div>
 
           <div class="settings-item" onclick="openAbout()">
             <div class="settings-icon about-icon">
               <i class="fa-solid fa-circle-info"></i>
             </div>
             <div class="settings-text">
-              <span class="settings-title" data-i18n="about-app"
+              <span class="settings-title" data-i18n="settings_about_app"
                 >About this app</span
               >
             </div>
           </div>
 
           <div id="settings-footer">
-            <span data-i18n="footer-text">transit · personal project</span>
+            <span data-i18n="footer_text">transit · personal project</span>
           </div>
         </div>
         <!-- end #settings-content -->

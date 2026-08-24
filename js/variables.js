@@ -39,3 +39,9 @@ var activeCategories = {}; /* tracks which categories are filtered on  */
 /* ── UI STATE ── */
 var darkMode = false; /* whether dark mode is currently on  */
 var toastTimer = null; /* reference to the toast timeout     */
+
+/* ── CURRENT PLACE INFO (used by click.js) ───────────────────── */
+var currentInfoName =
+  ""; /* name of the place currently shown in the info card */
+var currentInfoLat = 0; /* its latitude  */
+var currentInfoLng = 0; /* its longitude */

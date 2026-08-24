@@ -20,25 +20,86 @@
   --dark-green: #006631; /* Dark green — used when hovering over green buttons */
   --light-green: #37e654; /* Light green — used for tram icon color              */
   --yellow: #a5fb04; /* Star / saved places icon color                    */
-
   --orange: #ff6d00; /* Restaurant and food icon color                    */
   --purple: #8d00a0;
   --white: #ffffff; /* White — used for text on dark backgrounds         */
-  
 
-  
-  /* ── NEUTRAL COLORS (light mode) ──────────────────────────── */
-  --bg-primary: #ffffff; /* White — used for cards, bars, panels             */
-  --bg-secondary: #f8f9fa; /* Off-white — used for the page background         */
-  --bg-tertiary: #f1f3f4; /* Light grey — used for input fields and hover states */
-  --border: #e0e0e0; /* Subtle grey lines — used for dividers and outlines */
-  --text-primary: #202124; /* Near-black — main text color                     */
-  --text-secondary: #5f6368; /* Medium grey — subtitle and icon color            */
-  --text-hint: #9aa0a6; /* Light grey — placeholder text color              */
-  --bg-topbar: rgba(255, 255, 255, 0.11); /* Frosted glass — semi-transparent */
-  --background: rgba(255, 255, 255, 0.2);
-  --hover-white: #fce8e6;
-  --saved-header-txt: #5c4000;
+  /* ── DARK MODE COLORS ───────────────────────────────────── */
+  --bg-primary-dark: #202124; /* Dark grey — used for cards, bars, panels             */
+  --bg-secondary-dark: #171717; /* Very dark grey — used for the page background         */
+  --bg-tertiary-dark: #2c2c2c; /* Dark grey — used for input fields and hover states */
+  --border-dark: #3c4043; /* Subtle dark grey lines — used for dividers and outlines */
+  --text-primary-dark: #e8eaed; /* Near-white — main text color                     */
+  --text-secondary-dark: #9aa0a6; /* Medium grey — subtitle and icon color            */
+  --text-hint-dark: #5f6368; /* Dark grey — placeholder text color              */
+  --bg-topbar-dark: rgba(
+    32,
+    33,
+    36,
+    0.11
+  ); /* Frosted glass — semi-transparent */
+  --background-dark: rgba(32, 33, 36, 0.2);
+  --hover-dark: #2c2c2c;
+  --saved-header-txt-dark: #f1f3f4;
+
+  /* ── LIGHT MODE COLORS ───────────────────────────────────── */
+  --bg-primary-light: #ffffff; /* White — used for cards, bars, panels             */
+  --bg-secondary-light: #f8f9fa; /* Off-white — used for the page background         */
+  --bg-tertiary-light: #f1f3f4; /* Light grey — used for input fields and hover states */
+  --border-light: #e0e0e0; /* Subtle grey lines — used for dividers and outlines */
+  --text-primary-light: #202124; /* Near-black — main text color                     */
+  --text-secondary-light: #5f6368; /* Medium grey — subtitle and icon color            */
+  --text-hint-light: #9aa0a6; /* Light grey — placeholder text color              */
+  --bg-topbar-light: rgba(
+    255,
+    255,
+    255,
+    0.11
+  ); /* Frosted glass — semi-transparent */
+  --background-light: rgba(255, 255, 255, 0.2);
+  --hover-light: #fce8e6;
+  --saved-header-txt-light: #5c4000;
+
+  /* ── DARK MODE OVERRIDES ── */
+  [data-theme="dark"] {
+    --bg-primary: var(--bg-primary-dark);
+    --bg-secondary: var(--bg-secondary-dark);
+    --bg-tertiary: var(--bg-tertiary-dark);
+    --border: var(--border-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --text-hint: var(--text-hint-dark);
+    --topbar-bg: var(--bg-topbar-dark);
+    --overlay-bg: var(--background-dark);
+    --saved-text: var(--saved-header-txt-dark);
+  }
+
+  /* ── LIGHT MODE OVERRIDES ── */
+  [data-theme="light"] {
+    --bg-primary: var(--bg-primary-light);
+    --bg-secondary: var(--bg-secondary-light);
+    --bg-tertiary: var(--bg-tertiary-light);
+    --border: var(--border-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --text-hint: var(--text-hint-light);
+    --topbar-bg: var(--bg-topbar-light);
+    --overlay-bg: var(--background-light);
+    --saved-text: var(--saved-header-txt-light);
+  }
+
+  /*default colors for light mode, overridden in dark mode*/
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --bg-tertiary: var(--bg-tertiary-light);
+  --border: var(--border-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --text-hint: var(--text-hint-light);
+  --topbar-bg: var(--bg-topbar-light);
+  --overlay-bg: var(--background-light);
+  --saved-text: var(--saved-header-txt-light);
+
   /* ── SHADOWS ────────────────────────────────────────────────── */
   --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.12); /* Small shadow for the top bar    */
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16); /* Medium shadow for panels, cards */
@@ -51,7 +112,6 @@
   --radius-lg: 20px; /* Strong rounding — cards, directions panel */
   --radius-pill: 999px; /* Fully rounded (pill shape) — search box   */
 
-
   /* ── LAYOUT SIZES ───────────────────────────────────────────── */
   --topbar-height: 64px; /* Height of the search bar at the top    */
   --bottombar-height: 58px; /* Height of the transport tabs at bottom */
@@ -60,9 +120,4 @@
 
   /* ── ANIMATION SPEED ────────────────────────────────────────── */
   --speed: 0.25s; /* 0.25 seconds — quick but smooth */
-
-  /* ── CURRENT PLACE INFO (used by click.js) ───────────────────── */
-  var currentInfoName = '';   /* name of the place currently shown in the info card */
-  var currentInfoLat  = 0;    /* its latitude  */
-  var currentInfoLng  = 0;    /* its longitude */
 }
