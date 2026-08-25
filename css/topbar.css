@@ -18,7 +18,7 @@
   position: fixed; /* Floats above the map — doesn't affect layout flow */
   z-index: 799; /* Above everything else */
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.11); /* Frosted glass — semi-transparent */
+  background: var(--bg-primary);
   backdrop-filter: blur(5px); /* Blur whatever is behind the bar   */
   -webkit-backdrop-filter: blur(5px); /* Same for Safari/Opera             */
   border-radius: 30px;
