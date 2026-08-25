@@ -430,8 +430,10 @@
 
       <!-- DIRECTIONS PANEL -->
       <div id="directions-panel" role="dialog" aria-label="Directions">
-        <div id="directions-header" data-i18n="directions">
-          <h3><i class="fa-solid fa-route"></i> Directions</h3>
+        <div id="directions-header">
+          <h3 data-i18n="directions">
+            <i class="fa-solid fa-route"></i> Directions
+          </h3>
           <button
             onclick="closeDirections()"
             title="Close"
@@ -484,13 +486,13 @@
               placeholder="Destination"
               data-i18n-placeholder="destination"
             />
-            <button id="add-stop-btn" onclick="addStop()">
-              <i class="fa-solid fa-plus"></i> Add stop
-            </button>
           </div>
         </div>
-        <button id="get-route-btn" onclick="getRoute()">
+        <button id="get-route-btn" onclick="getRoute()" data-i18n="get_route">
           <i class="fa-solid fa-diamond-turn-right"></i> Get Route
+        </button>
+        <button id="add-stop-btn" onclick="addStop()" data-i18n="add_stop">
+          <i class="fa-solid fa-plus"></i> Add stop
         </button>
         <div id="route-summary"></div>
       </div>
@@ -523,7 +525,7 @@
         </div>
 
         <!-- Hint shown while user is picking a location on the map -->
-        <div id="picking-hint" data-i18n="picking_hint">
+        <div id="picking-hint" data-i18n="tap_map_select_location">
           <i class="fa-solid fa-hand-pointer"></i>
           Tap anywhere on the map to select a location
         </div>
@@ -603,7 +605,7 @@
               >Route steps</span
             >
           </div>
-          <div id="steps-summary-bar" data-i18n="route_summary">
+          <div id="steps-summary-bar">
             <span id="steps-distance" data-i18n="route_distance"
               ><i class="fa-solid fa-road"></i> --</span
             >
@@ -634,8 +636,10 @@
 
       <!-- SAVED PLACES POPUP (desktop) -->
       <div id="saved-popup" role="dialog" aria-label="Saved places">
-        <div id="saved-popup-header" data-i18n="saved_places">
-          <h3><i class="fa-solid fa-star"></i> Saved Places</h3>
+        <div id="saved-popup-header">
+          <h3 data-i18n="saved_places">
+            <i class="fa-solid fa-star"></i> Saved Places
+          </h3>
           <div id="saved-popup-header-actions">
             <!-- Global eye — hides/shows all saved markers at once -->
             <button
@@ -656,8 +660,10 @@
       <!-- SAVED PLACES BOTTOM SHEET (mobile) -->
       <div id="saved-sheet-overlay" onclick="closeSavedPlaces()"></div>
       <div id="saved-sheet" role="dialog" aria-label="Saved places">
-        <div id="saved-sheet-header" data-i18n="saved_places">
-          <h3><i class="fa-solid fa-star"></i> Saved Places</h3>
+        <div id="saved-sheet-header">
+          <h3 data-i18n="saved_places">
+            <i class="fa-solid fa-star"></i> Saved Places
+          </h3>
           <div id="saved-sheet-header-actions">
             <button
               id="saved-sheet-hide-all-btn"
@@ -740,7 +746,7 @@
               <i class="fa-solid fa-circle-info"></i>
             </div>
             <div class="settings-text">
-              <span class="settings-title" data-i18n="settings_about_app"
+              <span class="settings-title" data-i18n="settings_about_title"
                 >About this app</span
               >
             </div>

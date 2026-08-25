@@ -2,93 +2,74 @@
   ══════════════════════════════════════════════════════════════
   variables.css — Transit Maps App
   ══════════════════════════════════════════════════════════════
-  All CSS custom properties (variables) live here.
-  Change a value once → it updates everywhere it is used.
-  This file must be loaded FIRST in index.html.
+  All CSS custom properties live here.
+  Structure:
+    1. Fixed brand colors (never change between themes)
+    2. Light mode color definitions
+    3. Dark mode color definitions
+    4. Active theme variables (what the rest of the app uses)
+    5. Dark mode overrides (swaps active variables)
+    6. Shadows, radii, sizes, animation
   ══════════════════════════════════════════════════════════════
 */
 
 :root {
-  /* ── COLORS ─────────────────────────────────────────── */
-  --blue: #1a73e8; /* Main accent color — used for buttons, highlights  */
-  --blue-dark: #1558b0; /* A darker blue — used when hovering over blue buttons */
-  --blue-light: #a2c4fd; /* Very light blue — used for icon backgrounds       */
-  --red: #ff0000; /* Destination pin color & danger indicators         */
-  --dark-red: #b71c1c; /* Dark red — used when hovering over red buttons     */
-  --light-red: #f85555; /* Very light red — used for icon backgrounds         */
-  --green: #34a853; /* Success / GPS location dot color                  */
-  --dark-green: #006631; /* Dark green — used when hovering over green buttons */
-  --light-green: #37e654; /* Light green — used for tram icon color              */
-  --yellow: #a5fb04; /* Star / saved places icon color                    */
-  --orange: #ff6d00; /* Restaurant and food icon color                    */
+  /* ════════════════════════════════════════════════════════
+     1. FIXED BRAND COLORS
+     These never change between light and dark mode.
+     ════════════════════════════════════════════════════════ */
+  --blue: #1a73e8;
+  --blue-dark: #1558b0;
+  --blue-light: #a2c4fd;
+  --red: #ff0000;
+  --dark-red: #b71c1c;
+  --light-red: #f85555;
+  --green: #34a853;
+  --dark-green: #006631;
+  --light-green: #37e654;
+  --yellow: #a5fb04;
+  --orange: #ff6d00;
   --purple: #8d00a0;
-  --white: #ffffff; /* White — used for text on dark backgrounds         */
+  --white: #ffffff;
 
-  /* ── DARK MODE COLORS ───────────────────────────────────── */
-  --bg-primary-dark: #202124; /* Dark grey — used for cards, bars, panels             */
-  --bg-secondary-dark: #171717; /* Very dark grey — used for the page background         */
-  --bg-tertiary-dark: #2c2c2c; /* Dark grey — used for input fields and hover states */
-  --border-dark: #3c4043; /* Subtle dark grey lines — used for dividers and outlines */
-  --text-primary-dark: #e8eaed; /* Near-white — main text color                     */
-  --text-secondary-dark: #9aa0a6; /* Medium grey — subtitle and icon color            */
-  --text-hint-dark: #5f6368; /* Dark grey — placeholder text color              */
-  --bg-topbar-dark: rgba(
-    32,
-    33,
-    36,
-    0.11
-  ); /* Frosted glass — semi-transparent */
-  --background-dark: rgba(32, 33, 36, 0.2);
-  --hover-dark: #2c2c2c;
-  --saved-header-txt-dark: #f1f3f4;
-
-  /* ── LIGHT MODE COLORS ───────────────────────────────────── */
-  --bg-primary-light: #ffffff; /* White — used for cards, bars, panels             */
-  --bg-secondary-light: #f8f9fa; /* Off-white — used for the page background         */
-  --bg-tertiary-light: #f1f3f4; /* Light grey — used for input fields and hover states */
-  --border-light: #e0e0e0; /* Subtle grey lines — used for dividers and outlines */
-  --text-primary-light: #202124; /* Near-black — main text color                     */
-  --text-secondary-light: #5f6368; /* Medium grey — subtitle and icon color            */
-  --text-hint-light: #9aa0a6; /* Light grey — placeholder text color              */
-  --bg-topbar-light: rgba(
-    255,
-    255,
-    255,
-    0.11
-  ); /* Frosted glass — semi-transparent */
-  --background-light: rgba(255, 255, 255, 0.2);
+  /* ════════════════════════════════════════════════════════
+     2. LIGHT MODE COLOR DEFINITIONS
+     Raw values for the light theme.
+     ════════════════════════════════════════════════════════ */
+  --bg-primary-light: #ffffff;
+  --bg-secondary-light: #f8f9fa;
+  --bg-tertiary-light: #f1f3f4;
+  --border-light: #e0e0e0;
+  --text-primary-light: #202124;
+  --text-secondary-light: #5f6368;
+  --text-hint-light: #9aa0a6;
+  --topbar-bg-light: rgba(255, 255, 255, 0.11);
+  --overlay-bg-light: rgba(255, 255, 255, 0.2);
   --hover-light: #fce8e6;
-  --saved-header-txt-light: #5c4000;
+  --saved-text-light: #5c4000;
 
-  /* ── DARK MODE OVERRIDES ── */
-  [data-theme="dark"] {
-    --bg-primary: var(--bg-primary-dark);
-    --bg-secondary: var(--bg-secondary-dark);
-    --bg-tertiary: var(--bg-tertiary-dark);
-    --border: var(--border-dark);
-    --text-primary: var(--text-primary-dark);
-    --text-secondary: var(--text-secondary-dark);
-    --text-hint: var(--text-hint-dark);
-    --topbar-bg: var(--bg-topbar-dark);
-    --overlay-bg: var(--background-dark);
-    --saved-text: var(--saved-header-txt-dark);
-  }
+  /* ════════════════════════════════════════════════════════
+     3. DARK MODE COLOR DEFINITIONS
+     Raw values for the dark theme.
+     ════════════════════════════════════════════════════════ */
+  --bg-primary-dark: #202124;
+  --bg-secondary-dark: #171717;
+  --bg-tertiary-dark: #2c2c2c;
+  --border-dark: #3c4043;
+  --text-primary-dark: #e8eaed;
+  --text-secondary-dark: #9aa0a6;
+  --text-hint-dark: #5f6368;
+  --topbar-bg-dark: rgba(32, 33, 36, 0.11);
+  --overlay-bg-dark: rgba(32, 33, 36, 0.2);
+  --hover-dark: #2c2c2c;
+  --saved-text-dark: #f1f4f3;
 
-  /* ── LIGHT MODE OVERRIDES ── */
-  [data-theme="light"] {
-    --bg-primary: var(--bg-primary-light);
-    --bg-secondary: var(--bg-secondary-light);
-    --bg-tertiary: var(--bg-tertiary-light);
-    --border: var(--border-light);
-    --text-primary: var(--text-primary-light);
-    --text-secondary: var(--text-secondary-light);
-    --text-hint: var(--text-hint-light);
-    --topbar-bg: var(--bg-topbar-light);
-    --overlay-bg: var(--background-light);
-    --saved-text: var(--saved-header-txt-light);
-  }
-
-  /*default colors for light mode, overridden in dark mode*/
+  /* ════════════════════════════════════════════════════════
+     4. ACTIVE THEME VARIABLES
+     These are what every other CSS file uses.
+     They default to light mode values here.
+     Dark mode overrides them below via [data-theme="dark"].
+     ════════════════════════════════════════════════════════ */
   --bg-primary: var(--bg-primary-light);
   --bg-secondary: var(--bg-secondary-light);
   --bg-tertiary: var(--bg-tertiary-light);
@@ -96,28 +77,59 @@
   --text-primary: var(--text-primary-light);
   --text-secondary: var(--text-secondary-light);
   --text-hint: var(--text-hint-light);
-  --topbar-bg: var(--bg-topbar-light);
-  --overlay-bg: var(--background-light);
-  --saved-text: var(--saved-header-txt-light);
+  --topbar-bg: var(--topbar-bg-light);
+  --overlay-bg: var(--overlay-bg-light);
+  --hover: var(--hover-light);
+  --saved-text: var(--saved-text-light);
 
-  /* ── SHADOWS ────────────────────────────────────────────────── */
-  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.12); /* Small shadow for the top bar    */
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16); /* Medium shadow for panels, cards */
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2); /* Large shadow for big modals     */
+  /* ════════════════════════════════════════════════════════
+     5. SHADOWS
+     ════════════════════════════════════════════════════════ */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.16);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
   --shadow-white: rgba(255, 255, 255, 0.8);
 
-  /* ── BORDER RADIUS (rounded corners) ───────────────────────── */
-  --radius-sm: 8px; /* Slight rounding — inputs, small buttons   */
-  --radius-md: 12px; /* Medium rounding — panels, popups          */
-  --radius-lg: 20px; /* Strong rounding — cards, directions panel */
-  --radius-pill: 999px; /* Fully rounded (pill shape) — search box   */
+  /* ════════════════════════════════════════════════════════
+     6. BORDER RADIUS
+     ════════════════════════════════════════════════════════ */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --radius-panel: 30px;
 
-  /* ── LAYOUT SIZES ───────────────────────────────────────────── */
-  --topbar-height: 64px; /* Height of the search bar at the top    */
-  --bottombar-height: 58px; /* Height of the transport tabs at bottom */
-  --sidebar-width: 320px; /* Sidebar width on desktop screens       */
-  --sidebar-width-sm: 280px; /* Sidebar width on tablet screens        */
+  /* ════════════════════════════════════════════════════════
+     7. LAYOUT SIZES
+     ════════════════════════════════════════════════════════ */
+  --topbar-height: 64px;
+  --bottombar-height: 58px;
+  --sidebar-width: 320px;
+  --sidebar-width-sm: 280px;
 
-  /* ── ANIMATION SPEED ────────────────────────────────────────── */
-  --speed: 0.25s; /* 0.25 seconds — quick but smooth */
+  /* ════════════════════════════════════════════════════════
+     8. ANIMATION
+     ════════════════════════════════════════════════════════ */
+  --speed: 0.25s;
+}
+
+/* ════════════════════════════════════════════════════════════
+   DARK MODE OVERRIDES
+   When JS sets data-theme="dark" on <html>, these rules
+   override the active theme variables defined in :root above.
+   Every CSS file automatically gets the dark values because
+   they all reference var(--bg-primary) etc.
+   ════════════════════════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --bg-tertiary: var(--bg-tertiary-dark);
+  --border: var(--border-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --text-hint: var(--text-hint-dark);
+  --topbar-bg: var(--topbar-bg-dark);
+  --overlay-bg: var(--overlay-bg-dark);
+  --hover: var(--hover-dark);
+  --saved-text: var(--saved-text-dark);
 }
