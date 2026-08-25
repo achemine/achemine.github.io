@@ -205,3 +205,7 @@ function makeDraggable(elementId, handleId) {
 /* Make desktop panels draggable */
 makeDraggable("directions-panel", "directions-header");
 makeDraggable("saved-popup", "saved-popup-header");
+
+/* Restore saved places and settings from localStorage on startup */
+restoreSavedPlaces();
+restoreSettings();

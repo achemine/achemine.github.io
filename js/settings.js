@@ -34,6 +34,7 @@ function toggleDarkMode() {
   } else {
     document.documentElement.removeAttribute("data-theme", "light");
   }
+  themeSave(darkMode ? "dark" : "light");
 
   /* Update the icon in the settings panel */
   const settingsIcon = document.getElementById("settings-theme-icon");
@@ -119,4 +120,31 @@ function buildLanguageList() {
 
 function openAbout() {
   showToast("Transit · Personal Project · v1.0");
+}
+
+/*
+  restoreSettings() reads theme and language from localStorage
+  and applies them silently on page load.
+*/
+function restoreSettings() {
+  /* Restore theme */
+  const savedTheme = themeLoad();
+  if (savedTheme === "dark") {
+    darkMode = true;
+    document.documentElement.setAttribute("data-theme", "dark");
+    const icon = document.getElementById("settings-theme-icon");
+    if (icon) icon.className = "fa-solid fa-sun";
+    /* Switch map tile to dark */
+    if (tileLayers["Dark"]) {
+      map.removeLayer(tileLayers[currentLayer]);
+      tileLayers["Dark"].addTo(map);
+      currentLayer = "Dark";
+    }
+  }
+
+  /* Restore language — overrides device detection if user chose manually */
+  const savedLang = languageLoad();
+  if (savedLang && i18nResources[savedLang]) {
+    applyTranslations(savedLang, i18nResources);
+  }
 }

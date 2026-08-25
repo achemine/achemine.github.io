@@ -101,13 +101,13 @@ var currentLanguage = DEFAULT_LANGUAGE;
 var i18nResources = {}; /* stores all loaded translations */
 
 loadTranslations().then(function (results) {
-  /* Build the resources object: { en: {...}, fr: {...}, ... } */
   results.forEach(function (item) {
     i18nResources[item.lang] = item.data;
   });
 
-  /* Detect device language and apply */
-  const lang = detectLanguage();
+  /* Use saved language if available, otherwise detect from device */
+  const savedLang = languageLoad();
+  const lang = savedLang || detectLanguage();
   applyTranslations(lang, i18nResources);
 });
 
@@ -117,6 +117,7 @@ loadTranslations().then(function (results) {
 function changeLanguage(lang) {
   if (!SUPPORTED_LANGUAGES.includes(lang)) return;
   applyTranslations(lang, i18nResources);
-  buildLanguageList(); /* rebuild list to update highlight */
+  languageSave(lang); /* persist the choice */
+  buildLanguageList();
   showToast(LANGUAGE_NAMES[lang]);
 }

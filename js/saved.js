@@ -94,6 +94,7 @@ function saveCurrentPlace() {
     saveBtn.style.color = "var(--bg-primary)";
     saveBtn.querySelector("span").textContent = "Saved";
   }
+  savedPersist(); /* write to localStorage */
 }
 
 /* ── TOGGLE INDIVIDUAL MARKER VISIBILITY ── */
@@ -124,6 +125,7 @@ function toggleAllSavedMarkers() {
   savedPlaces.forEach(function (place) {
     if (!place.marker) return;
     place.visible = allSavedVisible;
+    savedPersist();
     if (allSavedVisible) {
       if (!map.hasLayer(place.marker)) place.marker.addTo(map);
     } else {
@@ -303,6 +305,7 @@ function confirmEditName() {
   });
   if (place) {
     place.name = newName;
+    savedPersist();
     if (place.marker) {
       place.marker.setPopupContent("<strong>" + newName + "</strong>");
     }
@@ -477,9 +480,64 @@ function deleteSavedPlace(index) {
 
   /* Remove from the array */
   savedPlaces.splice(index, 1);
+  savedPersist();
 
   /* Rebuild the list */
   buildSavedList();
 
   showToast('"' + place.name + '" removed');
+}
+
+/*
+  restoreSavedPlaces() reads saved places from localStorage on startup
+  and places star markers on the map for each one immediately.
+  Called once when the page loads — after the map is ready.
+*/
+function restoreSavedPlaces() {
+  const stored = savedLoad();
+  if (!stored.length) return;
+
+  stored.forEach(function (entry) {
+    /* Recreate the star marker */
+    const marker = L.marker([entry.lat, entry.lng], { icon: createStarIcon() });
+    marker.bindPopup("<strong>" + entry.name + "</strong>");
+
+    marker.on("click", function (e) {
+      L.DomEvent.stopPropagation(e);
+
+      /* Block on mobile if directions sheet is open */
+      if (window.innerWidth < 768) {
+        const dirOpen = document
+          .getElementById("directions-sheet")
+          ?.classList.contains("open");
+        if (dirOpen) return;
+      }
+
+      clickedLat = entry.lat;
+      clickedLng = entry.lng;
+
+      showInfoCard(entry.name, entry.lat.toFixed(5), entry.lng.toFixed(5));
+
+      const saveBtn = document.querySelector(".card-btn:not(.primary)");
+      if (saveBtn) {
+        saveBtn.style.background = COLOR_YELLOW;
+        saveBtn.style.borderColor = COLOR_YELLOW;
+        saveBtn.style.color = "var(--saved-text)";
+        const span = saveBtn.querySelector("span");
+        if (span) span.textContent = "Saved";
+      }
+    });
+
+    /* Add to map only if it was visible when last saved */
+    if (entry.visible !== false) marker.addTo(map);
+
+    /* Push the full object into savedPlaces */
+    savedPlaces.push({
+      name: entry.name,
+      lat: entry.lat,
+      lng: entry.lng,
+      visible: entry.visible !== false,
+      marker: marker,
+    });
+  });
 }
