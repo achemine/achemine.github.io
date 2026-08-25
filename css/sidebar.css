@@ -67,8 +67,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 16px 16px;
-  background: var(--yellow);
-  color: white;
+  background: var(--dark-green);
+  color: var(--bg-tertiary);
   flex-shrink: 0; /* Never let this shrink when content overflows */
 }
 
@@ -84,7 +84,7 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: white;
+  background: var(--bg-tertiary);
   color: var(--red);
   font-size: 20px;
   font-weight: 700;
@@ -96,17 +96,18 @@
 #avatar-name {
   font-size: 15px;
   font-weight: 500;
-  color: white;
+  color: var(--bg-tertiary);
 }
 #avatar-email {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--bg-tertiary);
   margin-top: 2px;
+  transparent: 0.7;
 }
 
 /* The × close button in the header */
 #sidebar-close {
-  color: white;
+  color: var(--bg-tertiary);
   font-size: 20px;
   padding: 6px;
   border-radius: 50%;
@@ -155,55 +156,55 @@
 
 /* One colour per item type */
 .home-icon {
-  background: var(--blue-light);
+  background: var(--bg-tertiary);
   color: var(--blue);
 }
 .work-icon {
-  background: #e6f4ea;
+  background: var(--bg-tertiary);
   color: var(--green);
 }
 .route-icon {
-  background: #fce8e6;
+  background: var(--bg-tertiary);
   color: var(--red);
 }
 .saved-icon {
-  background: #fef9e7;
+  background: var(--bg-tertiary);
   color: var(--yellow);
 }
 .subway-icon {
-  background: #fff3e0;
+  background: var(--bg-tertiary);
   color: var(--blue);
 }
 .train-icon {
-  background: #fce8e6;
+  background: var(--bg-tertiary);
   color: var(--blue-dark);
 }
 .tram-icon {
-  background: #fce8e6;
-  color: #37e654;
+  background: var(--bg-tertiary);
+  color: var(--light-green);
 }
 .cable-car-icon {
-  background: #fce8e6;
+  background: var(--bg-tertiary);
   color: var(--green);
 }
 .bus-icon {
-  background: #fce8e6;
+  background: var(--bg-tertiary);
   color: var(--red);
 }
 .layer-icon {
-  background: #e8eaf6;
-  color: #3949ab;
+  background: var(--bg-tertiary);
+  color: var(--blue);
 }
 .share-icon {
-  background: var(--blue-light);
-  color: var(--blue);
+  background: var(--bg-tertiary);
+  color: var(--grey);
 }
 .print-icon {
   background: var(--bg-tertiary);
   color: var(--text-secondary);
 }
 .settings-icon {
-  background: #fce8e6;
+  background: var(--bg-tertiary);
   color: var(--text-secondary);
 }
 

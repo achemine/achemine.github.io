@@ -40,9 +40,9 @@
   font-size: 20px;
   color: var(--text-secondary);
   flex-shrink: 0;
-  background: var(--bg-secondary-dark);
+  background: var(--bg-secondary);
   transition: background var(--speed);
-  border: 1.5px solid var(--border-dark);
+  border: 1.5px solid var(--border);
 }
 #menu-btn:hover {
   background: var(--bg-tertiary);
@@ -116,7 +116,7 @@
   transition: background var(--speed);
 }
 #search-btn:hover {
-  background: var(--blue-light);
+  background: var(--bg-secondary);
 }
 
 /* ── RIGHT-SIDE ACTION BUTTONS (locate + dark mode) ── */

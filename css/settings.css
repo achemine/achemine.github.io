@@ -62,7 +62,7 @@
   justify-content: space-between;
   padding: 20px 16px 16px;
   background: var(--text-secondary);
-  color: white;
+  color: var(--bg-tertiary);
   flex-shrink: 0;
 }
 #settings-profile {
@@ -74,7 +74,7 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: white;
+  background: var(--bg-tertiary);
   color: var(--text-secondary);
   font-size: 20px;
   display: flex;
@@ -85,10 +85,10 @@
 #settings-title {
   font-size: 17px;
   font-weight: 500;
-  color: white;
+  color: var(--bg-tertiary);
 }
 #settings-close {
-  color: white;
+  color: var(--bg-tertiary);
   font-size: 20px;
   padding: 6px;
   border-radius: 50%;
@@ -135,15 +135,15 @@
   flex-shrink: 0;
 }
 .theme-icon {
-  background: #e8eaf6;
+  background: var(--bg-tertiary);
   color: #3949ab;
 }
 .language-icon {
-  background: var(--blue-light);
+  background: var(--bg-tertiary);
   color: var(--blue);
 }
 .about-icon {
-  background: #e6f4ea;
+  background: var(--bg-tertiary);
   color: var(--green);
 }
 
@@ -202,11 +202,11 @@
   gap: 12px;
   padding: 20px 16px 16px;
   background: var(--text-secondary);
-  color: white;
+  color: var(--bg-tertiary);
   flex-shrink: 0;
 }
 #language-panel-header button {
-  color: white;
+  color: var(--bg-tertiary);
   font-size: 18px;
   padding: 6px;
   border-radius: 50%;
@@ -218,7 +218,7 @@
 #language-panel-header h3 {
   font-size: 17px;
   font-weight: 500;
-  color: white;
+  color: var(--bg-tertiary);
 }
 
 #language-list {

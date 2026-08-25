@@ -31,6 +31,7 @@
   --orange: #ff6d00;
   --purple: #8d00a0;
   --white: #ffffff;
+  --grey: #9e9e9e;
 
   /* ════════════════════════════════════════════════════════
      2. LIGHT MODE COLOR DEFINITIONS
@@ -132,4 +133,6 @@
   --overlay-bg: var(--overlay-bg-dark);
   --hover: var(--hover-dark);
   --saved-text: var(--saved-text-dark);
+  --dark-green: var(--light-green);
+  --blue: var(--blue-dark);
 }
