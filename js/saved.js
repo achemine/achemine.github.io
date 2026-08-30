@@ -58,6 +58,27 @@ function saveCurrentPlace() {
   marker.on("click", function (e) {
     L.DomEvent.stopPropagation(e);
 
+    /* If in pick mode, fill the input with the saved place name */
+    if (pickingInputId) {
+      const input = document.getElementById(pickingInputId);
+      if (input) {
+        input.value = evt.name;
+        input.dataset.lat = entry.lat;
+        input.dataset.lng = entry.lng;
+      }
+      /* Restore the sheet */
+      const sheet = document.getElementById("directions-sheet");
+      if (sheet) {
+        sheet.classList.remove("picking");
+        sheet.style.height = pickingPrevHeight + "px";
+      }
+      pickingInputId = null;
+      return;
+    }
+
+    /* rest of existing click handler... */
+    L.DomEvent.stopPropagation(e);
+
     clickedLat = lat;
     clickedLng = lng;
 

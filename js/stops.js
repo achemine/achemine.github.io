@@ -93,9 +93,26 @@ function loadCategory(category) {
             if (pickingInputId) {
               const lat = feature.geometry.coordinates[1];
               const lng = feature.geometry.coordinates[0];
-
+              const name =
+                feature.properties.name ||
+                lat.toFixed(6) + ", " + lng.toFixed(6);
               const input = document.getElementById(pickingInputId);
-              if (input) input.value = lat.toFixed(6) + ", " + lng.toFixed(6);
+              if (input) input.value = name;
+              /* Store coordinates separately so routing still works */
+              if (pickingInputId === "sheet-from-input") {
+                document.getElementById("sheet-from-input").dataset.lat = lat;
+                document.getElementById("sheet-from-input").dataset.lng = lng;
+              } else if (pickingInputId === "sheet-to-input") {
+                document.getElementById("sheet-to-input").dataset.lat = lat;
+                document.getElementById("sheet-to-input").dataset.lng = lng;
+              } else {
+                /* For stop inputs */
+                const input2 = document.getElementById(pickingInputId);
+                if (input2) {
+                  input2.dataset.lat = lat;
+                  input2.dataset.lng = lng;
+                }
+              }
 
               /* Restore the sheet */
               const sheet = document.getElementById("directions-sheet");
@@ -103,9 +120,7 @@ function loadCategory(category) {
                 sheet.classList.remove("picking");
                 sheet.style.height = pickingPrevHeight + "px";
               }
-              pickingInputId = null;
-
-              /* Still allow the popup to show */
+              pickingInputId = null; /* ← this line must be here */
               return;
             }
 

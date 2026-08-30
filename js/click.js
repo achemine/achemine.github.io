@@ -8,49 +8,29 @@
   ══════════════════════════════════════════════════════════════
 */
 
-/*
-  When the user clicks anywhere on the map (not on a marker):
-  1. Remove the previous click marker if there is one
-  2. Drop a new blue marker at the clicked spot
-  3. Show the info card at the bottom
-*/
 map.on("click", function (event) {
-  map.on("click", function (event) {
-    const dirOpen =
-      directionsSheet && directionsSheet.classList.contains("open");
-    const savedOpen = savedSheet && savedSheet.classList.contains("open");
+  /* ── Block during map-pick mode (directions pin selection) ── */
+  if (pickingInputId) return;
 
-    /* Block on mobile if any sheet is open */
-    if ((dirOpen || savedOpen) && window.innerWidth < 768) return;
+  /* ── Declare sheet references ── */
+  const directionsSheet = document.getElementById("directions-sheet");
+  const savedSheet = document.getElementById("saved-sheet");
+  const desktopPanel = document.getElementById("directions-panel");
 
-    if ((dirOpen || savedOpen) && window.innerWidth < 768) {
-      return;
-    }
+  const dirOpen = directionsSheet && directionsSheet.classList.contains("open");
+  const savedOpen = savedSheet && savedSheet.classList.contains("open");
+  const desktopDirOpen = desktopPanel && desktopPanel.style.display === "block";
 
-    clickedLat = event.latlng.lat;
-    clickedLng = event.latlng.lng;
+  /* Block on mobile if any sheet is open */
+  if ((dirOpen || savedOpen) && window.innerWidth < 768) return;
 
-    if (clickedMarker) map.removeLayer(clickedMarker);
-
-    clickedMarker = L.marker([clickedLat, clickedLng], {
-      icon: createIcon("#1a73e8"),
-    }).addTo(map);
-
-    showInfoCard(
-      "Custom Location",
-      clickedLat.toFixed(5),
-      clickedLng.toFixed(5),
-    );
-  });
   clickedLat = event.latlng.lat;
   clickedLng = event.latlng.lng;
 
-  /* Remove the old marker */
   if (clickedMarker) map.removeLayer(clickedMarker);
 
-  /* Drop a new marker */
   clickedMarker = L.marker([clickedLat, clickedLng], {
-    icon: createIcon("#1a73e8"),
+    icon: createIcon("blue"),
   }).addTo(map);
 
   showInfoCard("Custom Location", clickedLat.toFixed(5), clickedLng.toFixed(5));
@@ -70,6 +50,11 @@ function showInfoCard(name, lat, lng) {
   currentInfoLat = parseFloat(lat);
   currentInfoLng = parseFloat(lng);
 
+  /* Reset title display in case it was hidden during editing */
+  document.getElementById("info-title").style.display = "block";
+  document.getElementById("edit-name-input").style.display = "none";
+  document.getElementById("edit-name-btn").style.display = "none";
+
   /* Update save button based on whether this location is already saved */
   const saveBtn = document.querySelector(".card-btn:not(.primary)");
   if (saveBtn) {
@@ -77,9 +62,9 @@ function showInfoCard(name, lat, lng) {
       return p.lat === parseFloat(lat) && p.lng === parseFloat(lng);
     });
     if (alreadySaved) {
-      saveBtn.style.background = "var(--yellow)";
-      saveBtn.style.borderColor = "var(--yellow)";
-      saveBtn.style.color = "var(--bg-primary)";
+      saveBtn.style.background = COLOR_YELLOW;
+      saveBtn.style.borderColor = COLOR_YELLOW;
+      saveBtn.style.color = "var(--saved-text)";
       const span = saveBtn.querySelector("span");
       if (span) span.textContent = "Saved";
     } else {
@@ -108,11 +93,6 @@ function showInfoCard(name, lat, lng) {
     })
     .then(function (data) {
       const address = data.address || {};
-
-      /*
-        Nominatim returns different field names depending on the country.
-        We try several fallbacks to find the province/region.
-      */
       const province =
         address.state ||
         address.province ||
@@ -120,17 +100,13 @@ function showInfoCard(name, lat, lng) {
         address.county ||
         address.state_district ||
         "";
-
       const country = address.country || "";
 
       tags.innerHTML = "";
-
-      if (province) {
+      if (province)
         tags.innerHTML += '<span class="tag">📍 ' + province + "</span>";
-      }
-      if (country) {
+      if (country)
         tags.innerHTML += '<span class="tag">🗺️ ' + country + "</span>";
-      }
       if (!province && !country) {
         tags.innerHTML = '<span class="tag">📍 Unknown location</span>';
       }
@@ -146,12 +122,14 @@ function showInfoCard(name, lat, lng) {
 */
 function closeInfoCard() {
   document.getElementById("info-card").classList.remove("open");
+
   if (clickedMarker) {
     map.removeLayer(clickedMarker);
     clickedMarker = null;
   }
+
   document.getElementById("edit-name-btn").style.display = "none";
-  /* Reset save button for new location */
+
   const saveBtn = document.querySelector(".card-btn:not(.primary)");
   if (saveBtn) {
     saveBtn.style.background = "";

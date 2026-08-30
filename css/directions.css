@@ -408,10 +408,11 @@
   position: relative;
 }
 .sheet-input-dot {
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   flex-shrink: 0;
+  z-index: 2;
 }
 .sheet-input-dot.start {
   background: var(--blue);
@@ -426,7 +427,7 @@
 /* Dashed connector line between dots */
 .sheet-dot-connector {
   position: absolute;
-  left: 22px;
+  left: 21.5px;
   top: 50%;
   height: calc(100% + 1px); /* extend to just touch the next row */
   width: 2px;

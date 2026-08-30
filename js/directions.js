@@ -319,13 +319,25 @@ function getRoute() {
    ════════════════════════════════════════════════════════════ */
 
 function getSheetRoute() {
-  const from = document.getElementById("sheet-from-input").value.trim();
-  const to = document.getElementById("sheet-to-input").value.trim();
+  const fromInput = document.getElementById("sheet-from-input");
+  const toInput = document.getElementById("sheet-to-input");
+
+  /* Use stored coordinates if available, otherwise use text value */
+  const from = fromInput.dataset.lat
+    ? fromInput.dataset.lat + "," + fromInput.dataset.lng
+    : fromInput.value.trim();
+
+  const to = toInput.dataset.lat
+    ? toInput.dataset.lat + "," + toInput.dataset.lng
+    : toInput.value.trim();
+
   const stops = Array.from(
     document.querySelectorAll("#sheet-stops-wrapper input"),
   )
     .map(function (i) {
-      return i.value.trim();
+      return i.dataset.lat
+        ? i.dataset.lat + "," + i.dataset.lng
+        : i.value.trim();
     })
     .filter(Boolean);
 
@@ -511,6 +523,7 @@ function hideStepsView() {
 var directionSheetHeight = 0;
 
 function openDirectionsSheet() {
+  closeInfoCard();
   const sheet = document.getElementById("directions-sheet");
   sheet.classList.add("open");
   sheet.classList.remove("picking");
@@ -545,6 +558,18 @@ function closeDirectionsSheet() {
     sheet.style.height = "";
     hideStepsView();
   }, 300);
+  const fromInput = document.getElementById("sheet-from-input");
+  const toInput = document.getElementById("sheet-to-input");
+  if (fromInput) {
+    fromInput.value = "";
+    delete fromInput.dataset.lat;
+    delete fromInput.dataset.lng;
+  }
+  if (toInput) {
+    toInput.value = "";
+    delete toInput.dataset.lat;
+    delete toInput.dataset.lng;
+  }
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -555,7 +580,7 @@ var dirDragStartY = 0;
 var dirDragStartHeight = 0;
 var dirIsDragging = false;
 
-var DIR_MIN_HEIGHT = 120;
+var DIR_MIN_HEIGHT = 100;
 var DIR_CLOSE_THRESHOLD = window.innerHeight * 0.2;
 
 function initDirectionSheetDrag(sheet) {
@@ -623,7 +648,7 @@ function snapDirSheet() {
   const sheet = document.getElementById("directions-sheet");
   sheet.style.transition = "height 0.3s ease";
   const screenH = window.innerHeight;
-  const halfHeight = screenH * 0.5;
+  const halfHeight = screenH * 0.3;
   const fullHeight = screenH * 0.85;
   const closeH = screenH * 0.2;
 

@@ -67,7 +67,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 16px 16px;
-  background: var(--dark-green);
+  background: var(--green);
   color: var(--bg-tertiary);
   flex-shrink: 0; /* Never let this shrink when content overflows */
 }
@@ -102,7 +102,7 @@
   font-size: 12px;
   color: var(--bg-tertiary);
   margin-top: 2px;
-  transparent: 0.7;
+  opacity: 0.7;
 }
 
 /* The × close button in the header */
