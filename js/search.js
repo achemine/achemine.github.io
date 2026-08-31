@@ -8,28 +8,46 @@
   ══════════════════════════════════════════════════════════════
 */
 
-const searchInput   = document.getElementById('search-input');
-const searchResults = document.getElementById('search-results');
-const clearBtn      = document.getElementById('clear-btn');
+const searchInput = document.getElementById("search-input");
+const searchResults = document.getElementById("search-results");
+const clearBtn = document.getElementById("clear-btn");
 
-/* Show the × button when the user has typed something */
-searchInput.addEventListener('input', function() {
-  clearBtn.style.display = searchInput.value.length > 0 ? 'flex' : 'none';
+/* Debounce timer — waits 300ms after user stops typing before searching */
+var searchDebounceTimer = null;
+
+searchInput.addEventListener("input", function () {
+  clearBtn.style.display = searchInput.value.length > 0 ? "flex" : "none";
+
+  /* Clear previous timer */
+  if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+
+  const query = searchInput.value.trim();
+
+  /* Hide results if input is empty */
+  if (query.length < 2) {
+    searchResults.style.display = "none";
+    return;
+  }
+
+  /* Wait 300ms after user stops typing, then search */
+  searchDebounceTimer = setTimeout(function () {
+    doSearch();
+  }, 300);
 });
 
 /* × button: clear the input, hide results, refocus */
-clearBtn.onclick = function() {
-  searchInput.value           = '';
-  clearBtn.style.display      = 'none';
-  searchResults.style.display = 'none';
+clearBtn.onclick = function () {
+  searchInput.value = "";
+  clearBtn.style.display = "none";
+  searchResults.style.display = "none";
   searchInput.focus();
 };
 
 /* Trigger search on Enter key or the arrow button */
-searchInput.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') doSearch();
+searchInput.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") doSearch();
 });
-document.getElementById('search-btn').onclick = doSearch;
+document.getElementById("search-btn").onclick = doSearch;
 
 /*
   doSearch() sends the user's text to the Nominatim API,
@@ -41,17 +59,20 @@ function doSearch() {
   if (!query) return;
 
   /* Show a spinner while waiting */
-  searchResults.innerHTML     = '<div class="result-item"><i class="fa-solid fa-spinner fa-spin"></i> Searching…</div>';
-  searchResults.style.display = 'block';
+  searchResults.innerHTML =
+    '<div class="result-item"><i class="fa-solid fa-spinner fa-spin"></i> Searching…</div>';
+  searchResults.style.display = "block";
 
-  const url = 'https://nominatim.openstreetmap.org/search?format=json&q='
-              + encodeURIComponent(query)
-              + '&limit=6&addressdetails=1';
+  const url =
+    "https://photon.komoot.io/api/?q=" + encodeURIComponent(query) + "&limit=6";
 
   fetch(url)
-    .then(function(response) { return response.json(); })
-    .then(function(results) {
-      searchResults.innerHTML = '';
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const results = data.features || [];
+      searchResults.innerHTML = "";
 
       if (results.length === 0) {
         searchResults.innerHTML = `
@@ -66,13 +87,15 @@ function doSearch() {
       }
 
       /* Build one clickable row per result */
-      results.forEach(function(item) {
-        const div    = document.createElement('div');
-        div.className = 'result-item';
+      results.forEach(function (item) {
+        const div = document.createElement("div");
+        div.className = "result-item";
 
-        const parts  = item.display_name.split(',');
-        const title  = parts[0].trim();
-        const detail = parts.slice(1, 3).join(',').trim();
+        const props = item.properties;
+        const title = props.name || props.street || props.city || "Unknown";
+        const detail = [props.city, props.state, props.country]
+          .filter(Boolean)
+          .join(", ");
 
         div.innerHTML = `
           <i class="fa-solid fa-location-dot"></i>
@@ -83,14 +106,14 @@ function doSearch() {
         `;
 
         /* Clicking a result: fly there, drop a marker, show info card */
-        div.onclick = function() {
-          const lat = parseFloat(item.lat);
-          const lng = parseFloat(item.lon);
+        div.onclick = function () {
+          const lat = item.geometry.coordinates[1];
+          const lng = item.geometry.coordinates[0];
 
           map.flyTo([lat, lng], 16, { duration: 1.5 });
 
           if (clickedMarker) map.removeLayer(clickedMarker);
-          clickedMarker = L.marker([lat, lng], { icon: createIcon('#1a73e8') })
+          clickedMarker = L.marker([lat, lng], { icon: createIcon("#1a73e8") })
             .addTo(map)
             .bindPopup(title)
             .openPopup();
@@ -98,23 +121,27 @@ function doSearch() {
           clickedLat = lat;
           clickedLng = lng;
           showInfoCard(title, lat.toFixed(5), lng.toFixed(5));
-          searchResults.style.display = 'none';
-          clearBtn.style.display      = 'flex';
+          searchResults.style.display = "none";
+          clearBtn.style.display = "flex";
         };
 
         searchResults.appendChild(div);
       });
 
-      searchResults.style.display = 'block';
+      searchResults.style.display = "block";
     })
-    .catch(function() {
-      searchResults.innerHTML = '<div class="result-item">Search failed. Check your internet.</div>';
+    .catch(function () {
+      searchResults.innerHTML =
+        '<div class="result-item">Search failed. Check your internet.</div>';
     });
 }
 
 /* Hide the dropdown when clicking anywhere outside the search box */
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('#search-box') && !e.target.closest('#search-results')) {
-    searchResults.style.display = 'none';
+document.addEventListener("click", function (e) {
+  if (
+    !e.target.closest("#search-box") &&
+    !e.target.closest("#search-results")
+  ) {
+    searchResults.style.display = "none";
   }
 });
