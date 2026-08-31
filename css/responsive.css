@@ -20,7 +20,6 @@
     min-width: unset;
     max-width: unset;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.92); /* More opaque on mobile */
   }
 
   /* Prevent the search box from overflowing */

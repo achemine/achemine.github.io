@@ -29,7 +29,7 @@ var routingControl = null; /* the active route drawn on the map  */
 var directionProfile = "driving"; /* current transport mode             */
 
 /* ── SAVED PLACES ── */
-var savedPlaces = [{}];
+var savedPlaces = [];
 var savedMarkersLayer = null; /* holds all the star markers on the map */
 
 /* ── TRANSIT STOP LAYERS ── */
