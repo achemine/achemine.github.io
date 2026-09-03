@@ -146,6 +146,11 @@ function loadCategory(category) {
             clickedLat = lat;
             clickedLng = lng;
             showInfoCard(name, lat.toFixed(5), lng.toFixed(5));
+            /* If line slider is already open, refresh it for the new stop */
+            const slider = document.getElementById("line-slider");
+            if (slider && slider.classList.contains("open")) {
+              openLineSlider();
+            }
           });
         },
       }).addTo(map);

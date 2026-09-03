@@ -53,6 +53,7 @@
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/map.css" />
     <link rel="stylesheet" href="css/controls.css" />
+    <link rel="stylesheet" href="css/lines.css" />
     <link rel="stylesheet" href="css/infocard.css" />
     <link rel="stylesheet" href="css/directions.css" />
     <link rel="stylesheet" href="css/saved.css" />
@@ -421,9 +422,9 @@
             <i class="fa-solid fa-star"></i>
             <span data-i18n="save">Save</span>
           </button>
-          <button class="card-btn" onclick="shareLocation()">
-            <i class="fa-solid fa-share"></i>
-            <span data-i18n="share">Share</span>
+          <button class="card-btn" onclick="openLineSlider()">
+            <i class="fa-solid fa-train-subway"></i>
+            <span>Lines</span>
           </button>
         </div>
       </div>
@@ -634,6 +635,25 @@
         </div>
       </div>
 
+      <!-- LINE SLIDER -->
+      <div id="line-slider" role="dialog" aria-label="Lines">
+        <!-- Blue header — drag handle -->
+        <div id="line-slider-header">
+          <div id="line-slider-title">
+            <i class="fa-solid fa-train-subway" aria-hidden="true"></i>
+            <span id="line-slider-stop-name">Lines</span>
+          </div>
+          <button onclick="closeLineSlider()" title="Close" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Scrollable list of lines -->
+        <div id="line-slider-content">
+          <div id="line-slider-list"></div>
+        </div>
+      </div>
+
       <!-- SAVED PLACES POPUP (desktop) -->
       <div id="saved-popup" role="dialog" aria-label="Saved places">
         <div id="saved-popup-header">
@@ -804,6 +824,7 @@
     <script src="js/nearby.js"></script>
     <script src="js/shortcuts.js"></script>
     <script src="js/stops.js"></script>
+    <script src="js/lines.js"></script>
     <script src="js/ui.js"></script>
   </body>
 </html>

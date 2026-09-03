@@ -1,0 +1,166 @@
+/*
+  ══════════════════════════════════════════════════════════════
+  lines.css — Transit Maps App
+  ══════════════════════════════════════════════════════════════
+  Styles for the line slider bottom sheet.
+  ══════════════════════════════════════════════════════════════
+*/
+
+/* ── LINE SLIDER CONTAINER ── */
+#line-slider {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: var(--shadow-lg);
+  z-index: 601;
+  flex-direction: column;
+  overflow: hidden;
+  touch-action: none;
+}
+#line-slider.open {
+  display: flex;
+}
+
+/* ── HEADER (also the drag handle) ── */
+#line-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--blue);
+  color: white;
+  flex-shrink: 0;
+  cursor: grab;
+  user-select: none;
+}
+#line-slider-header:active {
+  cursor: grabbing;
+}
+#line-slider-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  pointer-events: none;
+  flex: 1;
+  min-width: 0;
+}
+#line-slider-stop-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#line-slider-header button {
+  color: white;
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--speed);
+  cursor: pointer;
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.15);
+}
+#line-slider-header button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── SCROLLABLE CONTENT ── */
+#line-slider-content {
+  overflow-y: auto;
+  flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue) transparent;
+}
+
+/* ── ONE LINE ROW ── */
+.line-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--bg-tertiary);
+  transition: background var(--speed);
+}
+.line-item:hover {
+  background: var(--bg-secondary);
+}
+.line-item:last-child {
+  border-bottom: none;
+}
+
+/* ── LINE NUMBER BADGE (square with number) ── */
+.line-number-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── LINE NAME TEXT ── */
+.line-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+.line-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.line-item-type {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+/* ── EMPTY STATE ── */
+.line-slider-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+.line-slider-empty i {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 12px;
+  color: var(--text-hint);
+}
+
+/* ── MINIMISED STATE (when a line is selected) ── */
+#line-slider.minimised #line-slider-content {
+  display: none;
+}
+#line-slider.minimised {
+  height: 56px !important;
+}
+
+/* ── ACTIVE LINE ITEM (currently selected) ── */
+.line-item.active {
+  background: var(--blue-light);
+}
+.line-item.active .line-item-name {
+  color: var(--blue);
+  font-weight: 700;
+}
