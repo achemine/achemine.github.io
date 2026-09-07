@@ -106,7 +106,8 @@ loadTranslations().then(function (results) {
   });
 
   /* Use saved language if available, otherwise detect from device */
-  const savedLang = languageLoad();
+  const savedLang =
+    null; /* Replace with actual retrieval from settings if implemented */
   const lang = savedLang || detectLanguage();
   applyTranslations(lang, i18nResources);
 });

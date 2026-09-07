@@ -62,8 +62,8 @@ function showInfoCard(name, lat, lng) {
       return p.lat === parseFloat(lat) && p.lng === parseFloat(lng);
     });
     if (alreadySaved) {
-      saveBtn.style.background = COLOR_YELLOW;
-      saveBtn.style.borderColor = COLOR_YELLOW;
+      saveBtn.style.background = "var(--yellow)";
+      saveBtn.style.borderColor = "var(--yellow)";
       saveBtn.style.color = "var(--saved-text)";
       const span = saveBtn.querySelector("span");
       if (span) span.textContent = "Saved";

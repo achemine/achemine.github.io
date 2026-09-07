@@ -12,21 +12,18 @@ function createStarIcon() {
   return L.divIcon({
     className: "star-marker-icon",
     html: `
-      <div style="
-        width: 20px;
-        height: 20px;
-        background: ${COLOR_YELLOW};
-        clip-path: polygon(
-          50% 0%, 61% 35%, 98% 35%,
-          68% 57%, 79% 91%, 50% 70%,
-          21% 91%, 32% 57%, 2% 35%,
-          39% 35%
-        );
-        filter: drop-shadow(0 0 2px white) drop-shadow(0 1px 3px rgba(0,0,0,0.4));
-      "></div>
+      <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <polygon
+          points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
+          fill="var(--yellow)"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linejoin="round"
+        />
+      </svg>
     `,
-    iconSize: [20, 20],
-    iconAnchor: [10, 10],
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
     popupAnchor: [0, -14],
   });
 }
@@ -57,8 +54,8 @@ function createSavedMarker(place) {
     /* Mark save button as already saved */
     const saveBtn = document.querySelector(".card-btn:not(.primary)");
     if (saveBtn) {
-      saveBtn.style.background = COLOR_YELLOW;
-      saveBtn.style.borderColor = COLOR_YELLOW;
+      saveBtn.style.background = "var(--yellow)";
+      saveBtn.style.borderColor = "var(--yellow)";
       saveBtn.style.color = "var(--saved-text)";
       const span = saveBtn.querySelector("span");
       if (span) span.textContent = "Saved";
@@ -113,8 +110,8 @@ function saveCurrentPlace() {
     /* Show yellow button */
     const saveBtn = document.querySelector(".card-btn:not(.primary)");
     if (saveBtn) {
-      saveBtn.style.background = COLOR_YELLOW;
-      saveBtn.style.borderColor = COLOR_YELLOW;
+      saveBtn.style.background = "var(--yellow)";
+      saveBtn.style.borderColor = "var(--yellow)";
       saveBtn.style.color = "var(--saved-text)";
       const span = saveBtn.querySelector("span");
       if (span) span.textContent = "Saved";
@@ -146,8 +143,8 @@ function saveCurrentPlace() {
     /* Update save button */
     const saveBtn = document.querySelector(".card-btn:not(.primary)");
     if (saveBtn) {
-      saveBtn.style.background = COLOR_YELLOW;
-      saveBtn.style.borderColor = COLOR_YELLOW;
+      saveBtn.style.background = "var(--yellow)";
+      saveBtn.style.borderColor = "var(--yellow)";
       saveBtn.style.color = "var(--saved-text)";
       const span = saveBtn.querySelector("span");
       if (span) span.textContent = "Saved";
