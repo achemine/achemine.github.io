@@ -34,7 +34,7 @@ function toggleDarkMode() {
   } else {
     document.documentElement.removeAttribute("data-theme", "light");
   }
-  themeSave(darkMode ? "dark" : "light");
+  settingsSave("theme", darkMode ? "dark" : "light");
 
   /* Update the icon in the settings panel */
   const settingsIcon = document.getElementById("settings-theme-icon");
@@ -127,24 +127,24 @@ function openAbout() {
   and applies them silently on page load.
 */
 function restoreSettings() {
-  /* Restore theme */
-  const savedTheme = themeLoad();
-  if (savedTheme === "dark") {
-    darkMode = true;
-    document.documentElement.setAttribute("data-theme", "dark");
-    const icon = document.getElementById("settings-theme-icon");
-    if (icon) icon.className = "fa-solid fa-sun";
-    /* Switch map tile to dark */
-    if (tileLayers["Dark"]) {
-      map.removeLayer(tileLayers[currentLayer]);
-      tileLayers["Dark"].addTo(map);
-      currentLayer = "Dark";
+  settingsLoad().then(function (settings) {
+    /* Restore theme */
+    if (settings.theme === "dark") {
+      darkMode = true;
+      document.documentElement.setAttribute("data-theme", "dark");
+      const icon = document.getElementById("settings-theme-icon");
+      if (icon) icon.className = "fa-solid fa-sun";
+      if (tileLayers["Dark"]) {
+        map.removeLayer(tileLayers[currentLayer]);
+        tileLayers["Dark"].addTo(map);
+        currentLayer = "Dark";
+      }
     }
-  }
 
-  /* Restore language — overrides device detection if user chose manually */
-  const savedLang = languageLoad();
-  if (savedLang && i18nResources[savedLang]) {
-    applyTranslations(savedLang, i18nResources);
-  }
+    /* Restore language */
+    if (settings.language && i18nResources[settings.language]) {
+      applyTranslations(settings.language, i18nResources);
+      buildLanguageList();
+    }
+  });
 }

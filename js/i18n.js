@@ -117,7 +117,7 @@ loadTranslations().then(function (results) {
 function changeLanguage(lang) {
   if (!SUPPORTED_LANGUAGES.includes(lang)) return;
   applyTranslations(lang, i18nResources);
-  languageSave(lang); /* persist the choice */
+  settingsSave("language", lang);
   buildLanguageList();
   showToast(LANGUAGE_NAMES[lang]);
 }
