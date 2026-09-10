@@ -2,37 +2,19 @@
   ══════════════════════════════════════════════════════════════
   stops.js — Transit Maps App
   ══════════════════════════════════════════════════════════════
-  Loads transit stop GeoJSON files and handles category toggling.
-
-  HOW TO ADD A NEW CATEGORY IN THE FUTURE:
-  1. Create a new .geojson file inside the stops/ folder
-  2. Add one new object to the stopCategories array below
-  That's it — no other code changes needed.
-
-  Depends on: variables.js, map.js, click.js (showInfoCard), ui.js (showToast)
+  Loads transit stops from the SQLite database via the server.
+  Uses stop id (integer) for all lookups — no name matching needed.
   ══════════════════════════════════════════════════════════════
 */
 
-/*
-  stopCategories defines every transit type.
-  Each object has:
-    type  — label shown in the popup and toast ("metro stop" etc.)
-    color — dot colour on the map
-    file  — path to the GeoJSON file, relative to index.html
-*/
 const stopCategories = [
-  { type: "metro", color: "#0077ff", file: "stops/metro.geojson" },
-  { type: "bus", color: "#fd1500", file: "stops/bus.geojson" },
-  { type: "tram", color: "#14ee4e", file: "stops/tram.geojson" },
-  { type: "train", color: "#011985", file: "stops/train.geojson" },
-  { type: "telecabine", color: "#028a36", file: "stops/telecabine.geojson" },
+  { type: "metro", color: "var(--blue)" },
+  { type: "bus", color: "var(--red)" },
+  { type: "tram", color: "var(--light-green)" },
+  { type: "train", color: "var(--purple)" },
+  { type: "telecabine", color: "var(--green)" },
 ];
 
-/*
-  createStopIcon(color) builds a small filled circle marker.
-  Simple dot shape so hundreds of stops don't clutter the map.
-  The white border makes it visible on both light and dark tiles.
-*/
 function createStopIcon(color) {
   return L.divIcon({
     className: "stop-marker-icon",
@@ -42,7 +24,7 @@ function createStopIcon(color) {
         height: 12px;
         background: ${color};
         border-radius: 50%;
-        border: 2px solid white;
+        border: 2px solid var(--white);
         box-shadow: 0 1px 3px rgba(0,0,0,0.4);
       "></div>
     `,
@@ -53,86 +35,69 @@ function createStopIcon(color) {
 }
 
 /*
-  loadCategory(category) fetches one GeoJSON file and stores
-  its layer in stopLayers[type].
-  Each category loads independently — a missing file doesn't
-  stop the others from loading.
+  loadCategory(category) fetches stops from the server
+  and places markers on the map.
 */
 function loadCategory(category) {
-  fetch(category.file)
-    .then(function (response) {
-      if (!response.ok) {
-        console.log(category.file + " not found — skipping.");
-        return null;
-      }
-      return response.json();
+  fetch("http://localhost:3000/api/stops/geojson/" + category.type)
+    .then(function (r) {
+      if (!r.ok) throw new Error("Could not load " + category.type + " stops");
+      return r.json();
     })
     .then(function (data) {
-      if (!data) return;
+      if (!data || !data.features) return;
 
-      /* Store the layer so toggleCategory() can show/hide it */
       stopLayers[category.type] = L.geoJSON(data, {
         pointToLayer: function (feature, latlng) {
-          /* Every stop in this file gets the same colour */
           return L.marker(latlng, { icon: createStopIcon(category.color) });
         },
 
         onEachFeature: function (feature, layer) {
-          const name = feature.properties.name || "Unknown stop";
+          const stopId =
+            feature.properties.id; /* integer — no name matching needed */
+          const stopName = feature.properties.name || "Unknown stop";
 
           layer.bindPopup(`
-            <strong style="font-size:14px;">${name}</strong><br>
-            <span style="color:#5f6368; font-size:12px; text-transform:capitalize;">
+            <strong style="font-size:14px;">${stopName}</strong><br>
+            <span style="color:var(--text-secondary); font-size:12px; text-transform:capitalize;">
               ${category.type} stop
             </span>
           `);
 
           layer.on("click", function (e) {
             L.DomEvent.stopPropagation(e);
-            /* If directions sheet is in pick mode, fill the input instead */
+
+            /* If in pick mode — fill the input */
             if (pickingInputId) {
               const lat = feature.geometry.coordinates[1];
               const lng = feature.geometry.coordinates[0];
-              const name =
-                feature.properties.name ||
-                lat.toFixed(6) + ", " + lng.toFixed(6);
               const input = document.getElementById(pickingInputId);
-              if (input) input.value = name;
-              /* Store coordinates separately so routing still works */
-              if (pickingInputId === "sheet-from-input") {
-                document.getElementById("sheet-from-input").dataset.lat = lat;
-                document.getElementById("sheet-from-input").dataset.lng = lng;
-              } else if (pickingInputId === "sheet-to-input") {
-                document.getElementById("sheet-to-input").dataset.lat = lat;
-                document.getElementById("sheet-to-input").dataset.lng = lng;
-              } else {
-                /* For stop inputs */
-                const input2 = document.getElementById(pickingInputId);
-                if (input2) {
-                  input2.dataset.lat = lat;
-                  input2.dataset.lng = lng;
-                }
+              if (input) {
+                input.value = stopName;
+                input.dataset.lat = lat;
+                input.dataset.lng = lng;
               }
-
-              /* Restore the sheet */
               const sheet = document.getElementById("directions-sheet");
               if (sheet) {
                 sheet.classList.remove("picking");
                 sheet.style.height = pickingPrevHeight + "px";
               }
-              pickingInputId = null; /* ← this line must be here */
+              pickingInputId = null;
               return;
             }
 
-            /* Block info card on mobile if a sheet is open */
+            /* Block on desktop if directions panel is open */
+            const desktopDirOpen =
+              document.getElementById("directions-panel")?.style.display ===
+              "block";
+            if (desktopDirOpen && window.innerWidth >= 768) return;
+
+            /* Block on mobile if directions sheet is open */
             if (window.innerWidth < 768) {
               const dirOpen = document
                 .getElementById("directions-sheet")
                 ?.classList.contains("open");
-              const savedOpen = document
-                .getElementById("saved-sheet")
-                ?.classList.contains("open");
-              if (dirOpen || savedOpen) return;
+              if (dirOpen) return;
             }
 
             const lat = feature.geometry.coordinates[1];
@@ -145,29 +110,51 @@ function loadCategory(category) {
 
             clickedLat = lat;
             clickedLng = lng;
-            showInfoCard(name, lat.toFixed(5), lng.toFixed(5));
-            /* If line slider is already open, refresh it for the new stop */
+
+            /* Store stop id and color for the Lines button */
+            currentStopId = stopId;
+            currentStopColor = category.color;
+
+            showInfoCard(stopName, lat.toFixed(5), lng.toFixed(5));
+
+            /* Refresh line slider if it is already open */
             const slider = document.getElementById("line-slider");
             if (slider && slider.classList.contains("open")) {
-              openLineSlider();
+              openLineSliderById(stopId, stopName, category.color);
             }
           });
         },
       }).addTo(map);
 
-      console.log(category.file + " loaded successfully.");
+      console.log(category.type + " stops loaded from database.");
     })
     .catch(function (error) {
-      console.log("Error loading " + category.file + ":", error);
+      console.log("Error loading " + category.type + " stops:", error);
     });
 }
+
+/*
+  fetchStopLines(stopId, categoryColor)
+  Fetches lines by stop INTEGER id — no name matching.
+  Updates the info card tags with colored line badges.
+*/
+
+function clearLineRoutes() {
+  Object.keys(activeLineRoutes).forEach(function (lineId) {
+    map.removeLayer(activeLineRoutes[lineId]);
+  });
+  activeLineRoutes = {};
+}
+
+/* Load all categories on startup */
+stopCategories.forEach(function (category) {
+  loadCategory(category);
+});
 
 /*
   toggleCategory(type) hides or shows one stop category.
   - First click  → hide that category (show closed eye icon)
   - Second click → show it again (hide the eye icon)
-  - If some categories are hidden, only visible ones show
-  - If all are visible again → everything is back to normal
 */
 function toggleCategory(type) {
   if (!stopLayers[type]) {
@@ -175,33 +162,19 @@ function toggleCategory(type) {
     return;
   }
 
-  /* Flip: true = hidden, false = visible */
   activeCategories[type] = !activeCategories[type];
 
   const eye = document.getElementById("eye-" + type);
 
   if (activeCategories[type]) {
-    /* ── Just HIDDEN ── */
-    /* Remove this category from the map */
-    if (map.hasLayer(stopLayers[type])) {
-      map.removeLayer(stopLayers[type]);
-    }
-    /* Show the closed eye icon */
+    /* Just HIDDEN */
+    if (map.hasLayer(stopLayers[type])) map.removeLayer(stopLayers[type]);
     if (eye) eye.style.display = "inline";
     showToast(type.charAt(0).toUpperCase() + type.slice(1) + " stops hidden");
   } else {
-    /* ── Just SHOWN AGAIN ── */
-    /* Add this category back to the map */
-    if (!map.hasLayer(stopLayers[type])) {
-      stopLayers[type].addTo(map);
-    }
-    /* Hide the closed eye icon */
+    /* Just SHOWN AGAIN */
+    if (!map.hasLayer(stopLayers[type])) stopLayers[type].addTo(map);
     if (eye) eye.style.display = "none";
     showToast(type.charAt(0).toUpperCase() + type.slice(1) + " stops visible");
   }
 }
-
-/* Load every category — all files load at the same time */
-stopCategories.forEach(function (category) {
-  loadCategory(category);
-});

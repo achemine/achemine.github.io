@@ -31,6 +31,7 @@ var directionProfile = "driving"; /* current transport mode             */
 /* ── SAVED PLACES ── */
 var savedPlaces = [];
 var savedMarkersLayer = null; /* holds all the star markers on the map */
+var allSavedVisible = true;
 
 /* ── TRANSIT STOP LAYERS ── */
 var stopLayers = {}; /* one Leaflet layer group per category     */
@@ -45,3 +46,5 @@ var currentInfoName =
   ""; /* name of the place currently shown in the info card */
 var currentInfoLat = 0; /* its latitude  */
 var currentInfoLng = 0; /* its longitude */
+
+var currentStopId = null; /* database id of the currently clicked stop */

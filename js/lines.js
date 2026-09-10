@@ -4,7 +4,7 @@
   ══════════════════════════════════════════════════════════════
   Handles the line slider bottom sheet.
   Shows lines serving a stop, draws route on map when selected.
-  Depends on: variables.js, map.js, click.js, stops.js
+  Depends on: variables.js, map.js, stops.js
   ══════════════════════════════════════════════════════════════
 */
 
@@ -12,38 +12,45 @@
 var lineSliderHeight = 0;
 var activeLineLayer = null; /* currently drawn line route on map */
 var activeLineId = null; /* id of the currently selected line */
-var currentSliderStop = null; /* stop name the slider is showing   */
+var currentSliderStopId = null; /* stop id the slider is showing     */
 
-/* ── OPEN / CLOSE ── */
+/* ════════════════════════════════════════════════════════════
+   OPEN / CLOSE
+   ════════════════════════════════════════════════════════════ */
 
 /*
-  openLineSlider() fetches lines for the current info card stop
-  and opens the bottom sheet.
-  If the slider is already open for a different stop, it refreshes.
+  openLineSliderById(stopId, stopName, color)
+  Opens the slider and fetches lines for the given stop id.
+  Uses integer id — no name matching needed.
 */
-function openLineSlider() {
-    closeInfoCard(); // Close the info card to avoid overlap
+function openLineSliderById(stopId, stopName, color) {
+  closeInfoCard();
+  if (!stopId) {
+    showToast("No stop selected");
+    return;
+  }
 
-  /* If no stop is selected, do nothing */
-  const stopName = document.getElementById("info-title").textContent;
-  if (!stopName || stopName === "Place Name") return;
-
-  currentSliderStop = stopName;
+  currentSliderStopId = stopId;
 
   /* Update header title */
-  document.getElementById("line-slider-stop-name").textContent = stopName;
+  const nameEl = document.getElementById("line-slider-stop-name");
+  if (nameEl) nameEl.textContent = stopName || "Lines";
 
-  /* Show empty list while loading */
+  /* Show loading state */
   const list = document.getElementById("line-slider-list");
-  list.innerHTML = `
-    <div class="line-slider-empty">
-      <i class="fa-solid fa-spinner fa-spin"></i>
-      Loading lines…
-    </div>
-  `;
+  if (list) {
+    list.innerHTML = `
+      <div class="line-slider-empty">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Loading lines…
+      </div>
+    `;
+  }
 
   /* Open the sheet */
   const slider = document.getElementById("line-slider");
+  if (!slider) return;
+
   slider.classList.add("open");
   slider.classList.remove("minimised");
 
@@ -54,14 +61,15 @@ function openLineSlider() {
 
   initLineSliderDrag(slider);
 
-  /* Fetch lines from server */
-  fetch(
-    "http://localhost:3000/api/stops/by-name/" + encodeURIComponent(stopName),
-  )
+  /* Fetch lines by stop id from server */
+  fetch("http://localhost:3000/api/stops/" + stopId + "/lines")
     .then(function (r) {
-      return r.ok ? r.json() : null;
+      if (!r.ok) throw new Error("Server error: " + r.status);
+      return r.json();
     })
     .then(function (stop) {
+      if (!list) return;
+
       if (!stop || !stop.lines || stop.lines.length === 0) {
         list.innerHTML = `
           <div class="line-slider-empty">
@@ -71,20 +79,29 @@ function openLineSlider() {
         `;
         return;
       }
-      buildLineList(stop.lines);
+
+      buildLineList(stop.lines, color);
     })
-    .catch(function () {
-      list.innerHTML = `
-        <div class="line-slider-empty">
-          <i class="fa-solid fa-wifi"></i>
-          Could not load lines. Check your connection.
-        </div>
-      `;
+    .catch(function (err) {
+      console.error("Line slider fetch error:", err);
+      if (list) {
+        list.innerHTML = `
+          <div class="line-slider-empty">
+            <i class="fa-solid fa-wifi"></i>
+            Could not load lines. Check your connection.
+          </div>
+        `;
+      }
     });
 }
 
+/*
+  closeLineSlider() slides the panel off screen and cleans up.
+*/
 function closeLineSlider() {
   const slider = document.getElementById("line-slider");
+  if (!slider) return;
+
   slider.style.transition = "transform 0.3s ease";
   slider.style.transform = "translateY(100%)";
 
@@ -97,14 +114,24 @@ function closeLineSlider() {
     slider.style.transform = "";
     slider.style.height = "";
     activeLineId = null;
-    currentSliderStop = null;
+    currentSliderStopId = null;
   }, 300);
 }
 
-/* ── BUILD THE LINE LIST ── */
+/* ════════════════════════════════════════════════════════════
+   BUILD THE LINE LIST
+   ════════════════════════════════════════════════════════════ */
 
-function buildLineList(lines) {
+/*
+  buildLineList(lines, categoryColor)
+  Renders one row per line in the slider list.
+  Each row has a colored square badge with the line number
+  and the line name next to it — similar to sidebar items.
+*/
+function buildLineList(lines, categoryColor) {
   const list = document.getElementById("line-slider-list");
+  if (!list) return;
+
   list.innerHTML = "";
 
   lines.forEach(function (line) {
@@ -112,8 +139,11 @@ function buildLineList(lines) {
     item.className = "line-item" + (line.id === activeLineId ? " active" : "");
     item.dataset.lineId = line.id;
 
+    /* Badge color: use the line's own color if available, else category color */
+    const badgeColor = line.color || categoryColor || "#1a73e8";
+
     item.innerHTML = `
-      <div class="line-number-badge" style="background: ${line.color};">
+      <div class="line-number-badge" style="background: ${badgeColor};">
         ${line.name}
       </div>
       <div class="line-item-text">
@@ -124,22 +154,30 @@ function buildLineList(lines) {
     `;
 
     item.onclick = function () {
-      selectLine(line);
+      selectLine(line, badgeColor);
     };
 
     list.appendChild(item);
   });
 }
 
-/* ── SELECT A LINE ── */
+/* ════════════════════════════════════════════════════════════
+   SELECT A LINE
+   ════════════════════════════════════════════════════════════ */
 
-function selectLine(line) {
-  /* If same line clicked again — deselect and restore full list */
+/*
+  selectLine(line, color)
+  When a line row is tapped:
+  - Minimises the slider to show only the header
+  - Draws the line route on the map
+  - Tapping the same line again deselects it and restores the list
+*/
+function selectLine(line, color) {
+  /* Same line tapped again — deselect */
   if (activeLineId === line.id) {
     activeLineId = null;
     clearActiveLineRoute();
     restoreLineSlider();
-    /* Remove active class */
     document.querySelectorAll(".line-item").forEach(function (el) {
       el.classList.remove("active");
     });
@@ -153,7 +191,7 @@ function selectLine(line) {
     el.classList.toggle("active", el.dataset.lineId === line.id);
   });
 
-  /* Minimise the slider to show only the header */
+  /* Minimise the slider */
   minimiseLineSlider();
 
   /* Remove any previously drawn route */
@@ -164,7 +202,8 @@ function selectLine(line) {
     "http://localhost:3000/api/lines/" + encodeURIComponent(line.id) + "/route",
   )
     .then(function (r) {
-      return r.ok ? r.json() : null;
+      if (!r.ok) throw new Error("Route not found");
+      return r.json();
     })
     .then(function (geojson) {
       if (!geojson) {
@@ -175,24 +214,28 @@ function selectLine(line) {
 
       activeLineLayer = L.geoJSON(geojson, {
         style: {
-          color: line.color,
+          color: color,
           weight: 5,
           opacity: 0.9,
         },
       }).addTo(map);
 
-      /* Fit map to show full route */
+      /* Fit map to show the full route */
       map.flyToBounds(activeLineLayer.getBounds(), {
         padding: [40, 40],
         duration: 1,
       });
     })
-    .catch(function () {
-      showToast("Could not load route. Check your connection.");
+    .catch(function (err) {
+      console.error("Route fetch error:", err);
+      showToast("Route not available yet for this line");
       restoreLineSlider();
     });
 }
 
+/*
+  clearActiveLineRoute() removes the drawn route from the map.
+*/
 function clearActiveLineRoute() {
   if (activeLineLayer) {
     map.removeLayer(activeLineLayer);
@@ -200,22 +243,28 @@ function clearActiveLineRoute() {
   }
 }
 
-/* ── MINIMISE / RESTORE ── */
+/* ════════════════════════════════════════════════════════════
+   MINIMISE / RESTORE
+   ════════════════════════════════════════════════════════════ */
 
 function minimiseLineSlider() {
   const slider = document.getElementById("line-slider");
+  if (!slider) return;
   slider.style.transition = "height 0.3s ease";
   slider.classList.add("minimised");
 }
 
 function restoreLineSlider() {
   const slider = document.getElementById("line-slider");
+  if (!slider) return;
   slider.style.transition = "height 0.3s ease";
   slider.classList.remove("minimised");
   slider.style.height = lineSliderHeight + "px";
 }
 
-/* ── DRAG TO RESIZE / CLOSE ── */
+/* ════════════════════════════════════════════════════════════
+   DRAG TO RESIZE / CLOSE
+   ════════════════════════════════════════════════════════════ */
 
 var lineDragStartY = 0;
 var lineDragStartHeight = 0;
@@ -224,6 +273,9 @@ var LINE_MIN_HEIGHT = 56;
 
 function initLineSliderDrag(slider) {
   const header = document.getElementById("line-slider-header");
+  if (!header) return;
+
+  /* Remove old listeners before adding new ones */
   header.removeEventListener("touchstart", lineOnTouchStart);
   header.removeEventListener("mousedown", lineOnMouseDown);
   header.addEventListener("touchstart", lineOnTouchStart, { passive: true });
@@ -277,12 +329,13 @@ function lineOnMouseUp() {
 
 function applyLineSliderHeight(newHeight) {
   const slider = document.getElementById("line-slider");
+  if (!slider) return;
   const maxH = window.innerHeight * 0.85;
   const clamped = Math.max(LINE_MIN_HEIGHT, Math.min(maxH, newHeight));
   lineSliderHeight = clamped;
   slider.style.height = clamped + "px";
 
-  /* If dragged up from minimised state — restore content */
+  /* If dragged up from minimised state — restore full content */
   if (clamped > 80 && slider.classList.contains("minimised")) {
     slider.classList.remove("minimised");
   }
@@ -290,14 +343,16 @@ function applyLineSliderHeight(newHeight) {
 
 function snapLineSlider() {
   const slider = document.getElementById("line-slider");
+  if (!slider) return;
   slider.style.transition = "height 0.3s ease";
+
   const screenH = window.innerHeight;
   const halfHeight = screenH * 0.45;
   const fullHeight = screenH * 0.85;
   const closeH = screenH * 0.15;
 
   if (lineSliderHeight < closeH) {
-    /* Dragged off screen — close */
+    /* Dragged off screen — close and remove route */
     closeLineSlider();
   } else if (lineSliderHeight < (halfHeight + fullHeight) / 2) {
     lineSliderHeight = halfHeight;

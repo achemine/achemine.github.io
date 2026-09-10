@@ -223,3 +223,53 @@ app.put("/api/settings/:key", function (req, res) {
 app.listen(PORT, function () {
   console.log("Transit server running at http://localhost:" + PORT);
 });
+
+/* Get all stops of a given type as GeoJSON FeatureCollection */
+app.get("/api/stops/geojson/:type", function (req, res) {
+  const stops = db
+    .prepare("SELECT * FROM stops WHERE type = ?")
+    .all(req.params.type);
+
+  const featureCollection = {
+    type: "FeatureCollection",
+    features: stops.map(function (stop) {
+      return {
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [stop.lng, stop.lat],
+        },
+        properties: {
+          id: stop.id,
+          name: stop.name,
+          type: stop.type,
+        },
+      };
+    }),
+  };
+
+  res.json(featureCollection);
+});
+
+/* Get lines for a stop by its database id */
+app.get("/api/stops/:id/lines", function (req, res) {
+  const stop = db
+    .prepare("SELECT * FROM stops WHERE id = ?")
+    .get(req.params.id);
+
+  if (!stop) return res.status(404).json({ error: "Stop not found" });
+
+  stop.lines = db
+    .prepare(
+      `
+    SELECT lines.id, lines.name, lines.color, lines.type
+    FROM lines
+    JOIN line_stops ON lines.id = line_stops.line_id
+    WHERE line_stops.stop_id = ?
+    ORDER BY lines.type, lines.name
+  `,
+    )
+    .all(stop.id);
+
+  res.json(stop);
+});

@@ -422,7 +422,10 @@
             <i class="fa-solid fa-star"></i>
             <span data-i18n="save">Save</span>
           </button>
-          <button class="card-btn" onclick="openLineSlider()">
+          <button
+            class="card-btn"
+            onclick="openLineSliderById(currentStopId, currentStopColor)"
+          >
             <i class="fa-solid fa-train-subway"></i>
             <span>Lines</span>
           </button>
@@ -822,8 +825,8 @@
     <script src="js/saved.js"></script>
     <script src="js/nearby.js"></script>
     <script src="js/shortcuts.js"></script>
-    <script src="js/stops.js"></script>
     <script src="js/lines.js"></script>
+    <script src="js/stops.js"></script>
     <script src="js/ui.js"></script>
   </body>
 </html>
