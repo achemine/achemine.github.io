@@ -10,7 +10,19 @@
 */
 
 /* Supported languages */
-var SUPPORTED_LANGUAGES = ["en", "fr", "ar", "de", "es", "it"];
+var SUPPORTED_LANGUAGES = [
+  "en",
+  "fr",
+  "ar",
+  "de",
+  "es",
+  "it",
+  "pt",
+  "ru",
+  "zh",
+  "ja",
+  "ko",
+];
 var DEFAULT_LANGUAGE = "en";
 
 /* Language display names shown in the picker */
@@ -21,6 +33,11 @@ var LANGUAGE_NAMES = {
   de: "Deutsch",
   es: "Español",
   it: "Italiano",
+  pt: "Português",
+  ru: "Русский",
+  zh: "中文",
+  ja: "日本語",
+  ko: "한국어",
 };
 
 /*

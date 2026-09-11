@@ -95,6 +95,12 @@ function buildLanguageList() {
       de: "de",
       es: "es",
       it: "it",
+      pt: "pt",
+      ru: "ru",
+      zh: "cn",
+      ja: "jp",
+      ko: "kr",
+      zgh: "yaz",
     };
 
     item.innerHTML = `
