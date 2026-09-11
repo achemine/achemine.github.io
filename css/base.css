@@ -10,9 +10,9 @@
 *,
 *::before,
 *::after {
-  margin: 0;               /* Remove all default outer spacing  */
-  padding: 0;              /* Remove all default inner spacing  */
-  box-sizing: border-box;  /* Width/height includes padding & border */
+  margin: 0; /* Remove all default outer spacing  */
+  padding: 0; /* Remove all default inner spacing  */
+  box-sizing: border-box; /* Width/height includes padding & border */
 }
 
 /*
@@ -22,17 +22,17 @@
 */
 html,
 body {
-  height: 100%;     /* Fill the full browser window height */
+  height: 100%; /* Fill the full browser window height */
   overflow: hidden; /* No page scroll — the map handles it */
 }
 
 body {
   font-family: "Roboto", Arial, sans-serif;
-  font-size: 14px;                   /* Default text size for the whole app   */
-  color: var(--text-primary);        /* Near-black text everywhere by default */
+  font-size: 14px; /* Default text size for the whole app   */
+  color: var(--text-primary); /* Near-black text everywhere by default */
   background: var(--bg-secondary);
   display: flex;
-  flex-direction: column;            /* Stack children top-to-bottom          */
+  flex-direction: column; /* Stack children top-to-bottom          */
 }
 
 /*
@@ -41,11 +41,11 @@ body {
   We remove all of that and style each button ourselves.
 */
 button {
-  border: none;              /* No grey border              */
-  background: none;          /* No grey background          */
-  cursor: pointer;           /* Show a hand cursor on hover */
-  font-family: inherit;      /* Use Roboto (same as body)   */
-  font-size: inherit;        /* Use 14px (same as body)     */
+  border: none; /* No grey border              */
+  background: none; /* No grey background          */
+  cursor: pointer; /* Show a hand cursor on hover */
+  font-family: inherit; /* Use Roboto (same as body)   */
+  font-size: inherit; /* Use 14px (same as body)     */
 }
 
 /* Remove the bullet points from <ul> lists */
@@ -70,8 +70,8 @@ input:focus:not(:focus-visible) {
 /* ── MAIN LAYOUT ── */
 #main {
   flex: 1;
-  display: flex;        /* Side-by-side layout for sidebar and map */
-  position: relative;   /* Required so absolute children are positioned relative to this */
-  overflow: hidden;     /* Clip anything that sticks out */
+  display: flex; /* Side-by-side layout for sidebar and map */
+  position: relative; /* Required so absolute children are positioned relative to this */
+  overflow: hidden; /* Clip anything that sticks out */
   min-height: 0;
 }

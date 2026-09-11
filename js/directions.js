@@ -319,18 +319,8 @@ function getRoute() {
    ════════════════════════════════════════════════════════════ */
 
 function getSheetRoute() {
-  const fromInput = document.getElementById("sheet-from-input");
-  const toInput = document.getElementById("sheet-to-input");
-
-  /* Use stored coordinates if available, otherwise use text value */
-  const from = fromInput.dataset.lat
-    ? fromInput.dataset.lat + "," + fromInput.dataset.lng
-    : fromInput.value.trim();
-
-  const to = toInput.dataset.lat
-    ? toInput.dataset.lat + "," + toInput.dataset.lng
-    : toInput.value.trim();
-
+  const from = document.getElementById("sheet-from-input").value.trim();
+  const to = document.getElementById("sheet-to-input").value.trim();
   const stops = Array.from(
     document.querySelectorAll("#sheet-stops-wrapper input"),
   )
@@ -364,18 +354,50 @@ function calculateRoute(from, to, stops, target) {
     - Otherwise → geocode via Nominatim
   */
   const geocodeOrParse = function (address) {
+    /* If it's already coordinates — use directly */
     const latLngPattern = /^-?\d+\.?\d*,\s*-?\d+\.?\d*$/;
     if (latLngPattern.test(address)) {
       const parts = address.split(",");
       return Promise.resolve([{ lat: parts[0].trim(), lon: parts[1].trim() }]);
     }
+
+    /*
+    Check the stops database first.
+    If the name matches a stop exactly, use its coordinates.
+    This avoids geocoding errors for transit stops.
+  */
     return fetch(
-      "https://nominatim.openstreetmap.org/search?format=json&q=" +
-        encodeURIComponent(address) +
-        "&limit=1",
-    ).then(function (r) {
-      return r.json();
-    });
+      "http://localhost:3000/api/stops/by-name/" + encodeURIComponent(address),
+    )
+      .then(function (r) {
+        return r.ok ? r.json() : null;
+      })
+      .then(function (stop) {
+        if (stop && stop.lat && stop.lng) {
+          /* Found in database — use exact coordinates */
+          return [{ lat: stop.lat, lon: stop.lng }];
+        }
+
+        /* Not a stop — fall back to Nominatim geocoding */
+        return fetch(
+          "https://nominatim.openstreetmap.org/search?format=json&q=" +
+            encodeURIComponent(address) +
+            "&limit=1" +
+            "&viewbox=2.5,37.2,3.7,36.5",
+        ).then(function (r) {
+          return r.json();
+        });
+      })
+      .catch(function () {
+        /* If database check fails — go straight to Nominatim */
+        return fetch(
+          "https://nominatim.openstreetmap.org/search?format=json&q=" +
+            encodeURIComponent(address) +
+            "&limit=1",
+        ).then(function (r) {
+          return r.json();
+        });
+      });
   };
 
   Promise.all(allAddresses.map(geocodeOrParse))
@@ -420,13 +442,10 @@ function calculateRoute(from, to, stops, target) {
           document
             .getElementById("directions-sheet-steps-view")
             .classList.add("open");
-          showToast("Route found: " + distance + " km");
-        } else {
-          document.getElementById("route-summary").innerHTML = `
-            <span><i class="fa-solid fa-road"></i> ${distance} km</span>
-            <span><i class="fa-solid fa-clock"></i> ~${minutes} min</span>
-          `;
-          showToast("Route found: " + distance + " km");
+
+          routeViewState = "steps";
+          const icon = document.getElementById("sheet-route-btn-icon");
+          if (icon) icon.className = "fa-solid fa-arrow-left";
         }
       });
     })
@@ -570,6 +589,10 @@ function closeDirectionsSheet() {
     delete toInput.dataset.lat;
     delete toInput.dataset.lng;
   }
+
+  routeViewState = "input";
+  const icon = document.getElementById("sheet-route-btn-icon");
+  if (icon) icon.className = "fa-solid fa-diamond-turn-right";
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -703,5 +726,29 @@ function openDirectionsTo() {
   } else {
     const input = document.getElementById("to-input");
     if (input) input.value = value;
+  }
+}
+
+var routeViewState = "input"; /* 'input' or 'steps' */
+
+function toggleRouteView() {
+  const icon = document.getElementById("sheet-route-btn-icon");
+
+  if (routeViewState === "input") {
+    getSheetRoute();
+  } else {
+    if (
+      document
+        .getElementById("directions-sheet-steps-view")
+        .classList.contains("open")
+    ) {
+      hideStepsView();
+      routeViewState = "input";
+      if (icon) icon.className = "fa-solid fa-diamond-turn-right";
+    } else {
+      showStepsView();
+      routeViewState = "steps";
+      if (icon) icon.className = "fa-solid fa-arrow-left";
+    }
   }
 }

@@ -28,7 +28,7 @@
   justify-content: space-between;
   padding: 16px 16px 12px;
   background: var(--green);
-  color: white;
+  color: var(--bg-tertiary);
 }
 #directions-header h3 {
   font-size: 15px;
@@ -38,7 +38,7 @@
   gap: 8px;
 }
 #directions-header button {
-  color: white;
+  color: var(--bg-tertiary);
   font-size: 18px;
   padding: 4px;
   border-radius: 50%;
@@ -72,7 +72,7 @@
 }
 .mode-btn.active {
   background: var(--green);
-  color: white;
+  color: var(--bg-tertiary);
 }
 
 /* ── FROM / TO INPUTS WITH CONNECTOR DOTS ── */

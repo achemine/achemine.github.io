@@ -517,13 +517,12 @@
             >
               <i class="fa-solid fa-car" id="sheet-mode-icon"></i>
             </button>
-            <!-- Turn-by-turn steps button -->
-            <button
-              id="sheet-steps-btn"
-              onclick="showStepsView()"
-              title="Show steps"
-            >
-              <i class="fa-solid fa-diamond-turn-right"></i>
+
+            <button id="sheet-get-route-btn" onclick="toggleRouteView()">
+              <i
+                class="fa-solid fa-diamond-turn-right"
+                id="sheet-route-btn-icon"
+              ></i>
             </button>
           </div>
         </div>
@@ -601,14 +600,6 @@
 
         <!-- STEPS VIEW (turn-by-turn, shown after route found) -->
         <div id="directions-sheet-steps-view">
-          <div id="steps-back-bar">
-            <button onclick="hideStepsView()" title="Back">
-              <i class="fa-solid fa-arrow-left"></i>
-            </button>
-            <span id="steps-back-title" data-i18n="route-steps"
-              >Route steps</span
-            >
-          </div>
           <div id="steps-summary-bar">
             <span id="steps-distance" data-i18n="route_distance"
               ><i class="fa-solid fa-road"></i> --</span
