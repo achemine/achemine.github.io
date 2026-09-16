@@ -111,12 +111,26 @@ app.get("/api/lines/:id", function (req, res) {
 });
 
 /* Get the route (GeoJSON) for a line */
-app.get("/api/lines/:id/route", function (req, res) {
+app.get("/api/lines/:id/routes", function (req, res) {
   const route = db
-    .prepare("SELECT geojson FROM line_routes WHERE line_id = ?")
+    .prepare("SELECT * FROM line_routes WHERE line_id = ?")
     .get(req.params.id);
-  if (!route) return res.status(404).json({ error: "Route not found" });
-  res.json(JSON.parse(route.geojson));
+
+  if (!route) return res.json({ outbound: null, return: null });
+
+  function parseRoute(geojson) {
+    if (!geojson) return null;
+    const parsed = JSON.parse(geojson);
+    if (parsed.type === "FeatureCollection") {
+      return parsed.features && parsed.features[0] ? parsed.features[0] : null;
+    }
+    return parsed;
+  }
+
+  res.json({
+    outbound: parseRoute(route.geojson) /* ← was geojson_out */,
+    return: parseRoute(route.geojson_ret) /* ← correct         */,
+  });
 });
 
 /* Add a new line */

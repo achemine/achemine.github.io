@@ -164,3 +164,56 @@
   color: var(--blue);
   font-weight: 700;
 }
+
+/* ── LINE GROUP ── */
+.line-group {
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.line-group:last-child {
+  border-bottom: none;
+}
+
+/* ── MAIN LINE ROW ── */
+.line-item-main {
+  border-bottom: none;
+}
+.line-item-main:hover {
+  background: var(--bg-secondary);
+}
+
+/* ── DIRECTION SUB-ROWS ── */
+.line-sub-rows {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--bg-tertiary);
+}
+
+/* ── ONE DIRECTION ROW ── */
+.line-direction-row {
+  padding: 10px 16px 10px 32px; /* indented to show hierarchy */
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+.line-direction-row:last-child {
+  border-bottom: none;
+}
+.line-direction-row.active {
+  background: var(--blue-light);
+}
+.line-direction-row.active .line-item-name {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* ── DIRECTION DOT ── */
+.line-direction-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid white;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── EXPAND ICON ── */
+.line-expand-icon {
+  transition: transform var(--speed);
+}

@@ -10,19 +10,14 @@
 
 /* ── STATE ── */
 var lineSliderHeight = 0;
-var activeLineLayer = null; /* currently drawn line route on map */
-var activeLineId = null; /* id of the currently selected line */
-var currentSliderStopId = null; /* stop id the slider is showing     */
+var activeLineLayer = null;
+var activeLineId = null;
+var currentSliderStopId = null;
 
 /* ════════════════════════════════════════════════════════════
    OPEN / CLOSE
    ════════════════════════════════════════════════════════════ */
 
-/*
-  openLineSliderById(stopId, stopName, color)
-  Opens the slider and fetches lines for the given stop id.
-  Uses integer id — no name matching needed.
-*/
 function openLineSliderById(stopId, stopName, color) {
   closeInfoCard();
   if (!stopId) {
@@ -32,11 +27,9 @@ function openLineSliderById(stopId, stopName, color) {
 
   currentSliderStopId = stopId;
 
-  /* Update header title */
   const nameEl = document.getElementById("line-slider-stop-name");
   if (nameEl) nameEl.textContent = stopName || "Lines";
 
-  /* Show loading state */
   const list = document.getElementById("line-slider-list");
   if (list) {
     list.innerHTML = `
@@ -47,7 +40,6 @@ function openLineSliderById(stopId, stopName, color) {
     `;
   }
 
-  /* Open the sheet */
   const slider = document.getElementById("line-slider");
   if (!slider) return;
 
@@ -61,7 +53,6 @@ function openLineSliderById(stopId, stopName, color) {
 
   initLineSliderDrag(slider);
 
-  /* Fetch lines by stop id from server */
   fetch("http://localhost:3000/api/stops/" + stopId + "/lines")
     .then(function (r) {
       if (!r.ok) throw new Error("Server error: " + r.status);
@@ -95,9 +86,6 @@ function openLineSliderById(stopId, stopName, color) {
     });
 }
 
-/*
-  closeLineSlider() slides the panel off screen and cleans up.
-*/
 function closeLineSlider() {
   const slider = document.getElementById("line-slider");
   if (!slider) return;
@@ -105,7 +93,6 @@ function closeLineSlider() {
   slider.style.transition = "transform 0.3s ease";
   slider.style.transform = "translateY(100%)";
 
-  /* Remove any drawn route */
   clearActiveLineRoute();
 
   setTimeout(function () {
@@ -122,120 +109,212 @@ function closeLineSlider() {
    BUILD THE LINE LIST
    ════════════════════════════════════════════════════════════ */
 
-/*
-  buildLineList(lines, categoryColor)
-  Renders one row per line in the slider list.
-  Each row has a colored square badge with the line number
-  and the line name next to it — similar to sidebar items.
-*/
 function buildLineList(lines, categoryColor) {
   const list = document.getElementById("line-slider-list");
   if (!list) return;
-
   list.innerHTML = "";
 
   lines.forEach(function (line) {
-    const item = document.createElement("div");
-    item.className = "line-item" + (line.id === activeLineId ? " active" : "");
-    item.dataset.lineId = line.id;
-
-    /* Badge color: use the line's own color if available, else category color */
     const badgeColor = line.color || categoryColor || "#1a73e8";
 
-    item.innerHTML = `
+    /* ── Line group wrapper ── */
+    const group = document.createElement("div");
+    group.className = "line-group";
+    group.dataset.lineId = line.id;
+
+    /* ── Main line row ── */
+    const mainRow = document.createElement("div");
+    mainRow.className = "line-item line-item-main";
+
+    mainRow.innerHTML = `
       <div class="line-number-badge" style="background: ${badgeColor};">
         ${line.name}
       </div>
       <div class="line-item-text">
-        <span class="line-item-name">${line.name}</span>
+        <span class="line-item-name">${line.id}</span>
         <span class="line-item-type">${line.type}</span>
       </div>
-      <i class="fa-solid fa-chevron-right" style="color: var(--text-hint); font-size:13px;"></i>
+      <i class="fa-solid fa-chevron-down line-expand-icon" style="color: var(--text-hint); font-size:13px;"></i>
     `;
 
-    item.onclick = function () {
-      selectLine(line, badgeColor);
-    };
+    /* ── Direction sub-rows (hidden by default) ── */
+    const subRows = document.createElement("div");
+    subRows.className = "line-sub-rows";
+    subRows.style.display = "none";
 
-    list.appendChild(item);
+    /* Fetch both directions */
+    fetch(
+      "http://localhost:3000/api/lines/" +
+        encodeURIComponent(line.id) +
+        "/routes",
+    )
+      .then(function (r) {
+        return r.ok ? r.json() : null;
+      })
+      .then(function (routes) {
+        if (!routes) return;
+
+        const hasOut = routes.outbound !== null;
+        const hasRet = routes.return !== null;
+
+        /* If only one direction — clicking main row draws it directly */
+        if (hasOut && !hasRet) {
+          mainRow.onclick = function () {
+            drawLineRoute(line.id, routes.outbound, badgeColor);
+            minimiseLineSlider();
+          };
+          /* Hide the chevron since there are no sub-rows */
+          const chevron = mainRow.querySelector(".line-expand-icon");
+          if (chevron) chevron.style.display = "none";
+          return;
+        }
+
+        if (!hasOut && hasRet) {
+          mainRow.onclick = function () {
+            drawLineRoute(line.id, routes.return, badgeColor);
+            minimiseLineSlider();
+          };
+          const chevron = mainRow.querySelector(".line-expand-icon");
+          if (chevron) chevron.style.display = "none";
+          return;
+        }
+
+        /* Both directions exist — show sub-rows */
+        if (hasOut) {
+          const label = getRouteLabel(routes.outbound, line.id, "outbound");
+          const outRow = buildDirectionRow(
+            label,
+            line,
+            badgeColor,
+            routes.outbound,
+          );
+          subRows.appendChild(outRow);
+        }
+
+        if (hasRet) {
+          const label = getRouteLabel(routes.return, line.id, "return");
+          const retRow = buildDirectionRow(
+            label,
+            line,
+            badgeColor,
+            routes.return,
+          );
+          subRows.appendChild(retRow);
+        }
+
+        /* Clicking main row toggles sub-rows */
+        mainRow.onclick = function () {
+          const isOpen = subRows.style.display !== "none";
+          subRows.style.display = isOpen ? "none" : "block";
+          const icon = mainRow.querySelector(".line-expand-icon");
+          if (icon) {
+            icon.className = isOpen
+              ? "fa-solid fa-chevron-down line-expand-icon"
+              : "fa-solid fa-chevron-up line-expand-icon";
+          }
+        };
+      })
+      .catch(function (err) {
+        console.error("Routes fetch error for line", line.id, err);
+        /* Fallback — clicking draws nothing but doesn't crash */
+        mainRow.onclick = function () {
+          showToast("Route not available for this line");
+        };
+      });
+
+    group.appendChild(mainRow);
+    group.appendChild(subRows);
+    list.appendChild(group);
   });
 }
 
 /* ════════════════════════════════════════════════════════════
-   SELECT A LINE
+   DIRECTION HELPERS
    ════════════════════════════════════════════════════════════ */
 
 /*
-  selectLine(line, color)
-  When a line row is tapped:
-  - Minimises the slider to show only the header
-  - Draws the line route on the map
-  - Tapping the same line again deselects it and restores the list
+  getRouteLabel() extracts a readable direction label.
+  Uses the line_id which contains "Origin - Destination" format.
 */
-function selectLine(line, color) {
-  /* Same line tapped again — deselect */
-  if (activeLineId === line.id) {
-    activeLineId = null;
-    clearActiveLineRoute();
-    restoreLineSlider();
-    document.querySelectorAll(".line-item").forEach(function (el) {
-      el.classList.remove("active");
-    });
-    return;
+function getRouteLabel(geojson, lineId, direction) {
+  /* Try to split the line_id into origin and destination */
+  if (lineId && lineId.indexOf(" - ") !== -1) {
+    const parts = lineId.split(" - ");
+    const origin = parts[0].trim();
+    const dest = parts[parts.length - 1].trim();
+
+    return direction === "outbound"
+      ? origin + " → " + dest
+      : dest + " → " + origin;
   }
 
-  activeLineId = line.id;
-
-  /* Highlight the selected row */
-  document.querySelectorAll(".line-item").forEach(function (el) {
-    el.classList.toggle("active", el.dataset.lineId === line.id);
-  });
-
-  /* Minimise the slider */
-  minimiseLineSlider();
-
-  /* Remove any previously drawn route */
-  clearActiveLineRoute();
-
-  /* Fetch and draw the route */
-  fetch(
-    "http://localhost:3000/api/lines/" + encodeURIComponent(line.id) + "/route",
-  )
-    .then(function (r) {
-      if (!r.ok) throw new Error("Route not found");
-      return r.json();
-    })
-    .then(function (geojson) {
-      if (!geojson) {
-        showToast("Route not available yet for this line");
-        restoreLineSlider();
-        return;
-      }
-
-      activeLineLayer = L.geoJSON(geojson, {
-        style: {
-          color: color,
-          weight: 5,
-          opacity: 0.9,
-        },
-      }).addTo(map);
-
-      /* Fit map to show the full route */
-      map.flyToBounds(activeLineLayer.getBounds(), {
-        padding: [40, 40],
-        duration: 1,
-      });
-    })
-    .catch(function (err) {
-      console.error("Route fetch error:", err);
-      showToast("Route not available yet for this line");
-      restoreLineSlider();
-    });
+  /* Fallback */
+  return direction === "outbound" ? "→ Outbound" : "← Return";
 }
 
 /*
-  clearActiveLineRoute() removes the drawn route from the map.
+  buildDirectionRow() creates one clickable sub-row for a direction.
 */
+function buildDirectionRow(label, line, color, geojson) {
+  const row = document.createElement("div");
+  row.className = "line-item line-direction-row";
+
+  row.innerHTML = `
+    <div class="line-direction-dot" style="background: ${color};"></div>
+    <div class="line-item-text">
+      <span class="line-item-name">${label}</span>
+    </div>
+    <i class="fa-solid fa-chevron-right" style="color: var(--text-hint); font-size:12px;"></i>
+  `;
+
+  row.onclick = function (e) {
+    e.stopPropagation();
+
+    /* Remove active from all direction rows */
+    document.querySelectorAll(".line-direction-row").forEach(function (r) {
+      r.classList.remove("active");
+    });
+    row.classList.add("active");
+
+    drawLineRoute(line.id, geojson, color);
+    minimiseLineSlider();
+  };
+
+  return row;
+}
+
+/* ════════════════════════════════════════════════════════════
+   DRAW / CLEAR ROUTE
+   ════════════════════════════════════════════════════════════ */
+
+function drawLineRoute(id, geojson, color) {
+  clearActiveLineRoute();
+
+  if (!geojson) {
+    showToast("Route not available for this line");
+    return;
+  }
+
+  activeLineLayer = L.geoJSON(geojson, {
+    style: {
+      color: color,
+      weight: 5,
+      opacity: 0.9,
+    },
+  }).addTo(map);
+
+  activeLineId = id;
+
+  try {
+    map.flyToBounds(activeLineLayer.getBounds(), {
+      padding: [40, 40],
+      duration: 1,
+    });
+  } catch (e) {
+    console.warn("Could not fit bounds:", e);
+  }
+}
+
 function clearActiveLineRoute() {
   if (activeLineLayer) {
     map.removeLayer(activeLineLayer);
@@ -252,6 +331,8 @@ function minimiseLineSlider() {
   if (!slider) return;
   slider.style.transition = "height 0.3s ease";
   slider.classList.add("minimised");
+  /* Force height to just show the header */
+  slider.style.height = "56px";
 }
 
 function restoreLineSlider() {
@@ -274,8 +355,6 @@ var LINE_MIN_HEIGHT = 56;
 function initLineSliderDrag(slider) {
   const header = document.getElementById("line-slider-header");
   if (!header) return;
-
-  /* Remove old listeners before adding new ones */
   header.removeEventListener("touchstart", lineOnTouchStart);
   header.removeEventListener("mousedown", lineOnMouseDown);
   header.addEventListener("touchstart", lineOnTouchStart, { passive: true });
@@ -286,7 +365,9 @@ function lineOnTouchStart(e) {
   if (e.target.closest("button")) return;
   lineIsDragging = true;
   lineDragStartY = e.touches[0].clientY;
-  lineDragStartHeight = lineSliderHeight;
+  lineDragStartHeight =
+    parseInt(document.getElementById("line-slider").style.height) ||
+    lineSliderHeight;
   document.getElementById("line-slider").style.transition = "none";
   document.addEventListener("touchmove", lineOnTouchMove, { passive: false });
   document.addEventListener("touchend", lineOnTouchEnd);
@@ -310,7 +391,9 @@ function lineOnMouseDown(e) {
   if (e.target.closest("button")) return;
   lineIsDragging = true;
   lineDragStartY = e.clientY;
-  lineDragStartHeight = lineSliderHeight;
+  lineDragStartHeight =
+    parseInt(document.getElementById("line-slider").style.height) ||
+    lineSliderHeight;
   document.getElementById("line-slider").style.transition = "none";
   document.addEventListener("mousemove", lineOnMouseMove);
   document.addEventListener("mouseup", lineOnMouseUp);
@@ -335,7 +418,7 @@ function applyLineSliderHeight(newHeight) {
   lineSliderHeight = clamped;
   slider.style.height = clamped + "px";
 
-  /* If dragged up from minimised state — restore full content */
+  /* If dragged up from minimised — restore content */
   if (clamped > 80 && slider.classList.contains("minimised")) {
     slider.classList.remove("minimised");
   }
@@ -352,7 +435,6 @@ function snapLineSlider() {
   const closeH = screenH * 0.15;
 
   if (lineSliderHeight < closeH) {
-    /* Dragged off screen — close and remove route */
     closeLineSlider();
   } else if (lineSliderHeight < (halfHeight + fullHeight) / 2) {
     lineSliderHeight = halfHeight;
