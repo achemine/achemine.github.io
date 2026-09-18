@@ -46,5 +46,7 @@
   "click_to_save": "任意の場所で「保存」をクリックしてください。",
   "route_steps": "ルート手順",
   "footer": "トランジット · 個人プロジェクト",
-  "avatar_name": "テストユーザー"
+  "avatar_name": "テストユーザー",
+  "lines": "路線",
+  "click_map_see_coordinates": "地図をクリックして座標を表示"
 }

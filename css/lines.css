@@ -209,11 +209,36 @@
   height: 10px;
   border-radius: 50%;
   flex-shrink: 0;
-  border: 2px solid white;
+  border: 2px solid var(--bg-tertiary);
   box-shadow: var(--shadow-sm);
 }
 
 /* ── EXPAND ICON ── */
 .line-expand-icon {
   transition: transform var(--speed);
+}
+
+/* ── DIRECTIONS VIEW HEADER ── */
+#line-directions-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--bg-tertiary);
+  flex-shrink: 0;
+}
+#line-directions-header button {
+  color: var(--blue);
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background var(--speed);
+}
+#line-directions-header button:hover {
+  background: var(--blue-light);
+}
+#line-directions-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
 }

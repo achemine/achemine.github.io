@@ -2,10 +2,6 @@
   ══════════════════════════════════════════════════════════════
   lines.js — Transit Maps App
   ══════════════════════════════════════════════════════════════
-  Handles the line slider bottom sheet.
-  Shows lines serving a stop, draws route on map when selected.
-  Depends on: variables.js, map.js, stops.js
-  ══════════════════════════════════════════════════════════════
 */
 
 /* ── STATE ── */
@@ -13,6 +9,9 @@ var lineSliderHeight = 0;
 var activeLineLayer = null;
 var activeLineId = null;
 var currentSliderStopId = null;
+var currentLineRoutes =
+  null; /* stores { outbound, return } for selected line */
+var currentLineColor = null; /* color of the selected line                    */
 
 /* ════════════════════════════════════════════════════════════
    OPEN / CLOSE
@@ -29,6 +28,9 @@ function openLineSliderById(stopId, stopName, color) {
 
   const nameEl = document.getElementById("line-slider-stop-name");
   if (nameEl) nameEl.textContent = stopName || "Lines";
+
+  /* Always start on the lines list view */
+  showLinesList();
 
   const list = document.getElementById("line-slider-list");
   if (list) {
@@ -53,6 +55,7 @@ function openLineSliderById(stopId, stopName, color) {
 
   initLineSliderDrag(slider);
 
+  /* Fetch lines for this stop */
   fetch("http://localhost:3000/api/stops/" + stopId + "/lines")
     .then(function (r) {
       if (!r.ok) throw new Error("Server error: " + r.status);
@@ -60,7 +63,6 @@ function openLineSliderById(stopId, stopName, color) {
     })
     .then(function (stop) {
       if (!list) return;
-
       if (!stop || !stop.lines || stop.lines.length === 0) {
         list.innerHTML = `
           <div class="line-slider-empty">
@@ -70,7 +72,6 @@ function openLineSliderById(stopId, stopName, color) {
         `;
         return;
       }
-
       buildLineList(stop.lines, color);
     })
     .catch(function (err) {
@@ -79,7 +80,7 @@ function openLineSliderById(stopId, stopName, color) {
         list.innerHTML = `
           <div class="line-slider-empty">
             <i class="fa-solid fa-wifi"></i>
-            Could not load lines. Check your connection.
+            Could not load lines.
           </div>
         `;
       }
@@ -102,11 +103,22 @@ function closeLineSlider() {
     slider.style.height = "";
     activeLineId = null;
     currentSliderStopId = null;
+    currentLineRoutes = null;
+    currentLineColor = null;
   }, 300);
 }
 
 /* ════════════════════════════════════════════════════════════
-   BUILD THE LINE LIST
+   SHOW / HIDE VIEWS
+   ════════════════════════════════════════════════════════════ */
+
+function showLinesList() {
+  document.getElementById("line-slider-content").style.display = "block";
+  document.getElementById("line-directions-view").style.display = "none";
+}
+
+/* ════════════════════════════════════════════════════════════
+   BUILD LINE LIST
    ════════════════════════════════════════════════════════════ */
 
 function buildLineList(lines, categoryColor) {
@@ -117,7 +129,7 @@ function buildLineList(lines, categoryColor) {
   lines.forEach(function (line) {
     const badgeColor = line.color || categoryColor || "#1a73e8";
 
-    /* ── Line group wrapper ── */
+    /* ── Wrapper for line row + its sub-rows ── */
     const group = document.createElement("div");
     group.className = "line-group";
     group.dataset.lineId = line.id;
@@ -125,102 +137,28 @@ function buildLineList(lines, categoryColor) {
     /* ── Main line row ── */
     const mainRow = document.createElement("div");
     mainRow.className = "line-item line-item-main";
-
     mainRow.innerHTML = `
       <div class="line-number-badge" style="background: ${badgeColor};">
         ${line.name}
       </div>
       <div class="line-item-text">
-        <span class="line-item-name">${line.id}</span>
+        <span class="line-item-id">${line.id}</span>
         <span class="line-item-type">${line.type}</span>
       </div>
-      <i class="fa-solid fa-chevron-down line-expand-icon" style="color: var(--text-hint); font-size:13px;"></i>
+      <i class="fa-solid fa-chevron-down line-expand-icon" style="color:var(--text-hint); font-size:13px;"></i>
     `;
 
-    /* ── Direction sub-rows (hidden by default) ── */
+    /* ── Sub-rows container ── */
     const subRows = document.createElement("div");
     subRows.className = "line-sub-rows";
     subRows.style.display = "none";
+    subRows.style.overflow = "hidden";
+    subRows.style.transition = "max-height 0.3s ease";
+    subRows.style.maxHeight = "0px";
 
-    /* Fetch both directions */
-    fetch(
-      "http://localhost:3000/api/lines/" +
-        encodeURIComponent(line.id) +
-        "/routes",
-    )
-      .then(function (r) {
-        return r.ok ? r.json() : null;
-      })
-      .then(function (routes) {
-        if (!routes) return;
-
-        const hasOut = routes.outbound !== null;
-        const hasRet = routes.return !== null;
-
-        /* If only one direction — clicking main row draws it directly */
-        if (hasOut && !hasRet) {
-          mainRow.onclick = function () {
-            drawLineRoute(line.id, routes.outbound, badgeColor);
-            minimiseLineSlider();
-          };
-          /* Hide the chevron since there are no sub-rows */
-          const chevron = mainRow.querySelector(".line-expand-icon");
-          if (chevron) chevron.style.display = "none";
-          return;
-        }
-
-        if (!hasOut && hasRet) {
-          mainRow.onclick = function () {
-            drawLineRoute(line.id, routes.return, badgeColor);
-            minimiseLineSlider();
-          };
-          const chevron = mainRow.querySelector(".line-expand-icon");
-          if (chevron) chevron.style.display = "none";
-          return;
-        }
-
-        /* Both directions exist — show sub-rows */
-        if (hasOut) {
-          const label = getRouteLabel(routes.outbound, line.id, "outbound");
-          const outRow = buildDirectionRow(
-            label,
-            line,
-            badgeColor,
-            routes.outbound,
-          );
-          subRows.appendChild(outRow);
-        }
-
-        if (hasRet) {
-          const label = getRouteLabel(routes.return, line.id, "return");
-          const retRow = buildDirectionRow(
-            label,
-            line,
-            badgeColor,
-            routes.return,
-          );
-          subRows.appendChild(retRow);
-        }
-
-        /* Clicking main row toggles sub-rows */
-        mainRow.onclick = function () {
-          const isOpen = subRows.style.display !== "none";
-          subRows.style.display = isOpen ? "none" : "block";
-          const icon = mainRow.querySelector(".line-expand-icon");
-          if (icon) {
-            icon.className = isOpen
-              ? "fa-solid fa-chevron-down line-expand-icon"
-              : "fa-solid fa-chevron-up line-expand-icon";
-          }
-        };
-      })
-      .catch(function (err) {
-        console.error("Routes fetch error for line", line.id, err);
-        /* Fallback — clicking draws nothing but doesn't crash */
-        mainRow.onclick = function () {
-          showToast("Route not available for this line");
-        };
-      });
+    mainRow.onclick = function () {
+      onLineClicked(line, badgeColor, mainRow, subRows);
+    };
 
     group.appendChild(mainRow);
     group.appendChild(subRows);
@@ -228,82 +166,142 @@ function buildLineList(lines, categoryColor) {
   });
 }
 
+function onLineClicked(line, color, mainRow, subRows) {
+  const icon = mainRow.querySelector(".line-expand-icon");
+
+  /* If already open — close it */
+  if (subRows.style.display !== "none") {
+    subRows.style.maxHeight = "0px";
+    setTimeout(function () {
+      subRows.style.display = "none";
+    }, 300);
+    if (icon) icon.className = "fa-solid fa-chevron-down line-expand-icon";
+    clearActiveLineRoute();
+    return;
+  }
+
+  /* Show loading state inside sub-rows */
+  subRows.innerHTML = `
+    <div class="line-direction-row" style="justify-content:center; color:var(--text-secondary);">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+    </div>
+  `;
+  subRows.style.display = "block";
+  subRows.style.maxHeight = "200px";
+  if (icon) icon.className = "fa-solid fa-chevron-up line-expand-icon";
+
+  /* Fetch both directions */
+  fetch(
+    "http://localhost:3000/api/lines/" +
+      encodeURIComponent(line.id) +
+      "/routes",
+  )
+    .then(function (r) {
+      return r.ok ? r.json() : null;
+    })
+    .then(function (routes) {
+      subRows.innerHTML = "";
+
+      if (!routes || (!routes.outbound && !routes.return)) {
+        subRows.innerHTML = `
+          <div class="line-direction-row" style="color:var(--text-secondary); font-size:13px;">
+            No routes available
+          </div>
+        `;
+        return;
+      }
+
+      /* Build outbound row */
+      if (routes.outbound) {
+        const label = getRouteLabel(routes.outbound, line.id, "outbound");
+        const outRow = document.createElement("div");
+        outRow.className = "line-item line-direction-row";
+        outRow.innerHTML = `
+          <div class="line-direction-dot" style="background:${color};"></div>
+          <div class="line-item-text">
+            <span class="line-item-name">${label}</span>
+          </div>
+        `;
+        outRow.onclick = function (e) {
+          e.stopPropagation();
+          document
+            .querySelectorAll(".line-direction-row")
+            .forEach(function (r) {
+              r.classList.remove("active");
+            });
+          outRow.classList.add("active");
+          drawLineRoute(routes.outbound, color);
+          minimiseLineSlider();
+        };
+        subRows.appendChild(outRow);
+      }
+
+      /* Build return row */
+      if (routes.return) {
+        const label = getRouteLabel(routes.return, line.id, "return");
+        const retRow = document.createElement("div");
+        retRow.className = "line-item line-direction-row";
+        retRow.innerHTML = `
+          <div class="line-direction-dot" style="background:${color};"></div>
+          <div class="line-item-text">
+            <span class="line-item-name">${label}</span>
+          </div>
+          <i class="fa-solid fa-chevron-right" style="color:var(--text-hint); font-size:12px;"></i>
+        `;
+        retRow.onclick = function (e) {
+          e.stopPropagation();
+          document
+            .querySelectorAll(".line-direction-row")
+            .forEach(function (r) {
+              r.classList.remove("active");
+            });
+          retRow.classList.add("active");
+          drawLineRoute(routes.return, color);
+          minimiseLineSlider();
+        };
+        subRows.appendChild(retRow);
+      }
+    })
+    .catch(function () {
+      subRows.innerHTML = `
+        <div class="line-direction-row" style="color:var(--text-secondary); font-size:13px;">
+          Could not load routes
+        </div>
+      `;
+    });
+}
+
 /* ════════════════════════════════════════════════════════════
-   DIRECTION HELPERS
+   ROUTE HELPERS
    ════════════════════════════════════════════════════════════ */
 
-/*
-  getRouteLabel() extracts a readable direction label.
-  Uses the line_id which contains "Origin - Destination" format.
-*/
 function getRouteLabel(geojson, lineId, direction) {
-  /* Try to split the line_id into origin and destination */
+  /* Extract origin and destination from the line_id */
   if (lineId && lineId.indexOf(" - ") !== -1) {
     const parts = lineId.split(" - ");
     const origin = parts[0].trim();
     const dest = parts[parts.length - 1].trim();
 
     return direction === "outbound"
-      ? origin + " → " + dest
-      : dest + " → " + origin;
+      ? origin + " - " + dest
+      : dest + " - " + origin;
   }
 
-  /* Fallback */
-  return direction === "outbound" ? "→ Outbound" : "← Return";
+  /* Fallback if line_id has no ' - ' separator */
+  return direction === "outbound" ? "Outbound" : "Return";
 }
 
-/*
-  buildDirectionRow() creates one clickable sub-row for a direction.
-*/
-function buildDirectionRow(label, line, color, geojson) {
-  const row = document.createElement("div");
-  row.className = "line-item line-direction-row";
-
-  row.innerHTML = `
-    <div class="line-direction-dot" style="background: ${color};"></div>
-    <div class="line-item-text">
-      <span class="line-item-name">${label}</span>
-    </div>
-    <i class="fa-solid fa-chevron-right" style="color: var(--text-hint); font-size:12px;"></i>
-  `;
-
-  row.onclick = function (e) {
-    e.stopPropagation();
-
-    /* Remove active from all direction rows */
-    document.querySelectorAll(".line-direction-row").forEach(function (r) {
-      r.classList.remove("active");
-    });
-    row.classList.add("active");
-
-    drawLineRoute(line.id, geojson, color);
-    minimiseLineSlider();
-  };
-
-  return row;
-}
-
-/* ════════════════════════════════════════════════════════════
-   DRAW / CLEAR ROUTE
-   ════════════════════════════════════════════════════════════ */
-
-function drawLineRoute(id, geojson, color) {
+function drawLineRoute(geojson, color) {
   clearActiveLineRoute();
 
   if (!geojson) {
-    showToast("Route not available for this line");
+    showToast("Route not available");
     return;
   }
 
   activeLineLayer = L.geoJSON(geojson, {
-    style: {
-      color: color,
-      weight: 5,
-      opacity: 0.9,
-    },
+    style: { color: color, weight: 5, opacity: 0.9 },
   }).addTo(map);
-
-  activeLineId = id;
 
   try {
     map.flyToBounds(activeLineLayer.getBounds(), {
@@ -331,7 +329,6 @@ function minimiseLineSlider() {
   if (!slider) return;
   slider.style.transition = "height 0.3s ease";
   slider.classList.add("minimised");
-  /* Force height to just show the header */
   slider.style.height = "56px";
 }
 
@@ -386,7 +383,6 @@ function lineOnTouchEnd() {
   document.removeEventListener("touchend", lineOnTouchEnd);
   snapLineSlider();
 }
-
 function lineOnMouseDown(e) {
   if (e.target.closest("button")) return;
   lineIsDragging = true;
@@ -417,8 +413,6 @@ function applyLineSliderHeight(newHeight) {
   const clamped = Math.max(LINE_MIN_HEIGHT, Math.min(maxH, newHeight));
   lineSliderHeight = clamped;
   slider.style.height = clamped + "px";
-
-  /* If dragged up from minimised — restore content */
   if (clamped > 80 && slider.classList.contains("minimised")) {
     slider.classList.remove("minimised");
   }
@@ -428,12 +422,10 @@ function snapLineSlider() {
   const slider = document.getElementById("line-slider");
   if (!slider) return;
   slider.style.transition = "height 0.3s ease";
-
   const screenH = window.innerHeight;
   const halfHeight = screenH * 0.45;
   const fullHeight = screenH * 0.85;
   const closeH = screenH * 0.15;
-
   if (lineSliderHeight < closeH) {
     closeLineSlider();
   } else if (lineSliderHeight < (halfHeight + fullHeight) / 2) {

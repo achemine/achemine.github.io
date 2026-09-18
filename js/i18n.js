@@ -139,3 +139,7 @@ function changeLanguage(lang) {
   buildLanguageList();
   showToast(LANGUAGE_NAMES[lang]);
 }
+
+function t(key, fallback = "") {
+  return i18nResources[currentLanguage]?.[key] || fallback || key;
+}

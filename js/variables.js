@@ -48,3 +48,4 @@ var currentInfoLat = 0; /* its latitude  */
 var currentInfoLng = 0; /* its longitude */
 
 var currentStopId = null; /* database id of the currently clicked stop */
+var currentStopColor = null;

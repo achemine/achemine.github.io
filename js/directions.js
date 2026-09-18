@@ -124,7 +124,7 @@ function buildDesktopStopRow(container, stopDots, stopNum) {
   const input = document.createElement("input");
   input.type = "text";
   input.className = "stop-input";
-  input.placeholder = "Stop " + stopNum;
+  input.placeholder = t("stop_placeholder", "Stop ") + stopNum;
 
   const removeBtn = document.createElement("button");
   removeBtn.className = "remove-stop-btn";
@@ -182,12 +182,12 @@ function addSheetStop() {
   const input = document.createElement("input");
   input.type = "text";
   input.id = inputId;
-  input.placeholder = "Stop " + stopNum;
+  input.placeholder = t("stop_placeholder", "Stop ") + stopNum;
 
   /* Pin button */
   const pinBtn = document.createElement("button");
   pinBtn.className = "sheet-row-btn";
-  pinBtn.title = "Pick on map";
+  pinBtn.title = t("pick_on_map", "Pick on map");
   pinBtn.innerHTML = '<i class="fa-solid fa-location-dot"></i>';
   pinBtn.onclick = function () {
     pickOnMap(inputId);
@@ -196,7 +196,7 @@ function addSheetStop() {
   /* GPS button */
   const gpsBtn = document.createElement("button");
   gpsBtn.className = "sheet-row-btn";
-  gpsBtn.title = "Use my location";
+  gpsBtn.title = t("use_my_location", "Use my location");
   gpsBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i>';
   gpsBtn.onclick = function () {
     useGPS(inputId);
@@ -241,7 +241,12 @@ function pickOnMap(inputId) {
   sheet.style.transition = "height 0.3s ease";
   sheet.style.height = "90px";
 
-  showToast("Tap anywhere on the map to select a location");
+  showToast(
+    t(
+      "tap_map_select_location",
+      "Tap anywhere on the map to select a location",
+    ),
+  );
 
   /* Listen for one map click */
   pickMapListener = map.once("click", function (e) {

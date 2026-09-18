@@ -46,5 +46,7 @@
   "click_to_save": "Clicca su \"Salva\".",
   "route_steps": "Passaggi del percorso",
   "footer": "transit · progetto personale",
-  "avatar_name": "utente_test"
+  "avatar_name": "utente_test",
+  "lines": "Linee",
+  "click_map_see_coordinates": "Clicca sulla mappa per vedere le coordinate"
 }

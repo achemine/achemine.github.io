@@ -46,5 +46,7 @@
   "click_to_save": "Clique em \"Salvar\" em qualquer local.",
   "route_steps": "Etapas da rota",
   "footer": "Transit · Projeto pessoal",
-  "avatar_name": "usuario_teste"
+  "avatar_name": "usuario_teste",
+  "lines": "Linhas",
+  "click_map_see_coordinates": "Clique no mapa para ver as coordenadas"
 }

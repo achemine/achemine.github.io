@@ -322,7 +322,7 @@
           </div>
 
           <div id="sidebar-footer">
-            <span data-i18n="sidebar-footer">transit · personal project</span>
+            <span data-i18n="footer">transit · personal project</span>
           </div>
         </div>
         <!-- end #sidebar-content -->
@@ -406,7 +406,7 @@
           </button>
         </div>
 
-        <p id="info-sub" data-i18n="click-map-see-coordinates">
+        <p id="info-sub" data-i18n="click_map_see_coordinates">
           Click on the map to see coordinates
         </p>
         <div id="info-tags">
@@ -427,7 +427,7 @@
             onclick="openLineSliderById(currentStopId, currentStopColor)"
           >
             <i class="fa-solid fa-train-subway"></i>
-            <span>Lines</span>
+            <span data-i18n="lines">Lines</span>
           </button>
         </div>
       </div>
@@ -629,7 +629,6 @@
         </div>
       </div>
 
-      <!-- LINE SLIDER -->
       <div id="line-slider" role="dialog" aria-label="Lines">
         <!-- Blue header — drag handle -->
         <div id="line-slider-header">
@@ -642,10 +641,43 @@
           </button>
         </div>
 
-        <!-- Scrollable list of lines -->
+        <!-- LINES LIST VIEW -->
         <div id="line-slider-content">
           <div id="line-slider-list"></div>
         </div>
+
+        <!-- DIRECTIONS VIEW (hidden by default) -->
+        <div id="line-directions-view" style="display: none">
+          <!-- The two direction buttons -->
+          <div id="line-directions-list">
+            <div
+              id="direction-out-row"
+              class="line-item line-direction-row"
+              onclick="drawOutbound()"
+            >
+              <div id="direction-out-dot" class="line-direction-dot"></div>
+              <div class="line-item-text">
+                <span id="direction-out-label" class="line-item-name"
+                  >Outbound</span
+                >
+              </div>
+            </div>
+
+            <div
+              id="direction-ret-row"
+              class="line-item line-direction-row"
+              onclick="drawReturn()"
+            >
+              <div id="direction-ret-dot" class="line-direction-dot"></div>
+              <div class="line-item-text">
+                <span id="direction-ret-label" class="line-item-name"
+                  >Return</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end directions view -->
       </div>
 
       <!-- SAVED PLACES POPUP (desktop) -->

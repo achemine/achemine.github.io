@@ -26,7 +26,6 @@
   "settings_language_sub": "Select your preferred language",
   "settings_about": "About",
   "settings_about_title": "About this app",
-  "settings_about": "About",
   "language_panel_title": "Language",
   "directions_title": "Directions",
   "saved_title": "Saved Places",
@@ -47,5 +46,7 @@
   "click_to_save": "Click \"Save\" on any location.",
   "route_steps": "Route steps",
   "footer": "transit · personal project",
-  "avatar_name": "user_test"
+  "avatar_name": "user_test",
+  "lines": "Lines",
+  "click_map_see_coordinates": "Click on the map to see coordinates"
 }

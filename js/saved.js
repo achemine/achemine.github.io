@@ -147,7 +147,7 @@ function saveCurrentPlace() {
       saveBtn.style.borderColor = "var(--yellow)";
       saveBtn.style.color = "var(--saved-text)";
       const span = saveBtn.querySelector("span");
-      if (span) span.textContent = "Saved";
+      if (span) span.textContent = t("saved", "Saved");
     }
   });
 }
